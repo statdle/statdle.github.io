@@ -1,38 +1,108 @@
-.App {
+/* Global Changes */
+
+* {
+  margin: 0;
+  padding: 0;
+  font-family: "Roboto";
+  font-size: 16px;
+}
+
+body {
+  background-color: #202124;
+  color: white;
+  margin: 0 50px;
+}
+
+h2 {
+  color: white;
+  margin: 20px 0 5px 0;
+  font-size: 20px;
+}
+
+input {
+  background-color: #343A40;
+  color: #DEE2E6;
+}
+
+.center-text {
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+/* Catagories Display */
+
+#catagories-container {
+  margin: 0 auto;
+  display: block;
+  width: 400px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.rank-number {
+  display: inline-block;
+  background-color: #343A40;
+  width: 60px;
+  height: 40px;
+  text-align: center;
+  line-height: 2.25;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.country-name {
+  margin-left: 20px;
 }
 
-.App-link {
-  color: #61dafb;
+.line-row {
+  margin-bottom: 5px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+/* Search */
+
+#search-module {
+  position: absolute;
+  margin: 0 auto;
+  bottom: 5px;
+  width: 600px;
+  left: 0;
+  right: 0;
+}
+
+#country-search {
+  height: 40px;
+  border: 0;
+  width: 335px;
+  padding-left: 20px;
+  margin-right: 5px;
+}
+
+#country-submit {
+  height: 40px;
+  width: 60px;
+  border: 0;
+}
+
+#country-submit:hover {
+  background-color: #495057;
+  cursor: pointer;
+}
+
+#autocomplete-container {
+  max-height: 120px;
+  overflow-y: scroll;
+  margin: 5px 0px;
+  border-top: 5px solid #202124;
+}
+
+.autocomplete-suggestion {
+  border-bottom: 2px solid #21252A;
+  padding-bottom: 5px;
+  background-color: #343A40;
+  padding: 5px 0 5px 20px;
+}
+
+.autocomplete-suggestion:hover {
+  background-color: #495057;
+  cursor: pointer;
+}
+
+.selected {
+  background-color: red;
+  font-weight: bold;
 }
