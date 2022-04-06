@@ -3,11 +3,13 @@ import "./App.css";
 import Search from "./Search";
 import Display from "./Display";
 import Top from "./Top";
+import Modal from "./Modal";
 
 class App extends React.Component {
   constructor(props) {
     super(props);
 
+    this.toggleModal = this.toggleModal.bind(this);
     this.doSearch = this.doSearch.bind(this);
     this.updateDisplay = this.updateDisplay.bind(this);
     this.seedValues = this.seedValues.bind(this);
@@ -44,9 +46,9 @@ class App extends React.Component {
       initialState[key] = {
         target: targetCountry[key],
         high: "",
-        highName: "",
+        highName: "\u00A0",
         low: "",
-        lowName: "",
+        lowName: "\u00A0",
       };
     }
 
@@ -54,6 +56,7 @@ class App extends React.Component {
     this.state = {
       catagories: initialState,
       history: [],
+      showModal: true,
     };
   }
 
@@ -70,7 +73,7 @@ class App extends React.Component {
 
     const newState = {}; //we fill this instead of repeatedly calling state
 
-    //history stores what gets changed for the share option
+    //history stores what gets inputed, and changed
     const history = this.state.history;
     const turnData = []; //this will be added to history
 
@@ -117,6 +120,10 @@ class App extends React.Component {
           newState[key].highName = catagory.highName;
         } else {
           console.log("win condition");
+          newState[key].low = rank;
+          newState[key].lowName = data.name;
+          newState[key].high = rank;
+          newState[key].highName = data.name;
         }
       }
     }
@@ -137,11 +144,30 @@ class App extends React.Component {
     }
   }
 
+  toggleModal() {
+    const modalValue = !this.state.showModal;
+    this.setState({
+      showModal: modalValue,
+    });
+  }
+
   render() {
+    const showModal = this.state.showModal;
     return (
       <div>
-        <Top />
-        <Display values={this.state.catagories} history={this.state.history} />
+        {showModal ? <Modal toggleModal={this.toggleModal} /> : null}
+        <Top
+          guessCount={this.state.history.length}
+          toggleModal={this.toggleModal}
+        />
+        <Display
+          values={this.state.catagories}
+          currentCountry={
+            this.state.history.length
+              ? this.state.history[this.state.history.length - 1].country
+              : ""
+          }
+        />
         <Search doSearch={this.doSearch} />
       </div>
     );

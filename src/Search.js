@@ -33,6 +33,7 @@ class Search extends React.Component {
       this.props.doSearch(this.state.inputValue);
 
       this.setState({
+        inputValue: "",
         autocompleteCountries: [],
         autocompleteIndex: -1,
       });
@@ -52,7 +53,6 @@ class Search extends React.Component {
 
       if (autocompleteIndex === autocompleteLength - 1) {
         autocompleteIndex = -1;
-        console.log("a");
       }
 
       this.setState({

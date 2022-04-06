@@ -1,5 +1,45 @@
 /* Global Changes */
 
+:root {
+  --p0: #41309A;
+  --w1: #F1F3F5;
+  --w2: #DEE2E6;
+  --w3: #CED4DA;
+  --w4: #ADB5BD;
+  --w5: #868E96;
+  --w6: #495057;
+  --w7: #343A40;
+  --w8: #21252A;
+}
+
+@import url('https://fonts.googleapis.com/icon?family=Material+Icons');
+
+.material-icons {
+  font-family: 'Material Icons';
+  font-weight: normal;
+  font-style: normal;
+  font-size: 24px;  /* Preferred icon size */
+  display: inline-block;
+  line-height: 1;
+  text-transform: none;
+  letter-spacing: normal;
+  word-wrap: normal;
+  white-space: nowrap;
+  direction: ltr;
+
+  /* Support for all WebKit browsers. */
+  -webkit-font-smoothing: antialiased;
+  /* Support for Safari and Chrome. */
+  text-rendering: optimizeLegibility;
+
+  /* Support for Firefox. */
+  -moz-osx-font-smoothing: grayscale;
+
+  /* Support for IE. */
+  font-feature-settings: 'liga';
+}
+
+
 * {
   margin: 0;
   padding: 0;
@@ -8,24 +48,43 @@
 }
 
 body {
-  background-color: #202124;
+  background-color: var(--w8);
   color: white;
   margin: 0 50px;
 }
 
-h2 {
-  color: white;
-  margin: 20px 0 5px 0;
-  font-size: 20px;
+h1 {
+  margin-bottom: 5px;
+  font-size: 18px;
 }
 
 input {
-  background-color: #343A40;
-  color: #DEE2E6;
+  background-color: var(--w7);
+  color: var(--w2);
 }
 
 .center-text {
   text-align: center;
+}
+
+/* Top Nav */
+
+.top-nav {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 10px 0px;
+}
+
+.btn-inline {
+  cursor: pointer;
+}
+
+.btn-inline:hover {
+  box-shadow: 0px 2px 0 0px white;
+  outline: none;
 }
 
 /* Catagories Display */
@@ -36,9 +95,17 @@ input {
   width: 400px;
 }
 
+.catagory-row {
+  margin-bottom: 20px;
+}
+
+.catagory-title {
+  text-align: left;
+}
+
 .rank-number {
   display: inline-block;
-  background-color: #343A40;
+  background-color: var(--w7);
   width: 60px;
   height: 40px;
   text-align: center;
@@ -46,12 +113,23 @@ input {
 }
 
 .country-name {
-  margin-left: 20px;
+  display: inline-block;
+  margin-left: 5px;
+  height: 40px;
+  width: 290px;
+  line-height: 2.25;
+  padding-left: 10px;
+  background-color: var(--w7);
 }
 
 .line-row {
   margin-bottom: 5px;
 }
+
+.active {
+  background-color: var(--p0);
+}
+
 
 /* Search */
 
@@ -59,7 +137,8 @@ input {
   position: absolute;
   margin: 0 auto;
   bottom: 5px;
-  width: 600px;
+  max-width: 640px;
+  width: 100%;
   left: 0;
   right: 0;
 }
@@ -67,19 +146,22 @@ input {
 #country-search {
   height: 40px;
   border: 0;
-  width: 335px;
+
+  max-width: 570px;
+  width: calc(100vw - 80px);
+  
   padding-left: 20px;
-  margin-right: 5px;
 }
 
 #country-submit {
+  margin-left: 10px;
   height: 40px;
   width: 60px;
   border: 0;
 }
 
 #country-submit:hover {
-  background-color: #495057;
+  background-color: var(--w6);
   cursor: pointer;
 }
 
@@ -87,22 +169,87 @@ input {
   max-height: 120px;
   overflow-y: scroll;
   margin: 5px 0px;
-  border-top: 5px solid #202124;
+  border-top: 5px solid var(--w8);
 }
 
 .autocomplete-suggestion {
-  border-bottom: 2px solid #21252A;
+  border-bottom: 2px solid var(--w8);
   padding-bottom: 5px;
-  background-color: #343A40;
+  background-color: var(--w7);
   padding: 5px 0 5px 20px;
 }
 
 .autocomplete-suggestion:hover {
-  background-color: #495057;
+  background-color: var(--w6);
   cursor: pointer;
 }
 
 .selected {
   background-color: red;
   font-weight: bold;
+}
+
+/* MODAL */
+
+.modal-backing {
+    position: fixed;
+    display: block;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: 0 auto;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 1;
+    overflow-x: hidden;
+    background-color: #14161988;
+    cursor: pointer;
+    /* opacity: 0; */
+    transition: opacity 250ms 700ms ease;
+}
+
+.modal-content {
+  display: block;
+  margin: 0 auto;
+  align-self: center;
+  cursor: auto;
+  
+  padding: 20px;
+  width: 80%;
+  max-width: 492px;
+  min-width: 380px;
+  height: 60%;
+
+  background-color: var(--w7);
+  overflow-y: scroll;
+}
+
+.modal-title {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 5px;
+  align-items: center;
+  }
+
+.onboard-example {
+  background-color: var(--w8);
+  padding: 10px;
+  margin: 20px 0px;
+}
+
+.modal-content p {
+  margin-bottom: 20px;
+}
+
+.btn {
+  cursor: pointer;
+  padding: 5px;
+}
+
+.btn:hover {
+  background-color: var(--w8);
+  border-radius: 4px;
+
 }
