@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 
 //values={this.state.catagories}
 //currentCountry
@@ -8,7 +8,7 @@ function Display(props) {
     // Is having IF statements in the classNames more efficient than if(HIGH) else if(LOW) else if
     return (
       <div key={value} className="catagory-row">
-        <h1 className="catagory-title">{catagoryNames[key[0]]}</h1>
+        <h2 className="catagory-title">{catagoryNames[key[0]]}</h2>
         <div className="line-row">
           <span
             className={
@@ -28,24 +28,22 @@ function Display(props) {
           </span>
         </div>
         <div className="line-row">
-          <div className="line-row">
-            <span
-              className={
-                "rank-number " +
-                (key[1].lowName === props.currentCountry ? "active" : "")
-              }
-            >
-              {"↑ " + key[1].low}
-            </span>
-            <span
-              className={
-                "country-name " +
-                (key[1].lowName === props.currentCountry ? "active" : "")
-              }
-            >
-              {key[1].lowName}
-            </span>
-          </div>
+          <span
+            className={
+              "rank-number " +
+              (key[1].lowName === props.currentCountry ? "active" : "")
+            }
+          >
+            {"↑ " + key[1].low}
+          </span>
+          <span
+            className={
+              "country-name " +
+              (key[1].lowName === props.currentCountry ? "active" : "")
+            }
+          >
+            {key[1].lowName}
+          </span>
         </div>
       </div>
     );

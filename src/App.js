@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import "./App.css";
 import Search from "./Search";
 import Display from "./Display";
@@ -9,11 +9,12 @@ class App extends React.Component {
   constructor(props) {
     super(props);
 
-    this.toggleModal = this.toggleModal.bind(this);
     this.doSearch = this.doSearch.bind(this);
     this.updateDisplay = this.updateDisplay.bind(this);
     this.seedValues = this.seedValues.bind(this);
     this.doRandom = this.doRandom.bind(this);
+    this.toggleModal = this.toggleModal.bind(this);
+    this.toggleModalOff = this.toggleModal.bind(this);
 
     this.seedValues();
   }
@@ -57,8 +58,11 @@ class App extends React.Component {
       catagories: initialState,
       history: [],
       showModal: true,
+      modalType: "how",
     };
   }
+
+  // help, win, settings
 
   updateDisplay(data) {
     console.log(
@@ -124,6 +128,8 @@ class App extends React.Component {
           newState[key].lowName = data.name;
           newState[key].high = rank;
           newState[key].highName = data.name;
+          turnData.push("☑️");
+          this.toggleModal("win");
         }
       }
     }
@@ -144,7 +150,15 @@ class App extends React.Component {
     }
   }
 
-  toggleModal() {
+  toggleModal(type) {
+    const modalValue = !this.state.showModal;
+    this.setState({
+      showModal: modalValue,
+      modalType: type,
+    });
+  }
+
+  toggleModalOff() {
     const modalValue = !this.state.showModal;
     this.setState({
       showModal: modalValue,
@@ -152,10 +166,16 @@ class App extends React.Component {
   }
 
   render() {
-    const showModal = this.state.showModal;
     return (
       <div>
-        {showModal ? <Modal toggleModal={this.toggleModal} /> : null}
+        {this.state.showModal ? (
+          <Modal
+            toggleModalOff={this.toggleModalOff}
+            modalType={this.state.modalType}
+            // refactor this
+            history={this.state.history}
+          />
+        ) : null}
         <Top
           guessCount={this.state.history.length}
           toggleModal={this.toggleModal}

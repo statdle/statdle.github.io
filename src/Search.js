@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 
 class Search extends React.Component {
   constructor(props) {
@@ -103,14 +103,15 @@ class Search extends React.Component {
   }
 
   render() {
-    // this.state.autocompleteCountries[this.state.autocompleteIndex]
-
     const suggestions = this.state.autocompleteCountries.map((item) => {
       return (
         <div
           key={item}
           onClick={this.autocompleteClick}
-          className="autocomplete-suggestion"
+          className={
+            "autocomplete-suggestion " +
+            (this.state.inputValue === item ? "selected" : "")
+          }
         >
           {item}
         </div>
@@ -120,7 +121,7 @@ class Search extends React.Component {
     return (
       <div id="search-module">
         <div id="autocomplete-container">{suggestions}</div>
-        <form onSubmit={this.handleSearch}>
+        <form id="search-bar" onSubmit={this.handleSearch}>
           <input
             type="search"
             placeholder="Country..."

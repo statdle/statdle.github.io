@@ -1,13 +1,28 @@
-import React, { Component } from "react";
+import React from "react";
 
 const Top = (props) => {
+  let fillerText = " Guesses";
+  if (props.guessCount === 1) {
+    fillerText = " Guess";
+  }
   return (
     <nav className="top-nav">
-      <p>{props.guessCount + " Guesses"}</p>
+      <p>{props.guessCount + fillerText}</p>
       <p>Nerdle</p>
-      <p className="btn-inline" onClick={() => props.toggleModal()}>
-        How to Play
-      </p>
+      <div>
+        <span
+          className="material-icons btn btn-dark"
+          onClick={() => props.toggleModal("how")}
+        >
+          help
+        </span>
+        <span
+          className="material-icons btn btn-dark"
+          onClick={() => props.toggleModal("settings")}
+        >
+          settings
+        </span>
+      </div>
     </nav>
   );
 };
