@@ -166,7 +166,7 @@ input {
 /* Search */
 
 #search-module {
-  position: absolute;
+  position: fixed;
   margin: 0 auto;
   bottom: 5px;
   max-width: 420px;
