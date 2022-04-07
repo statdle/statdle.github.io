@@ -19,10 +19,10 @@
 font-family: 'Roboto Condensed', sans-serif; */
 
 .material-icons {
+  font-size: 24px;
   font-family: 'Material Icons';
   font-weight: normal;
   font-style: normal;
-  font-size: 24px;  /* Preferred icon size */
   display: inline-block;
   line-height: 1;
   text-transform: none;
@@ -32,16 +32,17 @@ font-family: 'Roboto Condensed', sans-serif; */
   direction: ltr;
   color: var(--w2);
 
-  /* Support for all WebKit browsers. */
   -webkit-font-smoothing: antialiased;
-  /* Support for Safari and Chrome. */
   text-rendering: optimizeLegibility;
-
-  /* Support for Firefox. */
   -moz-osx-font-smoothing: grayscale;
-
-  /* Support for IE. */
   font-feature-settings: 'liga';
+
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  -o-user-select: none;
+  user-select: none;
 }
 
 
@@ -93,6 +94,24 @@ input {
   background-color: var(--w7);
 }
 
+.btn-wide {
+  display: flex;
+  margin: 10px auto;
+  align-items: center;
+  justify-content: center;
+
+  max-width: 300px;
+  padding: 10px 5px;
+  border-radius: 3px;
+  cursor: pointer;
+  background-color: var(--p0);
+
+}
+
+.mag-top {
+  margin-top: 20px;
+}
+
 /* Top Nav */
 
 .top-nav {
@@ -101,13 +120,14 @@ input {
   align-items: center;
   
   margin: 0 auto;
-  padding: 10px 5px;
+  padding: 10px 0px;
   
   width: 100%;
-  max-width: 420px;
+  max-width: 410px;
 }
 
 /* Catagories Display */
+
 
 #catagories-container {
   margin: 0 auto;
@@ -168,8 +188,9 @@ input {
 #search-module {
   position: fixed;
   margin: 0 auto;
-  bottom: 5px;
+  bottom: 10px;
   max-width: 420px;
+  background-color: var(--w8);
   width: 100%;
   left: 0;
   right: 0;
@@ -243,7 +264,7 @@ input {
     height: 100vh;
     z-index: 1;
 
-    background-color: #14161988;
+    background-color: #141619DD;
     cursor: pointer;
 }
 
@@ -252,15 +273,15 @@ input {
   align-self: center;
   
   margin: 0 auto;
-  width: 100%;
+  width: 90%;
   height: 60%;
   max-width: 520px;
   min-width: 320px;
   
   background-color: var(--w7);
-  overflow-y: scroll;
   cursor: auto;
   border-radius: 3px;
+  overflow-y: scroll;
 }
 
 .modal-title {
@@ -300,9 +321,15 @@ input {
 }
 
 .country-guess-container {
-  margin-bottom: 20px;
+  padding: 20px 0px;
 }
 
 .country-guess-container :last-child{
   background-color: var(--p0);
 }
+
+/* .autocomplete-suggestion {
+  border-bottom: 2px solid var(--w8);
+  padding: 5px 0px 5px 15px;
+  background-color: var(--w7);
+} */

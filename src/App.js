@@ -14,7 +14,7 @@ class App extends React.Component {
     this.seedValues = this.seedValues.bind(this);
     this.doRandom = this.doRandom.bind(this);
     this.toggleModal = this.toggleModal.bind(this);
-    this.toggleModalOff = this.toggleModal.bind(this);
+    this.toggleModalOff = this.toggleModalOff.bind(this);
 
     this.seedValues();
   }
@@ -151,6 +151,7 @@ class App extends React.Component {
   }
 
   toggleModal(type) {
+    console.log("the culprit");
     const modalValue = !this.state.showModal;
     this.setState({
       showModal: modalValue,

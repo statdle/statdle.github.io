@@ -6,7 +6,17 @@ class Modal extends React.Component {
   constructor(props) {
     super(props);
     this.share = this.share.bind(this);
+    this.stopPropagation = this.stopPropagation.bind(this);
+
+    this.state = {
+      shareActive: false,
+    };
   }
+
+  stopPropagation(e) {
+    e.stopPropagation();
+  }
+
   share() {
     let fillerText = " Guesses \n\n";
     if (this.props.history.length === 1) {
@@ -21,6 +31,10 @@ class Modal extends React.Component {
       text += "\n";
     });
     navigator.clipboard.writeText(text);
+
+    this.setState({
+      shareActive: true,
+    });
   }
 
   render() {
@@ -32,9 +46,13 @@ class Modal extends React.Component {
       );
     });
 
+    const shareActive = this.state.shareActive ? (
+      <div className="text-center mag-top">Copied!</div>
+    ) : null;
+
     const types = {
       how: (
-        <div className="modal-content">
+        <>
           <div className="modal-title">
             <h2>How to Play</h2>
             <span
@@ -66,11 +84,11 @@ class Modal extends React.Component {
             The guess Austria is 10th alphabetically, while San Marino is 149th.
             Hence the unknown country is inbetween rank 10 and 149.
           </p>
-        </div>
+        </>
       ),
 
       settings: (
-        <div className="modal-content">
+        <>
           <div className="modal-title">
             <h2>Settings</h2>
             <span
@@ -81,11 +99,11 @@ class Modal extends React.Component {
             </span>
           </div>
           <p>Coming Soon</p>
-        </div>
+        </>
       ),
 
       win: (
-        <div className="modal-content">
+        <>
           <div className="modal-title">
             <h2>Results</h2>
             <span
@@ -96,15 +114,15 @@ class Modal extends React.Component {
             </span>
           </div>
           <h1 className="text-center">{this.props.history.length} Guesses</h1>
-          <div className="country-guess-container">{display}</div>
 
-          <div className="top-nav">
-            <p className="btn" onClick={this.share}>
-              Share
-            </p>
-            <p className="btn">Reset</p>
+          {shareActive}
+          <div className="btn-wide" onClick={this.share}>
+            Share
           </div>
-        </div>
+          <div className="btn-wide">Reset</div>
+
+          <div className="country-guess-container">{display}</div>
+        </>
       ),
     };
 
@@ -113,7 +131,9 @@ class Modal extends React.Component {
         className="modal-backing"
         onClick={() => this.props.toggleModalOff()}
       >
-        {types[this.props.modalType]}
+        <div className="modal-content" onClick={this.stopPropagation}>
+          {types[this.props.modalType]}
+        </div>
       </div>
     );
   }
