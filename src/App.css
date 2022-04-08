@@ -13,7 +13,11 @@
 }
 
 @import url('https://fonts.googleapis.com/icon?family=Material+Icons');
-@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@400&family=Roboto:wght@400;700&display=swap');
+/* @import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@400&family=Roboto:wght@400;700&display=swap'); */
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Condensed&family=IBM+Plex+Sans:wght@400;600&display=swap');
+
+/* font-family: 'IBM Plex Sans', sans-serif;
+font-family: 'IBM Plex Sans Condensed', sans-serif; */
 
 /* font-family: 'Roboto', sans-serif;
 font-family: 'Roboto Condensed', sans-serif; */
@@ -49,7 +53,7 @@ font-family: 'Roboto Condensed', sans-serif; */
 * {
   margin: 0;
   padding: 0;
-  font-family: 'Roboto', sans-serif;
+  font-family: 'IBM Plex Sans', 'Roboto', sans-serif;
   font-size: 16px;
 }
 
@@ -72,6 +76,11 @@ h2 {
 input {
   background-color: var(--w7);
   color: var(--w2);
+}
+
+em {
+  font-style: normal;
+  font-weight: bold;
 }
 
 /* Custom */
@@ -147,35 +156,44 @@ input {
   color: var(--w2);
 }
 
+.line-thing {
+  height: 5px;
+  border-radius: 3px;
+}
+
 .line-row {
   margin-bottom: 5px;
   display: flex;
 }
 
-.rank-number {
+.row-item {
   display: inline-block;
   background-color: var(--w7);
-  width: 60px;
-  height: 40px;
-  text-align: center;
-  line-height: 2.25;
   border-radius: 3px;
+  line-height: 2.25;
+  height: 40px;
 }
 
-@media screen and (max-width: 340px) {
+.rank-number {
+  width: 60px;
+  text-align: center;
+  margin-right: 5px;
+}
+
+.position-symbol {
+  width: 25px;
+  margin-right: 5px;
+  text-align: center;
+}
+
+@media screen and (max-width: 360px) {
   .country-name {
-  font-family: 'Roboto Condensed', sans-serif;
+  font-family: 'IBM Plex Sans Condensed', 'Roboto Condensed', sans-serif;
 }}
 
 .country-name {
-  /* display: inline-block; */
   flex: 1;
-  margin-left: 5px;
-  height: 40px;
-  line-height: 2.25;
   padding-left: 10px;
-  background-color: var(--w7);
-  border-radius: 3px;
 }
 
 .active {

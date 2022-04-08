@@ -63,26 +63,32 @@ class Modal extends React.Component {
             </span>
           </div>
           <p>
-            Guess the unknown country, by guessing countries. Guessing a country
-            will reveal its rank on 4 random data points. The closest rank above
-            and below to the unknown country is displayed.
+            Goal: Find out the <em>Unknown Country</em>
+            <br />
+            Guessing a country will tell you its ranking compared to all
+            countries on 4 data points, and if it is above or below the target
+            country. The closest rank above and below the unknown country is
+            displayed.
           </p>
           <b>Example</b>
           <div className="onboard-example">
             <h2 className="catagory-title">Alphabetically</h2>
             <div className="line-row">
-              <span className="rank-number">↓ 10</span>
-              <span className="country-name">Austria</span>
+              <span className={"row-item position-symbol"}>↓</span>
+              <span className="row-item rank-number">10</span>
+              <span className="row-item country-name">Austria</span>
             </div>
             <div className="line-row">
-              <span className="rank-number active">↑ 149</span>
-              <span className="country-name active">San Marino</span>
+              <span className={"row-item position-symbol active"}>↑</span>
+              <span className="row-item rank-number active">149</span>
+              <span className="row-item country-name active">San Marino</span>
             </div>
           </div>
 
           <p>
-            The guess Austria is 10th alphabetically, while San Marino is 149th.
-            Hence the unknown country is inbetween rank 10 and 149.
+            <em>Austria</em> is 10th, while <em>San Marino</em> is 149th
+            Alphabetically. The <em>Unknown Country</em> is therefore between
+            ranks 10 and 149.
           </p>
         </>
       ),

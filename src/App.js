@@ -50,6 +50,7 @@ class App extends React.Component {
         highName: "\u00A0",
         low: "",
         lowName: "\u00A0",
+        lineThing: 0,
       };
     }
 
@@ -94,6 +95,7 @@ class App extends React.Component {
           highName: "",
           low: "",
           lowName: "",
+          lineThing: 0,
         }; //adding new blank row
 
         if (rank < catagory.target) {
@@ -106,6 +108,7 @@ class App extends React.Component {
             newState[key].high = catagory.high;
             newState[key].highName = catagory.highName;
             turnData.push("⏫");
+            newState[key].lineThing = 2;
           }
           newState[key].low = catagory.low;
           newState[key].lowName = catagory.lowName;
@@ -119,6 +122,7 @@ class App extends React.Component {
             newState[key].low = catagory.low;
             newState[key].lowName = catagory.lowName;
             turnData.push("⏬");
+            newState[key].lineThing = 1;
           }
           newState[key].high = catagory.high;
           newState[key].highName = catagory.highName;
