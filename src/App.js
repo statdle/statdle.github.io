@@ -66,16 +66,6 @@ class App extends React.Component {
   // help, win, settings
 
   updateDisplay(data) {
-    console.log(
-      "updateDisplay",
-      data.name,
-      data.pop,
-      data.area,
-      data.density,
-      data.gdp,
-      data.gdpcapita
-    );
-
     const newState = {}; //we fill this instead of repeatedly calling state
 
     //history stores what gets inputed, and changed
@@ -206,8 +196,8 @@ const catagoryNames = {
   gdp: "GDP",
   gdpc: "GDP Per Capita",
   calpha: "Capital Cities Alphabetically",
-  latt: "Capital Lattitude (North Pole -> South Pole)",
-  long: "Capital Longitude (Anti Meridian > East)",
+  latt: "Capital Lattitude (North -> South)",
+  long: "Capital Longitude (Anti Meridian -> East)",
 };
 
 const data = [
@@ -220,7 +210,7 @@ const data = [
     gdp: 162,
     gdpc: 24,
     calpha: 8,
-    latt: 156,
+    latt: 39,
     long: 57,
   },
   {
@@ -232,7 +222,7 @@ const data = [
     gdp: 29,
     gdpc: 26,
     calpha: 1,
-    latt: 112,
+    latt: 83,
     long: 150,
   },
   {
@@ -244,7 +234,7 @@ const data = [
     gdp: 112,
     gdpc: 184,
     calpha: 73,
-    latt: 131,
+    latt: 64,
     long: 156,
   },
   {
@@ -256,7 +246,7 @@ const data = [
     gdp: 175,
     gdpc: 51,
     calpha: 151,
-    latt: 99,
+    latt: 96,
     long: 25,
   },
   {
@@ -268,7 +258,7 @@ const data = [
     gdp: 126,
     gdpc: 105,
     calpha: 174,
-    latt: 151,
+    latt: 44,
     long: 96,
   },
   {
@@ -280,7 +270,7 @@ const data = [
     gdp: 133,
     gdpc: 112,
     calpha: 193,
-    latt: 147,
+    latt: 48,
     long: 140,
   },
   {
@@ -292,7 +282,7 @@ const data = [
     gdp: 57,
     gdpc: 117,
     calpha: 92,
-    latt: 28,
+    latt: 167,
     long: 79,
   },
   {
@@ -304,7 +294,7 @@ const data = [
     gdp: 21,
     gdpc: 56,
     calpha: 41,
-    latt: 4,
+    latt: 191,
     long: 32,
   },
   {
@@ -316,7 +306,7 @@ const data = [
     gdp: 27,
     gdpc: 16,
     calpha: 182,
-    latt: 173,
+    latt: 22,
     long: 88,
   },
   {
@@ -328,7 +318,7 @@ const data = [
     gdp: 13,
     gdpc: 13,
     calpha: 44,
-    latt: 2,
+    latt: 193,
     long: 185,
   },
   {
@@ -340,7 +330,7 @@ const data = [
     gdp: 86,
     gdpc: 110,
     calpha: 18,
-    latt: 148,
+    latt: 47,
     long: 146,
   },
   {
@@ -352,7 +342,7 @@ const data = [
     gdp: 113,
     gdpc: 95,
     calpha: 159,
-    latt: 160,
+    latt: 35,
     long: 92,
   },
   {
@@ -364,7 +354,7 @@ const data = [
     gdp: 155,
     gdpc: 46,
     calpha: 37,
-    latt: 82,
+    latt: 113,
     long: 31,
   },
   {
@@ -376,7 +366,7 @@ const data = [
     gdp: 42,
     gdpc: 148,
     calpha: 54,
-    latt: 111,
+    latt: 84,
     long: 166,
   },
   {
@@ -388,7 +378,7 @@ const data = [
     gdp: 24,
     gdpc: 20,
     calpha: 38,
-    latt: 178,
+    latt: 17,
     long: 62,
   },
   {
@@ -400,7 +390,7 @@ const data = [
     gdp: 129,
     gdpc: 180,
     calpha: 125,
-    latt: 80,
+    latt: 115,
     long: 53,
   },
   {
@@ -412,7 +402,7 @@ const data = [
     gdp: 75,
     gdpc: 77,
     calpha: 163,
-    latt: 157,
+    latt: 38,
     long: 100,
   },
   {
@@ -424,7 +414,7 @@ const data = [
     gdp: 95,
     gdpc: 37,
     calpha: 100,
-    latt: 116,
+    latt: 79,
     long: 147,
   },
   {
@@ -436,7 +426,7 @@ const data = [
     gdp: 161,
     gdpc: 193,
     calpha: 42,
-    latt: 36,
+    latt: 159,
     long: 113,
   },
   {
@@ -448,7 +438,7 @@ const data = [
     gdp: 139,
     gdpc: 168,
     calpha: 136,
-    latt: 59,
+    latt: 136,
     long: 60,
   },
   {
@@ -460,7 +450,7 @@ const data = [
     gdp: 132,
     gdpc: 34,
     calpha: 20,
-    latt: 54,
+    latt: 141,
     long: 176,
   },
   {
@@ -472,7 +462,7 @@ const data = [
     gdp: 93,
     gdpc: 124,
     calpha: 84,
-    latt: 19,
+    latt: 176,
     long: 22,
   },
   {
@@ -484,7 +474,7 @@ const data = [
     gdp: 8,
     gdpc: 68,
     calpha: 34,
-    latt: 20,
+    latt: 175,
     long: 37,
   },
   {
@@ -496,7 +486,7 @@ const data = [
     gdp: 131,
     gdpc: 29,
     calpha: 116,
-    latt: 114,
+    latt: 81,
     long: 13,
   },
   {
@@ -508,7 +498,7 @@ const data = [
     gdp: 167,
     gdpc: 123,
     calpha: 173,
-    latt: 117,
+    latt: 78,
     long: 165,
   },
   {
@@ -520,7 +510,7 @@ const data = [
     gdp: 114,
     gdpc: 80,
     calpha: 62,
-    latt: 11,
+    latt: 184,
     long: 106,
   },
   {
@@ -532,7 +522,7 @@ const data = [
     gdp: 79,
     gdpc: 91,
     calpha: 106,
-    latt: 185,
+    latt: 10,
     long: 109,
   },
   {
@@ -544,7 +534,7 @@ const data = [
     gdp: 170,
     gdpc: 103,
     calpha: 28,
-    latt: 100,
+    latt: 95,
     long: 6,
   },
   {
@@ -556,7 +546,7 @@ const data = [
     gdp: 10,
     gdpc: 19,
     calpha: 124,
-    latt: 164,
+    latt: 31,
     long: 17,
   },
   {
@@ -568,7 +558,7 @@ const data = [
     gdp: 92,
     gdpc: 186,
     calpha: 80,
-    latt: 34,
+    latt: 161,
     long: 86,
   },
   {
@@ -580,7 +570,7 @@ const data = [
     gdp: 168,
     gdpc: 189,
     calpha: 22,
-    latt: 51,
+    latt: 144,
     long: 93,
   },
   {
@@ -592,7 +582,7 @@ const data = [
     gdp: 141,
     gdpc: 146,
     calpha: 36,
-    latt: 35,
+    latt: 160,
     long: 85,
   },
   {
@@ -604,7 +594,7 @@ const data = [
     gdp: 20,
     gdpc: 4,
     calpha: 30,
-    latt: 167,
+    latt: 28,
     long: 67,
   },
   {
@@ -616,7 +606,7 @@ const data = [
     gdp: 94,
     gdpc: 152,
     calpha: 189,
-    latt: 61,
+    latt: 134,
     long: 51,
   },
   {
@@ -628,7 +618,7 @@ const data = [
     gdp: 40,
     gdpc: 53,
     calpha: 156,
-    latt: 5,
+    latt: 190,
     long: 20,
   },
   {
@@ -640,7 +630,7 @@ const data = [
     gdp: 96,
     gdpc: 156,
     calpha: 191,
-    latt: 49,
+    latt: 146,
     long: 74,
   },
   {
@@ -652,7 +642,7 @@ const data = [
     gdp: 2,
     gdpc: 76,
     calpha: 25,
-    latt: 145,
+    latt: 50,
     long: 177,
   },
   {
@@ -664,7 +654,7 @@ const data = [
     gdp: 37,
     gdpc: 88,
     calpha: 33,
-    latt: 52,
+    latt: 143,
     long: 18,
   },
   {
@@ -676,7 +666,7 @@ const data = [
     gdp: 76,
     gdpc: 61,
     calpha: 152,
-    latt: 71,
+    latt: 124,
     long: 9,
   },
   {
@@ -688,7 +678,7 @@ const data = [
     gdp: 63,
     gdpc: 75,
     calpha: 67,
-    latt: 109,
+    latt: 86,
     long: 10,
   },
   {
@@ -700,7 +690,7 @@ const data = [
     gdp: 171,
     gdpc: 125,
     calpha: 139,
-    latt: 93,
+    latt: 102,
     long: 38,
   },
   {
@@ -712,7 +702,7 @@ const data = [
     gdp: 108,
     gdpc: 43,
     calpha: 120,
-    latt: 132,
+    latt: 63,
     long: 124,
   },
   {
@@ -724,7 +714,7 @@ const data = [
     gdp: 47,
     gdpc: 38,
     calpha: 138,
-    latt: 176,
+    latt: 19,
     long: 81,
   },
   {
@@ -736,7 +726,7 @@ const data = [
     gdp: 4,
     gdpc: 18,
     calpha: 29,
-    latt: 183,
+    latt: 12,
     long: 80,
   },
   {
@@ -748,7 +738,7 @@ const data = [
     gdp: 165,
     gdpc: 130,
     calpha: 56,
-    latt: 75,
+    latt: 120,
     long: 136,
   },
   {
@@ -760,7 +750,7 @@ const data = [
     gdp: 34,
     gdpc: 10,
     calpha: 50,
-    latt: 187,
+    latt: 8,
     long: 77,
   },
   {
@@ -772,7 +762,7 @@ const data = [
     gdp: 186,
     gdpc: 83,
     calpha: 149,
-    latt: 94,
+    latt: 101,
     long: 28,
   },
   {
@@ -784,7 +774,7 @@ const data = [
     gdp: 68,
     gdpc: 82,
     calpha: 157,
-    latt: 105,
+    latt: 90,
     long: 21,
   },
   {
@@ -796,7 +786,7 @@ const data = [
     gdp: 53,
     gdpc: 115,
     calpha: 5,
-    latt: 136,
+    latt: 59,
     long: 61,
   },
   {
@@ -808,7 +798,7 @@ const data = [
     gdp: 62,
     gdpc: 89,
     calpha: 142,
-    latt: 41,
+    latt: 154,
     long: 12,
   },
   {
@@ -820,7 +810,7 @@ const data = [
     gdp: 99,
     gdpc: 39,
     calpha: 166,
-    latt: 191,
+    latt: 4,
     long: 103,
   },
   {
@@ -832,7 +822,7 @@ const data = [
     gdp: 44,
     gdpc: 135,
     calpha: 43,
-    latt: 121,
+    latt: 74,
     long: 118,
   },
   {
@@ -844,7 +834,7 @@ const data = [
     gdp: 169,
     gdpc: 183,
     calpha: 13,
-    latt: 95,
+    latt: 100,
     long: 134,
   },
   {
@@ -856,7 +846,7 @@ const data = [
     gdp: 14,
     gdpc: 33,
     calpha: 95,
-    latt: 149,
+    latt: 46,
     long: 52,
   },
   {
@@ -868,7 +858,7 @@ const data = [
     gdp: 66,
     gdpc: 173,
     calpha: 4,
-    latt: 68,
+    latt: 127,
     long: 133,
   },
   {
@@ -880,7 +870,7 @@ const data = [
     gdp: 41,
     gdpc: 17,
     calpha: 68,
-    latt: 193,
+    latt: 2,
     long: 104,
   },
   {
@@ -892,7 +882,7 @@ const data = [
     gdp: 150,
     gdpc: 92,
     calpha: 165,
-    latt: 16,
+    latt: 179,
     long: 193,
   },
   {
@@ -904,7 +894,7 @@ const data = [
     gdp: 189,
     gdpc: 178,
     calpha: 126,
-    latt: 63,
+    latt: 132,
     long: 186,
   },
   {
@@ -916,7 +906,7 @@ const data = [
     gdp: 7,
     gdpc: 23,
     calpha: 129,
-    latt: 174,
+    latt: 21,
     long: 59,
   },
   {
@@ -928,7 +918,7 @@ const data = [
     gdp: 120,
     gdpc: 84,
     calpha: 85,
-    latt: 44,
+    latt: 151,
     long: 70,
   },
   {
@@ -940,7 +930,7 @@ const data = [
     gdp: 6,
     gdpc: 25,
     calpha: 91,
-    latt: 180,
+    latt: 15,
     long: 55,
   },
   {
@@ -952,7 +942,7 @@ const data = [
     gdp: 180,
     gdpc: 66,
     calpha: 150,
-    latt: 77,
+    latt: 118,
     long: 26,
   },
   {
@@ -964,7 +954,7 @@ const data = [
     gdp: 119,
     gdpc: 116,
     calpha: 169,
-    latt: 152,
+    latt: 43,
     long: 141,
   },
   {
@@ -976,7 +966,7 @@ const data = [
     gdp: 74,
     gdpc: 142,
     calpha: 3,
-    latt: 55,
+    latt: 140,
     long: 54,
   },
   {
@@ -988,7 +978,7 @@ const data = [
     gdp: 177,
     gdpc: 177,
     calpha: 23,
-    latt: 84,
+    latt: 111,
     long: 41,
   },
   {
@@ -1000,7 +990,7 @@ const data = [
     gdp: 137,
     gdpc: 167,
     calpha: 49,
-    latt: 70,
+    latt: 125,
     long: 44,
   },
   {
@@ -1012,7 +1002,7 @@ const data = [
     gdp: 130,
     gdpc: 72,
     calpha: 97,
-    latt: 48,
+    latt: 147,
     long: 69,
   },
   {
@@ -1024,7 +1014,7 @@ const data = [
     gdp: 51,
     gdpc: 41,
     calpha: 16,
-    latt: 140,
+    latt: 55,
     long: 101,
   },
   {
@@ -1036,7 +1026,7 @@ const data = [
     gdp: 69,
     gdpc: 107,
     calpha: 64,
-    latt: 91,
+    latt: 104,
     long: 4,
   },
   {
@@ -1048,7 +1038,7 @@ const data = [
     gdp: 178,
     gdpc: 174,
     calpha: 32,
-    latt: 76,
+    latt: 119,
     long: 43,
   },
   {
@@ -1060,7 +1050,7 @@ const data = [
     gdp: 158,
     gdpc: 104,
     calpha: 63,
-    latt: 60,
+    latt: 135,
     long: 33,
   },
   {
@@ -1072,7 +1062,7 @@ const data = [
     gdp: 105,
     gdpc: 133,
     calpha: 170,
-    latt: 89,
+    latt: 106,
     long: 7,
   },
   {
@@ -1084,7 +1074,7 @@ const data = [
     gdp: 78,
     gdpc: 59,
     calpha: 194,
-    latt: 165,
+    latt: 30,
     long: 87,
   },
   {
@@ -1096,7 +1086,7 @@ const data = [
     gdp: 142,
     gdpc: 171,
     calpha: 135,
-    latt: 106,
+    latt: 89,
     long: 19,
   },
   {
@@ -1108,7 +1098,7 @@ const data = [
     gdp: 56,
     gdpc: 54,
     calpha: 40,
-    latt: 170,
+    latt: 25,
     long: 94,
   },
   {
@@ -1120,7 +1110,7 @@ const data = [
     gdp: 16,
     gdpc: 118,
     calpha: 71,
-    latt: 32,
+    latt: 163,
     long: 174,
   },
   {
@@ -1132,7 +1122,7 @@ const data = [
     gdp: 33,
     gdpc: 7,
     calpha: 58,
-    latt: 184,
+    latt: 11,
     long: 50,
   },
   {
@@ -1144,7 +1134,7 @@ const data = [
     gdp: 31,
     gdpc: 22,
     calpha: 172,
-    latt: 122,
+    latt: 73,
     long: 126,
   },
   {
@@ -1156,7 +1146,7 @@ const data = [
     gdp: 5,
     gdpc: 141,
     calpha: 117,
-    latt: 119,
+    latt: 76,
     long: 162,
   },
   {
@@ -1168,7 +1158,7 @@ const data = [
     gdp: 52,
     gdpc: 101,
     calpha: 17,
-    latt: 126,
+    latt: 69,
     long: 139,
   },
   {
@@ -1180,7 +1170,7 @@ const data = [
     gdp: 26,
     gdpc: 97,
     calpha: 171,
-    latt: 134,
+    latt: 61,
     long: 148,
   },
   {
@@ -1192,7 +1182,7 @@ const data = [
     gdp: 104,
     gdpc: 6,
     calpha: 145,
-    latt: 194,
+    latt: 1,
     long: 39,
   },
   {
@@ -1204,7 +1194,7 @@ const data = [
     gdp: 9,
     gdpc: 28,
     calpha: 148,
-    latt: 153,
+    latt: 42,
     long: 76,
   },
   {
@@ -1216,7 +1206,7 @@ const data = [
     gdp: 121,
     gdpc: 100,
     calpha: 78,
-    latt: 103,
+    latt: 92,
     long: 16,
   },
   {
@@ -1228,7 +1218,7 @@ const data = [
     gdp: 87,
     gdpc: 111,
     calpha: 6,
-    latt: 124,
+    latt: 71,
     long: 129,
   },
   {
@@ -1240,7 +1230,7 @@ const data = [
     gdp: 3,
     gdpc: 27,
     calpha: 175,
-    latt: 133,
+    latt: 62,
     long: 183,
   },
   {
@@ -1252,7 +1242,7 @@ const data = [
     gdp: 67,
     gdpc: 151,
     calpha: 115,
-    latt: 38,
+    latt: 157,
     long: 131,
   },
   {
@@ -1264,7 +1254,7 @@ const data = [
     gdp: 145,
     gdpc: 161,
     calpha: 31,
-    latt: 158,
+    latt: 37,
     long: 161,
   },
   {
@@ -1276,7 +1266,7 @@ const data = [
     gdp: 106,
     gdpc: 155,
     calpha: 130,
-    latt: 74,
+    latt: 121,
     long: 172,
   },
   {
@@ -1288,7 +1278,7 @@ const data = [
     gdp: 192,
     gdpc: 147,
     calpha: 167,
-    latt: 39,
+    latt: 156,
     long: 190,
   },
   {
@@ -1300,7 +1290,7 @@ const data = [
     gdp: 181,
     gdpc: 159,
     calpha: 111,
-    latt: 25,
+    latt: 170,
     long: 137,
   },
   {
@@ -1312,7 +1302,7 @@ const data = [
     gdp: 182,
     gdpc: 42,
     calpha: 24,
-    latt: 101,
+    latt: 94,
     long: 24,
   },
   {
@@ -1324,7 +1314,7 @@ const data = [
     gdp: 115,
     gdpc: 175,
     calpha: 141,
-    latt: 144,
+    latt: 51,
     long: 180,
   },
   {
@@ -1336,7 +1326,7 @@ const data = [
     gdp: 12,
     gdpc: 30,
     calpha: 160,
-    latt: 138,
+    latt: 57,
     long: 181,
   },
   {
@@ -1348,7 +1338,7 @@ const data = [
     gdp: 58,
     gdpc: 32,
     calpha: 82,
-    latt: 120,
+    latt: 75,
     long: 145,
   },
   {
@@ -1360,7 +1350,7 @@ const data = [
     gdp: 55,
     gdpc: 74,
     calpha: 14,
-    latt: 179,
+    latt: 16,
     long: 158,
   },
   {
@@ -1372,7 +1362,7 @@ const data = [
     gdp: 117,
     gdpc: 134,
     calpha: 183,
-    latt: 102,
+    latt: 93,
     long: 170,
   },
   {
@@ -1384,7 +1374,7 @@ const data = [
     gdp: 80,
     gdpc: 78,
     calpha: 26,
-    latt: 129,
+    latt: 66,
     long: 128,
   },
   {
@@ -1396,7 +1386,7 @@ const data = [
     gdp: 172,
     gdpc: 69,
     calpha: 46,
-    latt: 88,
+    latt: 107,
     long: 30,
   },
   {
@@ -1408,7 +1398,7 @@ const data = [
     gdp: 147,
     gdpc: 1,
     calpha: 179,
-    latt: 169,
+    latt: 26,
     long: 71,
   },
   {
@@ -1420,7 +1410,7 @@ const data = [
     gdp: 65,
     gdpc: 108,
     calpha: 48,
-    latt: 62,
+    latt: 133,
     long: 163,
   },
   {
@@ -1432,7 +1422,7 @@ const data = [
     gdp: 160,
     gdpc: 176,
     calpha: 109,
-    latt: 58,
+    latt: 137,
     long: 46,
   },
   {
@@ -1444,7 +1434,7 @@ const data = [
     gdp: 166,
     gdpc: 160,
     calpha: 103,
-    latt: 6,
+    latt: 189,
     long: 108,
   },
   {
@@ -1456,7 +1446,7 @@ const data = [
     gdp: 84,
     gdpc: 45,
     calpha: 184,
-    latt: 186,
+    latt: 9,
     long: 105,
   },
   {
@@ -1468,7 +1458,7 @@ const data = [
     gdp: 72,
     gdpc: 3,
     calpha: 94,
-    latt: 175,
+    latt: 20,
     long: 64,
   },
   {
@@ -1480,7 +1470,7 @@ const data = [
     gdp: 98,
     gdpc: 48,
     calpha: 146,
-    latt: 189,
+    latt: 6,
     long: 102,
   },
   {
@@ -1492,7 +1482,7 @@ const data = [
     gdp: 90,
     gdpc: 94,
     calpha: 176,
-    latt: 125,
+    latt: 70,
     long: 78,
   },
   {
@@ -1504,7 +1494,7 @@ const data = [
     gdp: 61,
     gdpc: 126,
     calpha: 143,
-    latt: 130,
+    latt: 65,
     long: 49,
   },
   {
@@ -1516,7 +1506,7 @@ const data = [
     gdp: 148,
     gdpc: 2,
     calpha: 108,
-    latt: 159,
+    latt: 36,
     long: 66,
   },
   {
@@ -1528,7 +1518,7 @@ const data = [
     gdp: 143,
     gdpc: 140,
     calpha: 47,
-    latt: 168,
+    latt: 27,
     long: 112,
   },
   {
@@ -1540,7 +1530,7 @@ const data = [
     gdp: 153,
     gdpc: 79,
     calpha: 131,
-    latt: 155,
+    latt: 40,
     long: 95,
   },
   {
@@ -1552,7 +1542,7 @@ const data = [
     gdp: 134,
     gdpc: 187,
     calpha: 10,
-    latt: 15,
+    latt: 180,
     long: 144,
   },
   {
@@ -1564,7 +1554,7 @@ const data = [
     gdp: 191,
     gdpc: 120,
     calpha: 96,
-    latt: 64,
+    latt: 131,
     long: 191,
   },
   {
@@ -1576,7 +1566,7 @@ const data = [
     gdp: 136,
     gdpc: 96,
     calpha: 162,
-    latt: 154,
+    latt: 41,
     long: 99,
   },
   {
@@ -1588,7 +1578,7 @@ const data = [
     gdp: 118,
     gdpc: 169,
     calpha: 19,
-    latt: 81,
+    latt: 114,
     long: 48,
   },
   {
@@ -1600,7 +1590,7 @@ const data = [
     gdp: 71,
     gdpc: 158,
     calpha: 190,
-    latt: 98,
+    latt: 97,
     long: 167,
   },
   {
@@ -1612,7 +1602,7 @@ const data = [
     gdp: 135,
     gdpc: 119,
     calpha: 178,
-    latt: 171,
+    latt: 24,
     long: 175,
   },
   {
@@ -1624,7 +1614,7 @@ const data = [
     gdp: 151,
     gdpc: 162,
     calpha: 121,
-    latt: 104,
+    latt: 91,
     long: 42,
   },
   {
@@ -1636,7 +1626,7 @@ const data = [
     gdp: 128,
     gdpc: 31,
     calpha: 180,
-    latt: 135,
+    latt: 60,
     long: 82,
   },
   {
@@ -1648,7 +1638,7 @@ const data = [
     gdp: 124,
     gdpc: 64,
     calpha: 132,
-    latt: 14,
+    latt: 181,
     long: 152,
   },
   {
@@ -1660,7 +1650,7 @@ const data = [
     gdp: 152,
     gdpc: 70,
     calpha: 98,
-    latt: 50,
+    latt: 145,
     long: 160,
   },
   {
@@ -1672,7 +1662,7 @@ const data = [
     gdp: 149,
     gdpc: 191,
     calpha: 86,
-    latt: 22,
+    latt: 173,
     long: 125,
   },
   {
@@ -1684,7 +1674,7 @@ const data = [
     gdp: 15,
     gdpc: 71,
     calpha: 105,
-    latt: 107,
+    latt: 88,
     long: 3,
   },
   {
@@ -1696,7 +1686,7 @@ const data = [
     gdp: 36,
     gdpc: 67,
     calpha: 81,
-    latt: 47,
+    latt: 148,
     long: 169,
   },
   {
@@ -1708,7 +1698,7 @@ const data = [
     gdp: 127,
     gdpc: 188,
     calpha: 102,
-    latt: 8,
+    latt: 187,
     long: 122,
   },
   {
@@ -1720,7 +1710,7 @@ const data = [
     gdp: 125,
     gdpc: 98,
     calpha: 188,
-    latt: 12,
+    latt: 183,
     long: 89,
   },
   {
@@ -1732,7 +1722,7 @@ const data = [
     gdp: 144,
     gdpc: 190,
     calpha: 119,
-    latt: 85,
+    latt: 110,
     long: 58,
   },
   {
@@ -1744,7 +1734,7 @@ const data = [
     gdp: 30,
     gdpc: 144,
     calpha: 2,
-    latt: 69,
+    latt: 126,
     long: 68,
   },
   {
@@ -1756,7 +1746,7 @@ const data = [
     gdp: 123,
     gdpc: 139,
     calpha: 99,
-    latt: 79,
+    latt: 116,
     long: 8,
   },
   {
@@ -1768,7 +1758,7 @@ const data = [
     gdp: 18,
     gdpc: 14,
     calpha: 7,
-    latt: 182,
+    latt: 13,
     long: 63,
   },
   {
@@ -1780,7 +1770,7 @@ const data = [
     gdp: 28,
     gdpc: 5,
     calpha: 123,
-    latt: 192,
+    latt: 3,
     long: 73,
   },
   {
@@ -1792,7 +1782,7 @@ const data = [
     gdp: 102,
     gdpc: 166,
     calpha: 75,
-    latt: 118,
+    latt: 77,
     long: 164,
   },
   {
@@ -1804,7 +1794,7 @@ const data = [
     gdp: 193,
     gdpc: 60,
     calpha: 192,
-    latt: 40,
+    latt: 155,
     long: 188,
   },
   {
@@ -1816,7 +1806,7 @@ const data = [
     gdp: 50,
     gdpc: 21,
     calpha: 187,
-    latt: 1,
+    latt: 194,
     long: 192,
   },
   {
@@ -1828,7 +1818,7 @@ const data = [
     gdp: 70,
     gdpc: 58,
     calpha: 113,
-    latt: 110,
+    latt: 85,
     long: 154,
   },
   {
@@ -1840,7 +1830,7 @@ const data = [
     gdp: 73,
     gdpc: 55,
     calpha: 127,
-    latt: 67,
+    latt: 128,
     long: 11,
   },
   {
@@ -1852,7 +1842,7 @@ const data = [
     gdp: 49,
     gdpc: 86,
     calpha: 87,
-    latt: 24,
+    latt: 171,
     long: 14,
   },
   {
@@ -1864,7 +1854,7 @@ const data = [
     gdp: 111,
     gdpc: 137,
     calpha: 133,
-    latt: 26,
+    latt: 169,
     long: 184,
   },
   {
@@ -1876,7 +1866,7 @@ const data = [
     gdp: 38,
     gdpc: 127,
     calpha: 101,
-    latt: 90,
+    latt: 105,
     long: 178,
   },
   {
@@ -1888,7 +1878,7 @@ const data = [
     gdp: 39,
     gdpc: 154,
     calpha: 70,
-    latt: 128,
+    latt: 67,
     long: 159,
   },
   {
@@ -1900,7 +1890,7 @@ const data = [
     gdp: 23,
     gdpc: 57,
     calpha: 185,
-    latt: 181,
+    latt: 14,
     long: 98,
   },
   {
@@ -1912,7 +1902,7 @@ const data = [
     gdp: 122,
     gdpc: 128,
     calpha: 144,
-    latt: 123,
+    latt: 72,
     long: 127,
   },
   {
@@ -1924,7 +1914,7 @@ const data = [
     gdp: 46,
     gdpc: 36,
     calpha: 88,
-    latt: 142,
+    latt: 53,
     long: 47,
   },
   {
@@ -1936,7 +1926,7 @@ const data = [
     gdp: 190,
     gdpc: 49,
     calpha: 118,
-    latt: 65,
+    latt: 130,
     long: 182,
   },
   {
@@ -1948,7 +1938,7 @@ const data = [
     gdp: 89,
     gdpc: 93,
     calpha: 15,
-    latt: 10,
+    latt: 185,
     long: 34,
   },
   {
@@ -1960,7 +1950,7 @@ const data = [
     gdp: 54,
     gdpc: 9,
     calpha: 57,
-    latt: 115,
+    latt: 80,
     long: 149,
   },
   {
@@ -1972,7 +1962,7 @@ const data = [
     gdp: 48,
     gdpc: 62,
     calpha: 39,
-    latt: 162,
+    latt: 33,
     long: 107,
   },
   {
@@ -1984,7 +1974,7 @@ const data = [
     gdp: 85,
     gdpc: 102,
     calpha: 27,
-    latt: 163,
+    latt: 32,
     long: 97,
   },
   {
@@ -1996,7 +1986,7 @@ const data = [
     gdp: 11,
     gdpc: 63,
     calpha: 112,
-    latt: 188,
+    latt: 7,
     long: 132,
   },
   {
@@ -2008,7 +1998,7 @@ const data = [
     gdp: 140,
     gdpc: 172,
     calpha: 77,
-    latt: 37,
+    latt: 158,
     long: 114,
   },
   {
@@ -2020,7 +2010,7 @@ const data = [
     gdp: 19,
     gdpc: 40,
     calpha: 147,
-    latt: 113,
+    latt: 82,
     long: 143,
   },
   {
@@ -2032,7 +2022,7 @@ const data = [
     gdp: 179,
     gdpc: 143,
     calpha: 69,
-    latt: 27,
+    latt: 168,
     long: 187,
   },
   {
@@ -2044,7 +2034,7 @@ const data = [
     gdp: 176,
     gdpc: 52,
     calpha: 181,
-    latt: 33,
+    latt: 162,
     long: 151,
   },
   {
@@ -2056,7 +2046,7 @@ const data = [
     gdp: 59,
     gdpc: 131,
     calpha: 76,
-    latt: 97,
+    latt: 98,
     long: 120,
   },
   {
@@ -2068,7 +2058,7 @@ const data = [
     gdp: 22,
     gdpc: 12,
     calpha: 164,
-    latt: 190,
+    latt: 5,
     long: 91,
   },
   {
@@ -2080,7 +2070,7 @@ const data = [
     gdp: 35,
     gdpc: 11,
     calpha: 161,
-    latt: 45,
+    latt: 150,
     long: 171,
   },
   {
@@ -2092,7 +2082,7 @@ const data = [
     gdp: 83,
     gdpc: 35,
     calpha: 89,
-    latt: 166,
+    latt: 29,
     long: 83,
   },
   {
@@ -2104,7 +2094,7 @@ const data = [
     gdp: 64,
     gdpc: 44,
     calpha: 35,
-    latt: 172,
+    latt: 23,
     long: 90,
   },
   {
@@ -2116,7 +2106,7 @@ const data = [
     gdp: 157,
     gdpc: 185,
     calpha: 60,
-    latt: 66,
+    latt: 129,
     long: 45,
   },
   {
@@ -2128,7 +2118,7 @@ const data = [
     gdp: 173,
     gdpc: 15,
     calpha: 153,
-    latt: 161,
+    latt: 34,
     long: 75,
   },
   {
@@ -2140,7 +2130,7 @@ const data = [
     gdp: 110,
     gdpc: 157,
     calpha: 51,
-    latt: 92,
+    latt: 103,
     long: 40,
   },
   {
@@ -2152,7 +2142,7 @@ const data = [
     gdp: 174,
     gdpc: 194,
     calpha: 107,
-    latt: 46,
+    latt: 149,
     long: 142,
   },
   {
@@ -2164,7 +2154,7 @@ const data = [
     gdp: 163,
     gdpc: 99,
     calpha: 128,
-    latt: 56,
+    latt: 139,
     long: 36,
   },
   {
@@ -2176,7 +2166,7 @@ const data = [
     gdp: 159,
     gdpc: 192,
     calpha: 72,
-    latt: 53,
+    latt: 142,
     long: 119,
   },
   {
@@ -2188,7 +2178,7 @@ const data = [
     gdp: 188,
     gdpc: 145,
     calpha: 158,
-    latt: 43,
+    latt: 152,
     long: 65,
   },
   {
@@ -2200,7 +2190,7 @@ const data = [
     gdp: 103,
     gdpc: 113,
     calpha: 154,
-    latt: 86,
+    latt: 109,
     long: 5,
   },
   {
@@ -2212,7 +2202,7 @@ const data = [
     gdp: 116,
     gdpc: 164,
     calpha: 52,
-    latt: 127,
+    latt: 68,
     long: 130,
   },
   {
@@ -2224,7 +2214,7 @@ const data = [
     gdp: 156,
     gdpc: 114,
     calpha: 104,
-    latt: 7,
+    latt: 188,
     long: 117,
   },
   {
@@ -2236,7 +2226,7 @@ const data = [
     gdp: 138,
     gdpc: 179,
     calpha: 114,
-    latt: 78,
+    latt: 117,
     long: 84,
   },
   {
@@ -2248,7 +2238,7 @@ const data = [
     gdp: 154,
     gdpc: 181,
     calpha: 90,
-    latt: 57,
+    latt: 138,
     long: 56,
   },
   {
@@ -2260,7 +2250,7 @@ const data = [
     gdp: 25,
     gdpc: 85,
     calpha: 21,
-    latt: 87,
+    latt: 108,
     long: 168,
   },
   {
@@ -2272,7 +2262,7 @@ const data = [
     gdp: 146,
     gdpc: 170,
     calpha: 59,
-    latt: 141,
+    latt: 54,
     long: 155,
   },
   {
@@ -2284,7 +2274,7 @@ const data = [
     gdp: 164,
     gdpc: 138,
     calpha: 55,
-    latt: 29,
+    latt: 166,
     long: 179,
   },
   {
@@ -2296,7 +2286,7 @@ const data = [
     gdp: 91,
     gdpc: 87,
     calpha: 12,
-    latt: 139,
+    latt: 56,
     long: 153,
   },
   {
@@ -2308,7 +2298,7 @@ const data = [
     gdp: 88,
     gdpc: 121,
     calpha: 177,
-    latt: 137,
+    latt: 58,
     long: 72,
   },
   {
@@ -2320,7 +2310,7 @@ const data = [
     gdp: 187,
     gdpc: 109,
     calpha: 122,
-    latt: 13,
+    latt: 182,
     long: 1,
   },
   {
@@ -2332,7 +2322,7 @@ const data = [
     gdp: 17,
     gdpc: 65,
     calpha: 9,
-    latt: 146,
+    latt: 49,
     long: 123,
   },
   {
@@ -2344,7 +2334,7 @@ const data = [
     gdp: 107,
     gdpc: 50,
     calpha: 134,
-    latt: 73,
+    latt: 122,
     long: 27,
   },
   {
@@ -2356,7 +2346,7 @@ const data = [
     gdp: 194,
     gdpc: 122,
     calpha: 61,
-    latt: 30,
+    latt: 165,
     long: 194,
   },
   {
@@ -2368,7 +2358,7 @@ const data = [
     gdp: 81,
     gdpc: 165,
     calpha: 53,
-    latt: 31,
+    latt: 164,
     long: 135,
   },
   {
@@ -2380,7 +2370,7 @@ const data = [
     gdp: 60,
     gdpc: 132,
     calpha: 83,
-    latt: 177,
+    latt: 18,
     long: 115,
   },
   {
@@ -2392,7 +2382,7 @@ const data = [
     gdp: 100,
     gdpc: 182,
     calpha: 74,
-    latt: 42,
+    latt: 153,
     long: 121,
   },
   {
@@ -2404,7 +2394,7 @@ const data = [
     gdp: 1,
     gdpc: 8,
     calpha: 186,
-    latt: 143,
+    latt: 52,
     long: 15,
   },
   {
@@ -2416,7 +2406,7 @@ const data = [
     gdp: 77,
     gdpc: 47,
     calpha: 110,
-    latt: 3,
+    latt: 192,
     long: 35,
   },
   {
@@ -2428,7 +2418,7 @@ const data = [
     gdp: 82,
     gdpc: 149,
     calpha: 168,
-    latt: 150,
+    latt: 45,
     long: 157,
   },
   {
@@ -2440,7 +2430,7 @@ const data = [
     gdp: 185,
     gdpc: 81,
     calpha: 79,
-    latt: 83,
+    latt: 112,
     long: 29,
   },
   {
@@ -2452,7 +2442,7 @@ const data = [
     gdp: 43,
     gdpc: 73,
     calpha: 45,
-    latt: 72,
+    latt: 123,
     long: 23,
   },
   {
@@ -2464,7 +2454,7 @@ const data = [
     gdp: 45,
     gdpc: 136,
     calpha: 65,
-    latt: 108,
+    latt: 87,
     long: 173,
   },
   {
@@ -2476,7 +2466,7 @@ const data = [
     gdp: 183,
     gdpc: 129,
     calpha: 137,
-    latt: 18,
+    latt: 177,
     long: 189,
   },
   {
@@ -2488,7 +2478,7 @@ const data = [
     gdp: 184,
     gdpc: 106,
     calpha: 11,
-    latt: 23,
+    latt: 172,
     long: 2,
   },
   {
@@ -2500,7 +2490,7 @@ const data = [
     gdp: 97,
     gdpc: 163,
     calpha: 155,
-    latt: 96,
+    latt: 99,
     long: 138,
   },
   {
@@ -2512,7 +2502,7 @@ const data = [
     gdp: 32,
     gdpc: 90,
     calpha: 140,
-    latt: 9,
+    latt: 186,
     long: 110,
   },
   {
@@ -2524,7 +2514,7 @@ const data = [
     gdp: 101,
     gdpc: 153,
     calpha: 93,
-    latt: 21,
+    latt: 174,
     long: 111,
   },
   {
@@ -2536,7 +2526,7 @@ const data = [
     gdp: 109,
     gdpc: 150,
     calpha: 66,
-    latt: 17,
+    latt: 178,
     long: 116,
   },
 ];

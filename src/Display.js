@@ -105,7 +105,7 @@ const catagoryNames = {
   gdp: "GDP",
   gdpc: "GDP Per Capita",
   calpha: "Capital Cities Alphabetically",
-  latt: "Capital Lattitude (North Pole -> South Pole)",
+  latt: "Capital Lattitude (North -> South)",
   long: "Capital Longitude (Anti Meridian -> East)",
 };
 
