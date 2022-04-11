@@ -99,11 +99,14 @@ function Display(props) {
 
 const catagoryNames = {
   alpha: "Alphabetically",
+  pop: "Population",
   area: "Area",
   density: "Density",
   gdp: "GDP",
-  gdpcapita: "GDP Per Capita",
-  pop: "Population",
+  gdpc: "GDP Per Capita",
+  calpha: "Capital Cities Alphabetically",
+  latt: "Capital Lattitude (North Pole -> South Pole)",
+  long: "Capital Longitude (Anti Meridian -> East)",
 };
 
 export default Display;

@@ -2,6 +2,7 @@
 
 :root {
   --p0: #41309A;
+  --p1: #503BBA;
   --w1: #F1F3F5;
   --w2: #DEE2E6;
   --w3: #CED4DA;
@@ -83,6 +84,12 @@ em {
   font-weight: bold;
 }
 
+a {
+  color: var(--p1);
+  text-decoration: none;
+  font-weight: bold;
+}
+
 /* Custom */
 
 .text-center {
@@ -146,7 +153,6 @@ em {
 }
 
 .catagory-row {
-  margin-bottom: 20px;
   padding: 0px 5px;
 }
 
@@ -206,7 +212,8 @@ em {
 #search-module {
   position: fixed;
   margin: 0 auto;
-  bottom: 10px;
+  bottom: 0;
+  padding-bottom: 5px;
   max-width: 420px;
   background-color: var(--w8);
   width: 100%;
@@ -233,10 +240,11 @@ em {
   width: 60px;
   border: 0;
   border-radius: 3px;
+  background-color: var(--p0);
 }
 
 #country-submit:hover {
-  background-color: var(--w6);
+  background-color: var(--p1);
   cursor: pointer;
 }
 
@@ -292,14 +300,12 @@ em {
   
   margin: 0 auto;
   width: 90%;
-  height: 60%;
   max-width: 520px;
   min-width: 320px;
-  
   background-color: var(--w7);
   cursor: auto;
   border-radius: 3px;
-  overflow-y: scroll;
+  overflow-y: hidden;
 }
 
 .modal-title {
@@ -309,23 +315,25 @@ em {
   align-items: center;
   }
 
+.modal-body {
+  overflow-y: scroll;
+  height: 60%;
+  padding: 10px;
+}
+
 .onboard-example {
   background-color: var(--w8);
   padding: 10px;
   max-width: 400px;
-  margin: 20px auto;
+  margin: 10px auto;
   border-radius: 3px;
 }
 
-.modal-content p {
+.modal-content {
   margin-bottom: 20px;
-  padding: 0 10px;
   line-height: 1.25;
 }
 
-.modal-content b {
-  padding: 0 10px;
-}
 
 /* WIN */
 
