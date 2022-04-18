@@ -85,9 +85,10 @@ em {
 }
 
 a {
-  color: var(--p1);
+  color: var(--w2);
   text-decoration: none;
   font-weight: bold;
+  display: block;
 }
 
 /* Custom */
@@ -121,8 +122,11 @@ a {
   border-radius: 3px;
   cursor: pointer;
   background-color: var(--p0);
-
 }
+
+.btn-wide:hover, .btn-wide:active {
+  background-color: var(--p1);
+} 
 
 .mag-top {
   margin-top: 20px;
@@ -138,8 +142,8 @@ a {
   margin: 0 auto;
   padding: 10px 0px;
   
-  width: 100%;
-  max-width: 410px;
+  width: 90%;
+  max-width: 400px;
 }
 
 /* Catagories Display */
@@ -239,11 +243,12 @@ a {
   height: 40px;
   width: 60px;
   border: 0;
-  border-radius: 3px;
+  border-radius: 3px !important;
   background-color: var(--p0);
+  padding: 5px;
 }
 
-#country-submit:hover {
+#country-submit:hover, #country-submit:active {
   background-color: var(--p1);
   cursor: pointer;
 }
@@ -311,14 +316,18 @@ a {
 .modal-title {
   display: flex;
   justify-content: space-between;
-  padding: 5px 10px;
+  padding: 10px 20px;
   align-items: center;
+  background-color: var(--w8);
+
   }
 
 .modal-body {
+
+  padding: 20px;
   overflow-y: scroll;
-  height: 60%;
-  padding: 10px;
+  max-height: 50vh;
+  height: 50vh;
 }
 
 .onboard-example {
@@ -328,12 +337,6 @@ a {
   margin: 10px auto;
   border-radius: 3px;
 }
-
-.modal-content {
-  margin-bottom: 20px;
-  line-height: 1.25;
-}
-
 
 /* WIN */
 
@@ -359,3 +362,22 @@ a {
   padding: 5px 0px 5px 15px;
   background-color: var(--w7);
 } */
+
+/* POPUP */
+
+.popup {
+  background-color: var(--w2);
+  color: var(--w8);
+  padding: 10px 20px;
+  border-radius: 3px;
+  display: block;
+  position: absolute;
+  top: 50px;
+  left: 0;
+  right: 0;
+  width: 100px;
+  margin: 0 auto;
+  text-align: center;
+  box-shadow: 0 3px 5px var(--w8);
+  font-weight: bold;
+}

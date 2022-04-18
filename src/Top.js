@@ -8,7 +8,7 @@ const Top = (props) => {
   return (
     <nav className="top-nav">
       <p>{props.guessCount + fillerText}</p>
-      <p>Nerdle</p>
+      <p onClick={() => props.toggleModal("win")}>Nerdle</p>
       <div>
         <span
           className="material-icons btn btn-dark"

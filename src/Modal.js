@@ -30,6 +30,8 @@ class Modal extends React.Component {
         <ModalWin
           history={this.props.history}
           guessCount={this.props.guessCount}
+          reset={this.props.reset}
+          catagories={this.props.catagories}
         />
       );
       ModalTitle = "Results";

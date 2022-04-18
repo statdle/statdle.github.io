@@ -6,10 +6,10 @@ const ModalHow = (props) => {
       <p>
         Goal: Find out the <em>Unknown Country</em>
       </p>
-      <p>
-        Guessing a country will reveal its ranking compared to all countries on
-        4 random catagories. Further guesses will The closest countries to the
-        <em>Unknown Country</em> are displayed.
+      <p className="mag-top">
+        When you guess a countries will tell you their <em>Rank</em> and if they
+        are ranked above or below the <em> Unknown Country</em>, on 4 random
+        catagories.
       </p>
       <p className="mag-top">
         <b>Example</b>
@@ -32,6 +32,10 @@ const ModalHow = (props) => {
         <em>Austria</em> is 10th, while <em>San Marino</em> is 149th
         Alphabetically. The <em>Unknown Country</em> is therefore between ranks
         10 and 149.
+      </p>
+      <p className="mag-top">
+        Further guesses will only retain the countries closest to the{" "}
+        <em>Unknown Country</em>.
       </p>
     </>
   );

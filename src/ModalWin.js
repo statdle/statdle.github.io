@@ -1,7 +1,8 @@
 import React from "react";
 
 /*props: 
-history
+catagories: 
+history... ["Uzbekistan", "Singapore", "Bangladesh", "Malaysia…
 guessCount
 toggleModalOff */
 class ModalWin extends React.Component {
@@ -15,18 +16,30 @@ class ModalWin extends React.Component {
   }
 
   share() {
-    let fillerText = " Guesses \n\n";
+    let fillerText = " Guesses";
     if (this.props.history.length === 1) {
-      fillerText = " Guess \n\n";
+      fillerText = " Guess!";
     }
-    var text = "Nerdle: " + this.props.history.length + fillerText;
+    var text = "Nerdle: " + this.props.history.length + fillerText + "\n";
+    text +=
+      "Unknown Country: " +
+      this.props.history[this.props.history.length - 1] +
+      "\n\n";
 
-    Object.entries(this.props.history).map((key) => {
-      for (let i in key[1].values) {
-        text += key[1].values[i];
+    Object.entries(this.props.catagories).map((key) => {
+      text += catagoryNames[key[0]] + "\n";
+      if (key[1].high) {
+        text += "↓ #" + key[1].high + "\n";
+      } else {
+        text += "↓ #---\n";
       }
-      text += "\n";
+      if (key[1].low) {
+        text += "↑ #" + key[1].low + "\n\n";
+      } else {
+        text += "↑ #---\n\n";
+      }
     });
+
     navigator.clipboard.writeText(text);
 
     this.setState({
@@ -35,12 +48,22 @@ class ModalWin extends React.Component {
   }
 
   render() {
-    const display = Object.entries(this.props.history).map((key) => {
-      return (
-        <div key={key[1].country} className="country-guess">
-          {key[1].country}
-        </div>
-      );
+    const display = Object.entries(this.props.history).map((key, value) => {
+      if (key[0] === "3" && this.props.history.length > 10) {
+        return (
+          <div key={key[0]} className="country-guess">
+            ...
+          </div>
+        );
+      } else if (key[0] > 3 && key[0] < this.props.history.length - 5) {
+        return;
+      } else {
+        return (
+          <div key={key[0]} className="country-guess">
+            {key[1]}
+          </div>
+        );
+      }
     });
 
     const shareActive = this.state.shareActive ? (
@@ -62,12 +85,26 @@ class ModalWin extends React.Component {
         <div className="btn-wide" onClick={this.share}>
           Share
         </div>
-        <div className="btn-wide">Reset</div>
+        <div className="btn-wide" onClick={this.props.reset}>
+          Reset
+        </div>
 
         <div className="country-guess-container">{display}</div>
       </>
     );
   }
 }
+
+const catagoryNames = {
+  alpha: "Alphabetically",
+  pop: "Population",
+  area: "Area",
+  density: "Density",
+  gdp: "GDP",
+  gdpc: "GDP Per Capita",
+  calpha: "Capital Cities Alphabetically",
+  latt: "Capital Latitude (North -> South)",
+  long: "Capital Longitude (Anti Meridian -> East)",
+};
 
 export default ModalWin;

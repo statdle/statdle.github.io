@@ -1,5 +1,7 @@
 import React from "react";
 
+//props history
+
 class Search extends React.Component {
   constructor(props) {
     super(props);
@@ -94,7 +96,18 @@ class Search extends React.Component {
 
   handleSearch(e) {
     e.preventDefault();
+
     this.props.doSearch(this.state.inputValue);
+    //doesnt work... let retVal =
+    // if (retVal) {
+    //   console.log("not found");
+    // } else {
+    //   console.log("ran");
+    //   let index = countries.indexOf(this.state.inputValue);
+    //   if (index !== -1) {
+    //     countries.splice(index, 1);
+    //   }
+    // }
 
     this.setState({
       inputValue: "",

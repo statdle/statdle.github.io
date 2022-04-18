@@ -1,3 +1,4 @@
+import catagoryNames from "./catagoryNames.json";
 import React from "react";
 
 //values={this.state.catagories}
@@ -96,17 +97,5 @@ function Display(props) {
   });
   return <div id="catagories-container">{catagories}</div>;
 }
-
-const catagoryNames = {
-  alpha: "Alphabetically",
-  pop: "Population",
-  area: "Area",
-  density: "Density",
-  gdp: "GDP",
-  gdpc: "GDP Per Capita",
-  calpha: "Capital Cities Alphabetically",
-  latt: "Capital Lattitude (North -> South)",
-  long: "Capital Longitude (Anti Meridian -> East)",
-};
 
 export default Display;
