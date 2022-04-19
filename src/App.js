@@ -50,14 +50,26 @@ class App extends React.Component {
     return retArr;
   }
 
+  seedRandom() {
+    //for fun
+    const seedrandom = require("seedrandom");
+    const date = new Date(); //used for seeding date
+    const gen1 = seedrandom(date.toDateString());
+    const gen2 = seedrandom(date.toDateString() + "filler");
+    const rand1 = Math.floor(gen1() * 194); //countries no.
+    const rand2 = Math.floor(gen2() * 126); //9c4
+    console.log("hey", rand1, rand2);
+  }
+
   // startup pick target country and catagories
   seedValues() {
     // Select target country
     const targetCountry = data[Math.floor(Math.random() * data.length)];
-    // console.log(targetCountry);
+    console.log(targetCountry);
 
     // Select which 4 catagories
     const seeds = this.doRandom(4, Object.keys(catagoryNames).length);
+    // this.seedRandom();
 
     //generate inital state values
     const initialState = {};
@@ -82,17 +94,38 @@ class App extends React.Component {
 
   updateDisplay(countryData) {
     const check = Object.entries(this.state.catagories)[0];
-
-    if (countryData[check[0]] === check[1].target) {
-      this.toggleModal("win");
-      return;
-    }
-
     const newState = {}; //we fill this instead of repeatedly calling state
-
     //history stores what gets inputed, and changed
     const newHistory = this.state.history;
     newHistory.push(countryData.name);
+
+    if (countryData[check[0]] === check[1].target) {
+      this.toggleModal("win");
+
+      // this will affect the other thing ):
+      /*
+      for (let i in Object.keys(this.state.catagories)) {
+        var key = Object.keys(this.state.catagories)[i];
+
+        const catagory = this.state.catagories[key];
+
+        newState[key] = {
+          target: catagory.target,
+          high: catagory.target,
+          highName: countryData.name,
+          low: catagory.target,
+          lowName: countryData.name,
+          lineThing: 0,
+        };
+
+        this.setState({
+          catagories: newState,
+          history: newHistory,
+        });
+      } */
+
+      return;
+    }
 
     //loop through data catagories; name, pop, area,
     for (let i in Object.keys(this.state.catagories)) {

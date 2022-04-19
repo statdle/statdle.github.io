@@ -139,7 +139,7 @@ a {
   justify-content: space-between;
   align-items: center;
   
-  margin: 0 auto;
+  margin: 0 auto; 
   padding: 10px 0px;
   
   width: 90%;
@@ -206,9 +206,20 @@ a {
   padding-left: 10px;
 }
 
+@keyframes test {
+  0% {scale: 1}
+  50% {scale: 1.1}
+  100% {scale: 1}
+}
+
 .active {
   background-color: var(--p0);
+  animation-duration: 300ms;
+  animation-name: test;
+  animation-timing-function: ease;
 }
+
+
 
 
 /* Search */

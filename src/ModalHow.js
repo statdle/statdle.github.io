@@ -29,9 +29,11 @@ const ModalHow = (props) => {
       </div>
 
       <p>
-        <em>Austria</em> is 10th, while <em>San Marino</em> is 149th
-        Alphabetically. The <em>Unknown Country</em> is therefore between ranks
-        10 and 149.
+        <em>Austria</em> is rank 10 Alphabetically, above the{" "}
+        <em>Unknown Country</em>
+        <br />
+        <em>San Marino</em> is rank 149 Alphabetically, below the{" "}
+        <em>Unknown Country</em>
       </p>
       <p className="mag-top">
         Further guesses will only retain the countries closest to the{" "}
