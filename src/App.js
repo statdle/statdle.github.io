@@ -3,10 +3,14 @@ import "./App.css";
 import Search from "./Search";
 import Display from "./Display";
 import Top from "./Top";
-import Modal from "./Modal";
-import Popup from "./Popup";
 import data from "./data.json";
 import catagoryNames from "./catagoryNames.json";
+
+import ModalHow from "./ModalHow";
+import ModalSettings from "./ModalSettings";
+import ModalWin from "./ModalWin";
+
+// import Popup from "./Popup";
 
 class App extends React.Component {
   constructor(props) {
@@ -17,14 +21,11 @@ class App extends React.Component {
     this.seedValues = this.seedValues.bind(this);
     this.doRandom = this.doRandom.bind(this);
     this.toggleModal = this.toggleModal.bind(this);
-    this.toggleModalOff = this.toggleModalOff.bind(this);
-    this.reset = this.reset.bind(this);
 
     this.state = {
-      catagories: {},
-      history: [],
-      showModal: true,
-      modalType: "how",
+      catagories: {}, // {<catagoryname>: {high: <0>, highName: <"">, low: <0> lowName: <""> target: <0>, lineThing: <0,1,2>}, ...}
+      history: [], //{<country>, <country>, ...}
+      modalType: 1, //0: "none", 1: "how" 2: "settings" 3: "win"
     };
   }
 
@@ -32,46 +33,45 @@ class App extends React.Component {
     this.seedValues();
   }
 
-  reset() {
-    this.toggleModalOff();
-    this.seedValues();
-  }
-
-  // generate ordered random values
-  doRandom(number, range) {
+  /* generate ordered random values
+  number: amount of returns
+  range: total 0-N
+  seed: seed for randomness
+  */
+  doRandom(number, range, seed, seedrandom) {
     var retArr = [];
     for (let i = 0; i < range; i++) {
       retArr.push(i);
     }
+
     while (retArr.length > number) {
-      var r = Math.floor(Math.random() * retArr.length);
-      retArr.splice(r, 1);
+      var rand = seedrandom(seed + retArr.length);
+      retArr.splice(Math.floor(rand() * retArr.length), 1);
     }
     return retArr;
   }
 
-  seedRandom() {
-    //for fun
+  /* pick target country and catagories */
+  seedValues() {
+    // Generate randomness from todays date
     const seedrandom = require("seedrandom");
     const date = new Date(); //used for seeding date
-    const gen1 = seedrandom(date.toDateString());
-    const gen2 = seedrandom(date.toDateString() + "filler");
-    const rand1 = Math.floor(gen1() * 194); //countries no.
-    const rand2 = Math.floor(gen2() * 126); //9c4
-    console.log("hey", rand1, rand2);
-  }
+    const gen = seedrandom(date.toDateString());
+    const countryRandIndex = Math.floor(gen() * data.length); //country randomizer
 
-  // startup pick target country and catagories
-  seedValues() {
     // Select target country
-    const targetCountry = data[Math.floor(Math.random() * data.length)];
-    console.log(targetCountry);
+    const targetCountry = data[countryRandIndex];
+    // console.log(targetCountry);
 
     // Select which 4 catagories
-    const seeds = this.doRandom(4, Object.keys(catagoryNames).length);
-    // this.seedRandom();
+    const seeds = this.doRandom(
+      4,
+      Object.keys(catagoryNames).length,
+      date.toDateString(),
+      seedrandom
+    );
 
-    //generate inital state values
+    // Generate inital state values
     const initialState = {};
     for (let i in seeds) {
       var key = Object.keys(catagoryNames)[seeds[i]];
@@ -88,10 +88,10 @@ class App extends React.Component {
     //set initial state
     this.setState({
       catagories: initialState,
-      history: [],
     });
   }
 
+  /* update state, update display */
   updateDisplay(countryData) {
     const check = Object.entries(this.state.catagories)[0];
     const newState = {}; //we fill this instead of repeatedly calling state
@@ -100,29 +100,31 @@ class App extends React.Component {
     newHistory.push(countryData.name);
 
     if (countryData[check[0]] === check[1].target) {
-      this.toggleModal("win");
+      const finalState = this.state.catagories;
 
-      // this will affect the other thing ):
-      /*
+      this.setState({
+        finalState: finalState,
+      });
+
+      this.toggleModal(3); //win condtion
+
       for (let i in Object.keys(this.state.catagories)) {
         var key = Object.keys(this.state.catagories)[i];
-
         const catagory = this.state.catagories[key];
-
         newState[key] = {
           target: catagory.target,
-          high: catagory.target,
+          high: countryData[key],
           highName: countryData.name,
-          low: catagory.target,
+          low: countryData[key],
           lowName: countryData.name,
           lineThing: 0,
         };
+      }
 
-        this.setState({
-          catagories: newState,
-          history: newHistory,
-        });
-      } */
+      this.setState({
+        catagories: newState,
+        history: newHistory,
+      });
 
       return;
     }
@@ -187,33 +189,43 @@ class App extends React.Component {
     return 1;
   }
 
-  toggleModal(type) {
-    const modalValue = !this.state.showModal;
+  /* changes modal display
+  input: 0: "none", 1: "how" 2: "settings" 3: "win"
+  */
+  toggleModal(type = 0) {
     this.setState({
-      showModal: modalValue,
       modalType: type,
     });
   }
 
-  toggleModalOff() {
-    const modalValue = !this.state.showModal;
-    this.setState({
-      showModal: modalValue,
-    });
-  }
-
   render() {
+    let modalDisplay = null;
+    switch (this.state.modalType) {
+      case 0:
+        modalDisplay = null;
+        break;
+      case 1:
+        modalDisplay = <ModalHow toggleModal={this.toggleModal} />;
+        break;
+      case 2:
+        modalDisplay = <ModalSettings toggleModal={this.toggleModal} />;
+        break;
+      case 3:
+        modalDisplay = (
+          <ModalWin
+            toggleModal={this.toggleModal}
+            history={this.state.history}
+            catagories={this.state.finalState}
+          />
+        );
+        break;
+      default:
+        break;
+    }
+
     return (
       <>
-        {this.state.showModal ? (
-          <Modal
-            toggleModalOff={this.toggleModalOff}
-            modalType={this.state.modalType}
-            history={this.state.history}
-            catagories={this.state.catagories}
-            reset={this.reset}
-          />
-        ) : null}
+        {modalDisplay}
         <Top
           guessCount={this.state.history.length}
           toggleModal={this.toggleModal}

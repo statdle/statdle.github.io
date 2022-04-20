@@ -1,4 +1,5 @@
 import catagoryNames from "./catagoryNames.json";
+import catagoryDescription from "./catagoryDescription.json";
 import React from "react";
 
 //values={this.state.catagories}
@@ -87,7 +88,11 @@ function Display(props) {
 
     return (
       <div key={value} className="catagory-row">
-        <h2 className="catagory-title">{catagoryNames[key[0]]}</h2>
+        <details>
+          <summary className="catagory-title">{catagoryNames[key[0]]}</summary>
+          <p>{catagoryDescription[key[0]]}</p>
+        </details>
+
         {highLineThing}
         {highDisplay}
         {lowDisplay}

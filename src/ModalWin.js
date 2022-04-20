@@ -1,43 +1,63 @@
 import React from "react";
+import catagoryNames from "./catagoryNames.json";
 
 /*props: 
 catagories: 
-history... ["Uzbekistan", "Singapore", "Bangladesh", "Malaysia…
-guessCount
-toggleModalOff */
+history... ["Uzbekistan", "Singapore", "Bangladesh", "Malaysia… */
 class ModalWin extends React.Component {
   constructor(props) {
     super(props);
+
     this.share = this.share.bind(this);
+    this.stopPropagation = this.stopPropagation.bind(this);
+    this.getNumber = this.stopPropagation.bind(this);
 
     this.state = {
       shareActive: false,
     };
   }
 
-  share() {
+  stopPropagation(e) {
+    if (e) {
+      e.stopPropagation();
+    }
+  }
+
+  /* what is returned when share clicked */
+  share(e) {
     let fillerText = " Guesses";
     if (this.props.history.length === 1) {
-      fillerText = " Guess!";
+      fillerText = " Guess";
     }
-    var text = "Nerdle: " + this.props.history.length + fillerText + "\n";
-    text +=
-      "Unknown Country: " +
-      this.props.history[this.props.history.length - 1] +
-      "\n\n";
+
+    // Get day of challenge
+    const start = new Date("April 20, 2022 00:00:00");
+    let today = new Date();
+    today.setHours(0, 0, 0, 0);
+    const gameNumber = (today - start) / 86400000;
+
+    var text =
+      "Nerdle " +
+      gameNumber +
+      ": " +
+      this.props.history.length +
+      fillerText +
+      "\n";
 
     Object.entries(this.props.catagories).map((key) => {
-      text += catagoryNames[key[0]] + "\n";
-      if (key[1].high) {
-        text += "↓ #" + key[1].high + "\n";
+      text += "↓↑ ";
+      const high = key[1].high;
+      const low = key[1].low;
+      if (high === "" && low === "") {
+        text += 194;
+      } else if (low === "") {
+        text += 194 - high;
+      } else if (high === "") {
+        text += low;
       } else {
-        text += "↓ #---\n";
+        text += low - high;
       }
-      if (key[1].low) {
-        text += "↑ #" + key[1].low + "\n\n";
-      } else {
-        text += "↑ #---\n\n";
-      }
+      text += " - " + catagoryNames[key[0]] + "\n";
     });
 
     navigator.clipboard.writeText(text);
@@ -71,40 +91,38 @@ class ModalWin extends React.Component {
     ) : null;
 
     let fillerText = " Guesses";
-    if (this.props.guessCount === 1) {
+    if (this.props.history.length === 1) {
       fillerText = " Guess";
     }
 
     return (
-      <>
-        <h1 className="text-center">
-          {this.props.history.length + " " + fillerText}
-        </h1>
+      <div className="modal-backing" onClick={() => this.props.toggleModal()}>
+        <div className="modal-content" onClick={this.stopPropagation}>
+          <div className="modal-title">
+            <h2>Results</h2>
+            <span
+              className="material-icons btn"
+              onClick={() => this.props.toggleModal()}
+            >
+              close
+            </span>
+          </div>
+          <div className="modal-body">
+            <h1 className="text-center">
+              {this.props.history.length + " " + fillerText}
+            </h1>
 
-        {shareActive}
-        <div className="btn-wide" onClick={this.share}>
-          Share
-        </div>
-        <div className="btn-wide" onClick={this.props.reset}>
-          Reset
-        </div>
+            {shareActive}
+            <div className="btn-wide btn-modal" onClick={this.share}>
+              Share
+            </div>
 
-        <div className="country-guess-container">{display}</div>
-      </>
+            <div className="country-guess-container">{display}</div>
+          </div>
+        </div>
+      </div>
     );
   }
 }
-
-const catagoryNames = {
-  alpha: "Alphabetically",
-  pop: "Population",
-  area: "Area",
-  density: "Density",
-  gdp: "GDP",
-  gdpc: "GDP Per Capita",
-  calpha: "Capital Cities Alphabetically",
-  latt: "Capital Latitude (North -> South)",
-  long: "Capital Longitude (Anti Meridian -> East)",
-};
 
 export default ModalWin;
