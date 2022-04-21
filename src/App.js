@@ -1,14 +1,17 @@
 import React from "react";
-import "./App.css";
-import Search from "./Search";
-import Display from "./Display";
-import Top from "./Top";
-import data from "./data.json";
-import catagoryNames from "./catagoryNames.json";
 
-import ModalHow from "./ModalHow";
-import ModalSettings from "./ModalSettings";
-import ModalWin from "./ModalWin";
+import Search from "./views/Search";
+import Display from "./views/Display";
+import Top from "./views/Top";
+
+import ModalHow from "./components/ModalHow";
+import ModalSettings from "./components/ModalSettings";
+import ModalWin from "./components/ModalWin";
+import Popup from "./components/Popup";
+
+import "./App.css";
+import data from "./assets/data.json";
+import catagoryNames from "./assets/catagoryNames.json";
 
 // import Popup from "./Popup";
 
@@ -21,6 +24,7 @@ class App extends React.Component {
     this.seedValues = this.seedValues.bind(this);
     this.doRandom = this.doRandom.bind(this);
     this.toggleModal = this.toggleModal.bind(this);
+    this.doPopup = this.doPopup.bind(this);
 
     this.state = {
       catagories: {}, // {<catagoryname>: {high: <0>, highName: <"">, low: <0> lowName: <""> target: <0>, lineThing: <0,1,2>}, ...}
@@ -109,13 +113,13 @@ class App extends React.Component {
       this.toggleModal(3); //win condtion
 
       for (let i in Object.keys(this.state.catagories)) {
-        var key = Object.keys(this.state.catagories)[i];
-        const catagory = this.state.catagories[key];
-        newState[key] = {
+        var keyWin = Object.keys(this.state.catagories)[i];
+        const catagory = this.state.catagories[keyWin];
+        newState[keyWin] = {
           target: catagory.target,
-          high: countryData[key],
+          high: countryData[keyWin],
           highName: countryData.name,
-          low: countryData[key],
+          low: countryData[keyWin],
           lowName: countryData.name,
           lineThing: 0,
         };
@@ -179,14 +183,28 @@ class App extends React.Component {
     });
   }
 
-  doSearch(searchTerm) {
-    for (let v in data) {
-      if (data[v].name.toLowerCase() === searchTerm.toLowerCase()) {
-        this.updateDisplay(data[v]);
-        return 0;
+  doPopup(text) {
+    this.setState({
+      popupText: text,
+    });
+  }
+
+  doSearch(inp) {
+    let searchTerm = inp.toLowerCase();
+    for (let i in this.state.history) {
+      if (searchTerm === this.state.history[i].toLowerCase()) {
+        this.doPopup("Already Entered!");
+        return;
       }
     }
-    return 1;
+
+    for (let i in data) {
+      if (searchTerm === data[i].name.toLowerCase()) {
+        this.updateDisplay(data[i]);
+        return;
+      }
+    }
+    this.doPopup("Unknown Country!");
   }
 
   /* changes modal display
@@ -225,6 +243,7 @@ class App extends React.Component {
 
     return (
       <>
+        <Popup text={this.state.popupText} />
         {modalDisplay}
         <Top
           guessCount={this.state.history.length}
@@ -237,6 +256,12 @@ class App extends React.Component {
         <Search doSearch={this.doSearch} />
       </>
     );
+  }
+
+  componentDidUpdate() {
+    setTimeout(() => {
+      this.setState({ popupText: "" });
+    }, 6000);
   }
 }
 

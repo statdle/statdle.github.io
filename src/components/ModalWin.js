@@ -1,5 +1,5 @@
 import React from "react";
-import catagoryNames from "./catagoryNames.json";
+import catagoryNames from "../assets/catagoryNames.json";
 
 /*props: 
 catagories: 
@@ -44,7 +44,7 @@ class ModalWin extends React.Component {
       fillerText +
       "\n";
 
-    Object.entries(this.props.catagories).map((key) => {
+    Object.entries(this.props.catagories).forEach((key) => {
       text += "↓↑ ";
       const high = key[1].high;
       const low = key[1].low;
@@ -71,15 +71,15 @@ class ModalWin extends React.Component {
     const display = Object.entries(this.props.history).map((key, value) => {
       if (key[0] === "3" && this.props.history.length > 10) {
         return (
-          <div key={key[0]} className="country-guess">
+          <div key={key[0] + value[0]} className="country-guess">
             ...
           </div>
         );
       } else if (key[0] > 3 && key[0] < this.props.history.length - 5) {
-        return;
+        return <></>;
       } else {
         return (
-          <div key={key[0]} className="country-guess">
+          <div key={key[0] + value[0]} className="country-guess">
             {key[1]}
           </div>
         );

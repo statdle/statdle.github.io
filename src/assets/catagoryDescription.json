@@ -1,0 +1,9 @@
+{"alp": "Ranked by its country name alphabetically, e.g. #1 Afghanistan, #194 Zimbabwe",
+"pop": "How many people in a country, e.g. #1 China, #194 Nauru",
+"area": "Size of a country, e.g. #1 Russia, #194 Monaco",
+"den": "Population / Area of a country, e.g. #1 Monaco, #194 Mongolia",
+"gdp": "Gross Domestic Product of a country, e.g. #1 USA, #194 Tuvalu",
+"gdpc": "Gross Domestic Product / Population of a country, e.g. #1 Liechtenstein, #194 Somalia",
+"alpc": "Ranked by its capital city alphabetically, e.g. #1 United Arab Emirates (Abu Dhabi), #194 Croatia (Zagreb)",
+"latt": "Position of the capital from the North pole southwards, e.g. #1 Iceland, #194 Tuvalu",
+"long": "Position of the capital from the anti/180th meridian (opposite of the prime meridian) eastwards, e.g. #1 Tonga, #194 Tuvalu"}

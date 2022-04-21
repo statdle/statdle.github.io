@@ -31,6 +31,7 @@ class Search extends React.Component {
     const autocompleteLength = autocompleteCountries.length;
 
     if (e.keyCode === 13) {
+      //Enter
       e.preventDefault();
       this.props.doSearch(this.state.inputValue);
 
@@ -40,9 +41,12 @@ class Search extends React.Component {
         autocompleteIndex: -1,
       });
     } else if (e.keyCode === 38) {
+      //UP
       e.preventDefault();
 
-      if (autocompleteIndex === -1 || autocompleteIndex === 0) {
+      if (this.state.autocompleteCountries.length === 0) {
+        return;
+      } else if (autocompleteIndex === -1 || autocompleteIndex === 0) {
         autocompleteIndex = autocompleteLength;
       }
 
@@ -51,9 +55,12 @@ class Search extends React.Component {
         inputValue: autocompleteCountries[autocompleteIndex - 1],
       });
     } else if (e.keyCode === 40) {
+      //DOWN
       e.preventDefault();
 
-      if (autocompleteIndex === autocompleteLength - 1) {
+      if (this.state.autocompleteCountries.length === 0) {
+        return;
+      } else if (autocompleteIndex === autocompleteLength - 1) {
         autocompleteIndex = -1;
       }
 
@@ -75,7 +82,7 @@ class Search extends React.Component {
   }
 
   handleAutocomplete(str) {
-    //if smaller remove everything
+    //if nothing in input
     if (str.length < 1) {
       this.setState({
         autocompleteCountries: [],
@@ -98,16 +105,6 @@ class Search extends React.Component {
     e.preventDefault();
 
     this.props.doSearch(this.state.inputValue);
-    //doesnt work... let retVal =
-    // if (retVal) {
-    //   console.log("not found");
-    // } else {
-    //   console.log("ran");
-    //   let index = countries.indexOf(this.state.inputValue);
-    //   if (index !== -1) {
-    //     countries.splice(index, 1);
-    //   }
-    // }
 
     this.setState({
       inputValue: "",
@@ -134,7 +131,7 @@ class Search extends React.Component {
     return (
       <div id="search-module">
         <div id="autocomplete-container">{suggestions}</div>
-        <form id="search-bar" onSubmit={this.handleSearch}>
+        <form className="search-bar" onSubmit={this.handleSearch}>
           <input
             type="search"
             placeholder="Country..."

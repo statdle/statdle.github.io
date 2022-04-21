@@ -78,6 +78,7 @@ h2 {
 input {
   background-color: var(--w7);
   color: var(--w2);
+  outline-color: var(--p0);
 }
 
 em {
@@ -151,7 +152,7 @@ a {
   margin: 0 auto; 
   padding: 10px 0px;
   
-  width: 90%;
+  width: 100%;
   max-width: 400px;
 }
 
@@ -161,9 +162,14 @@ a {
 
 .catagory-title {
   text-align: left;
-  color: var(--w2);
+  color: var(--w3);
   font-size: 18px;
   cursor: pointer;
+}
+
+.catagory-title:hover {
+  color: var(--w1);
+
 }
 
 details > p {
@@ -226,9 +232,9 @@ details > p {
 }
 
 @keyframes animation {
-  0% {scale: 1}
+  0% {scale: 1; background-color: var(--p2)}
   50% {scale: 1.02}
-  100% {scale: 1}
+  100% {scale: 1; background-color: var(--p1)}
 }
 
 .active {
@@ -255,7 +261,21 @@ details > p {
   right: 0;
 }
 
-#search-bar {
+@keyframes animation-search-invalid {
+  0% {transform: translate(0px);}
+  25% {transform: translate(10px)}
+  50% {transform: translate(-10px);}
+  75% {transform: translate(10px)}
+  100% {transform: translate(0px)}
+}
+
+.search-invalid {
+  animation-duration: 600ms;
+  animation-name: animation-search-invalid;
+  animation-timing-function: ease;
+}
+
+.search-bar {
   display: flex;
   padding: 0 5px;
 }
@@ -265,7 +285,11 @@ details > p {
   height: 40px;
   border: 0;
   flex: 1;
-  border-radius: 3px;  
+  border-radius: 3px;
+}
+
+#country-search:focus {
+  outline: var(--p1) solid 3px;
 }
 
 #country-submit {
@@ -276,18 +300,18 @@ details > p {
   border-radius: 3px !important;
   background-color: var(--p1);
   padding: 5px;
+  cursor: pointer;
 }
 
 #country-submit:hover {
   background-color: var(--p0);
-  cursor: pointer;
 }
 
 
 #country-submit:active {
   background-color: var(--p0);
   cursor: pointer;
-  outline: var(--p0) solid 3px;
+  outline: var(--p1) solid 3px;
 }
 
 #autocomplete-container {
@@ -425,6 +449,11 @@ details > p {
 
 /* POPUP */
 
+/* @keyframes animation-popup {
+  from {opacity: 1;}
+  to {opacity: 0;}
+} */
+
 .popup {
   background-color: var(--w2);
   color: var(--w8);
@@ -440,4 +469,10 @@ details > p {
   text-align: center;
   box-shadow: 0 3px 5px var(--w8);
   font-weight: bold;
+
+  /* animation-delay: 600ms;
+  animation-duration: 600ms;
+  animation-name: animation-popup;
+  animation-timing-function: ease-out; */
 }
+

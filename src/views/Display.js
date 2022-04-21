@@ -1,5 +1,5 @@
-import catagoryNames from "./catagoryNames.json";
-import catagoryDescription from "./catagoryDescription.json";
+import catagoryNames from "../assets/catagoryNames.json";
+import catagoryDescription from "../assets/catagoryDescription.json";
 import React from "react";
 
 //values={this.state.catagories}
