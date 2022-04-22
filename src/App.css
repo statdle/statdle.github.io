@@ -204,16 +204,19 @@ details[open] > p {
   flex-direction: column;
   justify-content: center;
   height: 40px;
+  transition-duration: 300ms;
 }
 
 @media screen and (max-height: 620px) {
   .row-item {
     height: 35px;
+    transition-duration: 300ms;
 }}
 
 @media screen and (max-height: 580px) {
   .row-item {
     height: 30px;
+    transition-duration: 300ms;
 }}
 
 
