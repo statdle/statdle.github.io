@@ -42,7 +42,7 @@ class ModalWin extends React.Component {
       ": " +
       this.props.history.length +
       fillerText +
-      "\n";
+      "\n\nRANGE - CATAGORY\n";
 
     Object.entries(this.props.catagories).forEach((key) => {
       text += "↓↑ ";
@@ -59,7 +59,7 @@ class ModalWin extends React.Component {
       }
       text += " - " + catagoryNames[key[0]] + "\n";
     });
-
+    text += "\nhttps://9ps.github.io/nerdle/";
     navigator.clipboard.writeText(text);
 
     this.setState({
@@ -96,8 +96,14 @@ class ModalWin extends React.Component {
     }
 
     return (
-      <div className="modal-backing" onClick={() => this.props.toggleModal()}>
-        <div className="modal-content" onClick={this.stopPropagation}>
+      <div
+        className="modal-backing modal-backing-special"
+        onClick={() => this.props.toggleModal()}
+      >
+        <div
+          className="modal-content modal-content-special"
+          onClick={this.stopPropagation}
+        >
           <div className="modal-title">
             <h2>Results</h2>
             <span

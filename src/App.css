@@ -176,6 +176,17 @@ details > p {
   color: var(--w3);
 }
 
+@keyframes animation-details-open {
+  0% {opacity: 0; margin-top: -20px}
+  100% {opacity: 1; margin-top: 0px}
+}
+
+details[open] > p {
+    animation-duration: 600ms;
+    animation-name: animation-details-open;
+    animation-timing-function: ease;  
+}
+
 #catagories-container {
   margin: 0 auto;
   display: block;
@@ -370,9 +381,22 @@ details > p {
   to {opacity: 1; margin-top: 0px}
 }
 
+
+@keyframes animation-modal-content-special {
+  0% {opacity: 0; margin-top: 100px}
+  75% {opacity: 0; margin-top: 100px}
+  100% {opacity: 1; margin-top: 0px}
+}
+
 @keyframes animation-modal-backing {
   from {opacity: 0}
   to {opacity: 1}
+}
+
+@keyframes animation-modal-backing-special {
+  0% {opacity: 0}
+  75% {opacity: 0}
+  100% {opacity: 1}
 }
 
 .modal-content {
@@ -393,6 +417,17 @@ details > p {
   animation-timing-function: ease;
 }
 
+.modal-content-special {
+  animation-duration: 1200ms;
+  animation-name: animation-modal-content-special;
+  animation-timing-function: ease;
+}
+
+.modal-backing-special {
+  animation-duration: 1200ms;
+  animation-name: animation-modal-backing-special;
+  animation-timing-function: ease;
+}
 .modal-title {
   display: flex;
   justify-content: space-between;
