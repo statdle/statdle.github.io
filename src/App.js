@@ -87,16 +87,21 @@ class App extends React.Component {
       localStorage.setItem("stats", JSON.stringify(stats));
     }
 
+    let today = new Date();
+    today.setHours(0, 0, 0, 0);
+
     if (localStorage.getItem("state")) {
       const state = JSON.parse(localStorage.getItem("state"));
 
-      this.setState({
-        catagories: state.catagories,
-        history: state.history,
-        finalState: state.finalState,
-        win: state.win,
-      });
-      return;
+      if (state.date === today.toISOString()) {
+        this.setState({
+          catagories: state.catagories,
+          history: state.history,
+          finalState: state.finalState,
+          win: state.win,
+        });
+        return;
+      }
     }
 
     // Generate randomness from todays date
@@ -141,6 +146,7 @@ class App extends React.Component {
     const state = {
       catagories: initialState,
       history: [],
+      date: today.toISOString(),
     };
 
     localStorage.setItem("state", JSON.stringify(state));
