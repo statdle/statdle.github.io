@@ -5,7 +5,6 @@ import Display from "./views/Display";
 import Top from "./views/Top";
 
 import ModalHow from "./components/ModalHow";
-import ModalSettings from "./components/ModalSettings";
 import ModalWin from "./components/ModalWin";
 import Popup from "./components/Popup";
 
@@ -25,11 +24,15 @@ class App extends React.Component {
     this.doRandom = this.doRandom.bind(this);
     this.toggleModal = this.toggleModal.bind(this);
     this.doPopup = this.doPopup.bind(this);
+    this.updateStorageState = this.updateStorageState.bind(this);
+    this.updateStorageStats = this.updateStorageStats.bind(this);
 
     this.state = {
       catagories: {}, // {<catagoryname>: {high: <0>, highName: <"">, low: <0> lowName: <""> target: <0>, lineThing: <0,1,2>}, ...}
       history: [], //{<country>, <country>, ...}
-      modalType: 1, //0: "none", 1: "how" 2: "settings" 3: "win"
+      modalType: 1, //0: "none", 1: "how" 2: "win from top" 3: "win"
+      finalState: {},
+      win: false,
     };
   }
 
@@ -37,26 +40,65 @@ class App extends React.Component {
     this.seedValues();
   }
 
-  /* generate ordered random values
-  number: amount of returns
-  range: total 0-N
-  seed: seed for randomness
-  */
-  doRandom(number, range, seed, seedrandom) {
-    var retArr = [];
-    for (let i = 0; i < range; i++) {
-      retArr.push(i);
+  updateStorageStats(score) {
+    let stats = JSON.parse(localStorage.getItem("stats"));
+    let best = stats.best;
+    let average = stats.average;
+    let rounds = stats.rounds;
+
+    if (score < best || best === 0) {
+      best = score;
     }
 
-    while (retArr.length > number) {
-      var rand = seedrandom(seed + retArr.length);
-      retArr.splice(Math.floor(rand() * retArr.length), 1);
+    average = Math.round(((average * rounds + score) / (rounds + 1)) * 10) / 10;
+    rounds = rounds + 1;
+
+    stats = {
+      rounds: rounds,
+      best: best,
+      average: average,
+    };
+
+    localStorage.setItem("stats", JSON.stringify(stats));
+  }
+
+  /* newCatagories, newHistory, newWin, finalState (conditional)*/
+  updateStorageState(newCatagories, newHistory, newWin, finalState) {
+    const state = JSON.parse(localStorage.getItem("state"));
+    state.catagories = newCatagories;
+    state.history = newHistory;
+    state.win = newWin;
+    if (finalState) {
+      state.finalState = finalState;
     }
-    return retArr;
+    localStorage.setItem("state", JSON.stringify(state));
   }
 
   /* pick target country and catagories */
   seedValues() {
+    if (!localStorage.getItem("stats")) {
+      //set up stats
+      const stats = {
+        rounds: 0,
+        best: 0,
+        average: 0,
+      };
+
+      localStorage.setItem("stats", JSON.stringify(stats));
+    }
+
+    if (localStorage.getItem("state")) {
+      const state = JSON.parse(localStorage.getItem("state"));
+
+      this.setState({
+        catagories: state.catagories,
+        history: state.history,
+        finalState: state.finalState,
+        win: state.win,
+      });
+      return;
+    }
+
     // Generate randomness from todays date
     const seedrandom = require("seedrandom");
     const date = new Date(); //used for seeding date
@@ -92,30 +134,42 @@ class App extends React.Component {
     //set initial state
     this.setState({
       catagories: initialState,
+      win: false,
     });
+
+    //set local storage state
+    const state = {
+      catagories: initialState,
+      history: [],
+    };
+
+    localStorage.setItem("state", JSON.stringify(state));
   }
 
   /* update state, update display */
   updateDisplay(countryData) {
     const check = Object.entries(this.state.catagories)[0];
-    const newState = {}; //we fill this instead of repeatedly calling state
-    //history stores what gets inputed, and changed
-    const newHistory = this.state.history;
+    const newCatagories = {}; //we fill this instead of repeatedly calling state
+    const newHistory = this.state.history; //history stores what gets inputed
     newHistory.push(countryData.name);
 
+    // check if target country
     if (countryData[check[0]] === check[1].target) {
       const finalState = this.state.catagories;
 
       this.setState({
         finalState: finalState,
+        win: true,
       });
+
+      this.updateStorageStats(newHistory.length);
 
       this.toggleModal(3); //win condtion
 
       for (let i in Object.keys(this.state.catagories)) {
         var keyWin = Object.keys(this.state.catagories)[i];
         const catagory = this.state.catagories[keyWin];
-        newState[keyWin] = {
+        newCatagories[keyWin] = {
           target: catagory.target,
           high: countryData[keyWin],
           highName: countryData.name,
@@ -126,9 +180,11 @@ class App extends React.Component {
       }
 
       this.setState({
-        catagories: newState,
+        catagories: newCatagories,
         history: newHistory,
       });
+
+      this.updateStorageState(newCatagories, newHistory, true, finalState);
 
       return;
     }
@@ -140,7 +196,7 @@ class App extends React.Component {
       const catagory = this.state.catagories[key];
       const rank = countryData[key];
 
-      newState[key] = {
+      newCatagories[key] = {
         target: catagory.target,
         high: "",
         highName: "",
@@ -152,35 +208,37 @@ class App extends React.Component {
       if (rank < catagory.target) {
         //1: higher rank
         if (catagory.high === "" || rank > catagory.high) {
-          newState[key].high = rank;
-          newState[key].highName = countryData.name;
+          newCatagories[key].high = rank;
+          newCatagories[key].highName = countryData.name;
         } else {
-          newState[key].high = catagory.high;
-          newState[key].highName = catagory.highName;
-          newState[key].lineThing = 2;
+          newCatagories[key].high = catagory.high;
+          newCatagories[key].highName = catagory.highName;
+          newCatagories[key].lineThing = 1;
         }
-        newState[key].low = catagory.low;
-        newState[key].lowName = catagory.lowName;
+        newCatagories[key].low = catagory.low;
+        newCatagories[key].lowName = catagory.lowName;
       } else if (rank > catagory.target) {
         //2: lower rank
         if (catagory.low === "" || rank < catagory.low) {
-          newState[key].low = rank;
-          newState[key].lowName = countryData.name;
+          newCatagories[key].low = rank;
+          newCatagories[key].lowName = countryData.name;
         } else {
-          newState[key].low = catagory.low;
-          newState[key].lowName = catagory.lowName;
-          newState[key].lineThing = 1;
+          newCatagories[key].low = catagory.low;
+          newCatagories[key].lowName = catagory.lowName;
+          newCatagories[key].lineThing = 2;
         }
-        newState[key].high = catagory.high;
-        newState[key].highName = catagory.highName;
+        newCatagories[key].high = catagory.high;
+        newCatagories[key].highName = catagory.highName;
       }
     }
 
     // Update State
     this.setState({
-      catagories: newState,
+      catagories: newCatagories,
       history: newHistory,
     });
+
+    this.updateStorageState(newCatagories, newHistory, false, false);
   }
 
   doPopup(text) {
@@ -216,6 +274,24 @@ class App extends React.Component {
     });
   }
 
+  /* generate ordered random values
+  number: amount of returns
+  range: total 0-N
+  seed: seed for randomness
+  */
+  doRandom(number, range, seed, seedrandom) {
+    var retArr = [];
+    for (let i = 0; i < range; i++) {
+      retArr.push(i);
+    }
+
+    while (retArr.length > number) {
+      var rand = seedrandom(seed + retArr.length);
+      retArr.splice(Math.floor(rand() * retArr.length), 1);
+    }
+    return retArr;
+  }
+
   render() {
     let modalDisplay = null;
     switch (this.state.modalType) {
@@ -226,7 +302,15 @@ class App extends React.Component {
         modalDisplay = <ModalHow toggleModal={this.toggleModal} />;
         break;
       case 2:
-        modalDisplay = <ModalSettings toggleModal={this.toggleModal} />;
+        modalDisplay = (
+          <ModalWin
+            toggleModal={this.toggleModal}
+            history={this.state.history}
+            catagories={this.state.finalState}
+            special={false}
+            win={this.state.win}
+          />
+        );
         break;
       case 3:
         modalDisplay = (
@@ -234,6 +318,8 @@ class App extends React.Component {
             toggleModal={this.toggleModal}
             history={this.state.history}
             catagories={this.state.finalState}
+            special={true}
+            win={this.state.win}
           />
         );
         break;
@@ -258,11 +344,11 @@ class App extends React.Component {
     );
   }
 
-  componentDidUpdate() {
-    setTimeout(() => {
-      this.setState({ popupText: "" });
-    }, 6000);
-  }
+  // componentDidUpdate() {
+  //   setTimeout(() => {
+  //     this.setState({ popupText: "" });
+  //   }, 6000);
+  // }
 }
 
 export default App;

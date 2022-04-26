@@ -8,20 +8,20 @@ const Top = (props) => {
   return (
     <div id="nav-container">
       <nav className="top-nav">
-        <p>Nerdle</p>
+        <p>Statdle</p>
         <p>{props.guessCount + fillerText}</p>
         <div>
           <span
             className="material-icons btn btn-dark"
             onClick={() => props.toggleModal(1)}
           >
-            help
+            help_outline
           </span>
           <span
             className="material-icons btn btn-dark"
             onClick={() => props.toggleModal(2)}
           >
-            settings
+            leaderboard
           </span>
         </div>
       </nav>

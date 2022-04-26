@@ -1,6 +1,6 @@
 {
-  "name": "nerdle",
-  "homepage": "https://9ps.github.io/nerdle/",
+  "name": "statdle",
+  "homepage": "https://9ps.github.io/statdle/",
   "version": "0.1.0",
   "private": true,
   "dependencies": {

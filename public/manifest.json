@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "Statdle",
+  "name": "Statdle",
   "icons": [
     {
       "src": "%PUBLIC_URL%/favicon.ico?v=2",
@@ -20,6 +20,6 @@
   ],
   "start_url": ".",
   "display": "standalone",
-  "theme_color": "#000000",
+  "theme_color": "#41309A",
   "background_color": "#ffffff"
 }

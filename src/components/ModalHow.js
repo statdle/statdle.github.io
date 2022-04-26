@@ -25,7 +25,7 @@ class ModalHow extends React.Component {
           </div>
           <div className="modal-body">
             <p>
-              Find the <em>Secret Country</em>
+              Find the Secret Nation-<em>State</em> using <em>Stat</em>istics!
             </p>
             <p className="mag-top">
               Guessing a country will show its rank on 4 random catagories, and

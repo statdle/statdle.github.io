@@ -1,6 +1,6 @@
 import React from "react";
 
-class ModalSettings extends React.Component {
+class ModalStats extends React.Component {
   constructor(props) {
     super(props);
     this.stopPropagation = this.stopPropagation.bind(this);
@@ -15,7 +15,7 @@ class ModalSettings extends React.Component {
       <div className="modal-backing" onClick={() => this.props.toggleModal()}>
         <div className="modal-content" onClick={this.stopPropagation}>
           <div className="modal-title">
-            <h2>Settings</h2>
+            <h2>Statistics</h2>
             <span
               className="material-icons btn"
               onClick={() => this.props.toggleModal()}
@@ -53,4 +53,4 @@ class ModalSettings extends React.Component {
   }
 }
 
-export default ModalSettings;
+export default ModalStats;
