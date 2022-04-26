@@ -44,7 +44,7 @@ class ModalWin extends React.Component {
       ": " +
       this.props.history.length +
       fillerText +
-      "\n\nlast guess range - catagory\n";
+      "\n\nlast guess range - category\n";
 
     console.log(this.props.catagories);
     Object.entries(this.props.catagories).forEach((key) => {
