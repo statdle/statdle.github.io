@@ -11,9 +11,11 @@
   --w5: #868E96;
   --w6: #495057;
   --w7: #343A40;
-  --w8: #21252A;
-  --m1: #292e32;
-  --m2: #25292d;
+  --w8: #292e32;
+  --w9: #25292d;
+  --w10: #21252A;
+
+
 }
 
 @import url('https://fonts.googleapis.com/icon?family=Material+Icons+Outlined');
@@ -37,7 +39,7 @@
   }
 
 body {
-  background-color: var(--w8);
+  background-color: var(--w10);
   color: var(--w1);
   margin: 0 auto;
 }
@@ -130,9 +132,9 @@ a {
 #nav-container {
   position: sticky;
   top: 0;
-  /* background-color: var(--m1); */
+  /* background-color: var(--w8); */
   width: 100%;
-  border-bottom: 3px solid var(--m1);
+  border-bottom: 3px solid var(--w8);
   margin-bottom: 5px;
 }
 
@@ -140,7 +142,7 @@ a {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: var(--w8);
+  background-color: var(--w10);
   margin: 0 10px; 
   padding: 5px 0px;
 }
@@ -218,7 +220,7 @@ details[open] > p {
   justify-content: center;
   height: 40px;
   transition-duration: 300ms;
-  box-shadow: inset 0 3px 0px var(--m1); 
+  box-shadow: inset 0 3px 0px var(--w8); 
 }
 
 @media screen and (max-height: 660px) {
@@ -290,7 +292,7 @@ details[open] > p {
   margin: 0 auto;
   bottom: 0;
   max-width: 420px;
-  background-color: var(--w8);
+  background-color: var(--w10);
   width: 100%;
   left: 0;
   right: 0;
@@ -354,7 +356,7 @@ details[open] > p {
 #autocomplete-container {
   margin: 0 5px;
   max-height: 200px;
-  border-top: 5px solid var(--w8);
+  border-top: 5px solid var(--w10);
   overflow-y: scroll;
 }
 
@@ -363,7 +365,7 @@ details[open] > p {
 }
 
 .autocomplete-suggestion {
-  border-bottom: 2px solid var(--w8);
+  border-bottom: 2px solid var(--w10);
   padding: 5px 0px 5px 10px;
   background-color: var(--w7);
   color: var(--w2);
@@ -462,7 +464,7 @@ details[open] > p {
   justify-content: space-between;
   padding: 10px 20px;
   align-items: center;
-  background-color: var(--w8);
+  background-color: var(--w10);
 
   }
 
@@ -480,7 +482,7 @@ details[open] > p {
 }
 
 .onboard-example {
-  background-color: var(--w8);
+  background-color: var(--w10);
   padding: 10px;
   max-width: 400px;
   margin: 10px auto;
@@ -502,9 +504,9 @@ details[open] > p {
 }
 
 .stat-item > h1 {
-  background-color: var(--m1);
+  background-color: var(--w8);
   border-radius: 3px;
-  box-shadow: inset 0 3px 0px var(--m2);
+  box-shadow: inset 0 3px 0px var(--w9);
   padding: 5px 0px;
   margin-bottom: 5px;
 }
@@ -527,13 +529,13 @@ details[open] > p {
 
 .country-guess {
   text-align: center;
-  background-color: var(--m1);
+  background-color: var(--w8);
   padding: 10px 5px;
   margin: 5px auto;
   border-radius: 4px;
   max-width: 300px;
 
-  box-shadow: inset 0 3px 0px var(--m2);
+  box-shadow: inset 0 3px 0px var(--w9);
 }
 
 .country-guess-container {
@@ -554,7 +556,7 @@ details[open] > p {
 
 .popup {
   background-color: var(--w2);
-  color: var(--w8);
+  color: var(--w10);
   padding: 10px 20px;
   border-radius: 3px;
   display: block;
@@ -565,7 +567,7 @@ details[open] > p {
   width: 100px;
   margin: 0 auto;
   text-align: center;
-  box-shadow: 0 3px 5px var(--w8);
+  box-shadow: 0 3px 5px var(--w10);
   font-weight: bold;
 
   /* animation-delay: 600ms;
