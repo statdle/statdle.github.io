@@ -12,7 +12,10 @@ import "./App.css";
 import data from "./assets/data.json";
 import catagoryNames from "./assets/catagoryNames.json";
 
-// import Popup from "./Popup";
+import ReactGA from "react-ga";
+
+ReactGA.initialize("G-S5J5C9XDNK");
+ReactGA.pageview(window.location.pathname);
 
 class App extends React.Component {
   constructor(props) {
@@ -26,6 +29,7 @@ class App extends React.Component {
     this.doPopup = this.doPopup.bind(this);
     this.updateStorageState = this.updateStorageState.bind(this);
     this.updateStorageStats = this.updateStorageStats.bind(this);
+    this.initReactGA = this.initReactGA.bind(this);
 
     this.state = {
       catagories: {}, // {<catagoryname>: {high: <0>, highName: <"">, low: <0> lowName: <""> target: <0>, lineThing: <0,1,2>}, ...}
@@ -37,7 +41,14 @@ class App extends React.Component {
   }
 
   componentDidMount() {
+    this.initReactGA();
     this.seedValues();
+  }
+
+  initReactGA() {
+    ReactGA.initialize("UA-227405978-1");
+    ReactGA.pageview(window.location.pathname + window.location.search);
+    // ReactGA.pageview("test-init-pageview");
   }
 
   updateStorageStats(score) {
