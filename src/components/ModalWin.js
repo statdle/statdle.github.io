@@ -13,10 +13,6 @@ class ModalWin extends React.Component {
     this.share = this.share.bind(this);
     this.stopPropagation = this.stopPropagation.bind(this);
     this.getNumber = this.stopPropagation.bind(this);
-
-    this.state = {
-      shareActive: false,
-    };
   }
 
   stopPropagation(e) {
@@ -63,10 +59,7 @@ class ModalWin extends React.Component {
     });
     text += "\nhttps://9ps.github.io/statdle/";
     navigator.clipboard.writeText(text);
-
-    this.setState({
-      shareActive: true,
-    });
+    this.props.togglePopup(3);
   }
 
   render() {
@@ -75,9 +68,6 @@ class ModalWin extends React.Component {
 
     if (this.props.win) {
       //share buttons
-      const shareActive = this.state.shareActive ? (
-        <div className="text-center mag-top">Copied to Clipboard!</div>
-      ) : null;
 
       let fillerText = " Guesses";
       if (this.props.history.length === 1) {
@@ -89,7 +79,6 @@ class ModalWin extends React.Component {
           <h1 className="text-center">
             {this.props.history.length + " " + fillerText}
           </h1>
-          {shareActive}
           <div className="btn-wide btn-modal btn-active" onClick={this.share}>
             Share
           </div>

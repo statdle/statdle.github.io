@@ -1,4 +1,5 @@
 import React from "react";
+import CatagoryGroup from "./CatagoryGroup";
 
 class ModalHow extends React.Component {
   constructor(props) {
@@ -9,8 +10,46 @@ class ModalHow extends React.Component {
   stopPropagation(e) {
     e.stopPropagation();
   }
-
+  // props: values[<catgoryName>, high, highname, low, lowName, target], active<[0, 0, 0, 0]>
   render() {
+    const exampleOne = (
+      <div className="onboard-example">
+        <CatagoryGroup
+          values={[
+            "alp",
+            {
+              high: 10,
+              highName: "Austria",
+              low: 149,
+              lowName: "San Marino",
+              target: 11,
+            },
+          ]}
+          active={[0, 0, 1, 0]}
+          key={"ex1"}
+        />
+      </div>
+    );
+
+    const exampleTwo = (
+      <div className="onboard-example">
+        <CatagoryGroup
+          values={[
+            "alp",
+            {
+              high: 10,
+              highName: "Austria",
+              low: 149,
+              lowName: "San Marino",
+              target: 11,
+            },
+          ]}
+          active={[0, 0, 0, 1]}
+          key={"ex2"}
+        />
+      </div>
+    );
+
     return (
       <div className="modal-backing" onClick={() => this.props.toggleModal(0)}>
         <div className="modal-content" onClick={this.stopPropagation}>
@@ -31,25 +70,8 @@ class ModalHow extends React.Component {
               Guessing a country will show its rank on 4 random catagories, and
               how it compares to the <em> Secret Country</em>
             </p>
-            <p className="mag-top">
-              <b>Example</b>
-            </p>
-            <div className="onboard-example">
-              <h2 className="catagory-title">Alphabetically</h2>
-              <div className="line-thing"></div>
-              <div className="line-row">
-                <span className="row-item position-symbol">↓</span>
-                <span className="row-item rank-number">10</span>
-                <span className="row-item country-name">Austria</span>
-              </div>
-              <div className="line-row">
-                <span className="row-item position-symbol active">↑</span>
-                <span className="row-item rank-number active">149</span>
-                <span className="row-item country-name active">San Marino</span>
-              </div>
-              <div className="line-thing"></div>
-            </div>
-
+            <h3 className="mag-top">Example</h3>
+            {exampleOne}
             <ul>
               <li>
                 <em>Austria</em> is rank 10 Alphabetically, above the
@@ -65,6 +87,11 @@ class ModalHow extends React.Component {
               <em> Secret Country</em>, and will display a line to represent
               this.
             </p>
+            <h3 className="mag-top">Example</h3>
+            {exampleTwo}
+            <ul>
+              <li>A new guess, like Zimbabwe is lower than San Marino</li>
+            </ul>
           </div>
         </div>
       </div>

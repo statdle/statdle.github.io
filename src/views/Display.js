@@ -5,7 +5,6 @@ import React from "react";
 function Display(props) {
   const catagories = Object.entries(props.values).map((key, value) => {
     let active = [0, 0, 0, 0]; // LineThing, high, low, LineThing
-
     // line thing logic
     if (key[1].lineThing === 1) {
       active[0] = 1;

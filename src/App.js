@@ -11,11 +11,7 @@ import Popup from "./components/Popup";
 import "./App.css";
 import data from "./assets/data.json";
 import catagoryNames from "./assets/catagoryNames.json";
-
-import ReactGA from "react-ga";
-
-ReactGA.initialize("G-S5J5C9XDNK");
-ReactGA.pageview(window.location.pathname);
+// import gtag from "ga-gtag";
 
 class App extends React.Component {
   constructor(props) {
@@ -26,29 +22,22 @@ class App extends React.Component {
     this.seedValues = this.seedValues.bind(this);
     this.doRandom = this.doRandom.bind(this);
     this.toggleModal = this.toggleModal.bind(this);
-    this.doPopup = this.doPopup.bind(this);
+    this.togglePopup = this.togglePopup.bind(this);
     this.updateStorageState = this.updateStorageState.bind(this);
     this.updateStorageStats = this.updateStorageStats.bind(this);
-    this.initReactGA = this.initReactGA.bind(this);
 
     this.state = {
       catagories: {}, // {<catagoryname>: {high: <0>, highName: <"">, low: <0> lowName: <""> target: <0>, lineThing: <0,1,2>}, ...}
       history: [], //{<country>, <country>, ...}
       modalType: 1, //0: "none", 1: "how" 2: "win from top" 3: "win"
+      popupType: 0, //0: "none", 1: "Already Guessed", 2: "Invalid Country", 3: "Copied to Clipboard"
       finalState: {},
       win: false,
     };
   }
 
   componentDidMount() {
-    this.initReactGA();
     this.seedValues();
-  }
-
-  initReactGA() {
-    ReactGA.initialize("UA-227405978-1");
-    ReactGA.pageview(window.location.pathname + window.location.search);
-    // ReactGA.pageview("test-init-pageview");
   }
 
   updateStorageStats(score) {
@@ -110,6 +99,7 @@ class App extends React.Component {
           history: state.history,
           finalState: state.finalState,
           win: state.win,
+          modalType: 0,
         });
         return;
       }
@@ -258,9 +248,9 @@ class App extends React.Component {
     this.updateStorageState(newCatagories, newHistory, false, false);
   }
 
-  doPopup(text) {
+  togglePopup(type = 0) {
     this.setState({
-      popupText: text,
+      popupType: type,
     });
   }
 
@@ -268,7 +258,7 @@ class App extends React.Component {
     let searchTerm = inp.toLowerCase();
     for (let i in this.state.history) {
       if (searchTerm === this.state.history[i].toLowerCase()) {
-        this.doPopup("Already Entered!");
+        this.togglePopup(1);
         return;
       }
     }
@@ -279,7 +269,7 @@ class App extends React.Component {
         return;
       }
     }
-    this.doPopup("Unknown Country!");
+    this.togglePopup(2);
   }
 
   /* changes modal display
@@ -313,7 +303,6 @@ class App extends React.Component {
     let modalDisplay = null;
     switch (this.state.modalType) {
       case 0:
-        modalDisplay = null;
         break;
       case 1:
         modalDisplay = <ModalHow toggleModal={this.toggleModal} />;
@@ -322,6 +311,7 @@ class App extends React.Component {
         modalDisplay = (
           <ModalWin
             toggleModal={this.toggleModal}
+            togglePopup={this.togglePopup}
             history={this.state.history}
             catagories={this.state.finalState}
             special={false}
@@ -333,6 +323,7 @@ class App extends React.Component {
         modalDisplay = (
           <ModalWin
             toggleModal={this.toggleModal}
+            togglePopup={this.togglePopup}
             history={this.state.history}
             catagories={this.state.finalState}
             special={true}
@@ -343,10 +334,35 @@ class App extends React.Component {
       default:
         break;
     }
+    let popupDisplay = null;
+    switch (this.state.popupType) {
+      case 0:
+        break;
+      case 1:
+        popupDisplay = (
+          <Popup display={"Duplicate Country"} togglePopup={this.togglePopup} />
+        );
+        break;
+      case 2:
+        popupDisplay = (
+          <Popup display={"Invalid Country"} togglePopup={this.togglePopup} />
+        );
+        break;
+      case 3:
+        popupDisplay = (
+          <Popup
+            display={"Copied to Clipboard"}
+            togglePopup={this.togglePopup}
+          />
+        );
+        break;
+      default:
+        break;
+    }
 
     return (
       <>
-        <Popup text={this.state.popupText} />
+        {popupDisplay}
         {modalDisplay}
         <Top
           guessCount={this.state.history.length}
@@ -356,16 +372,10 @@ class App extends React.Component {
           values={this.state.catagories}
           currentCountry={this.state.history[this.state.history.length - 1]}
         />
-        <Search doSearch={this.doSearch} />
+        <Search doSearch={this.doSearch} win={this.state.win} />
       </>
     );
   }
-
-  // componentDidUpdate() {
-  //   setTimeout(() => {
-  //     this.setState({ popupText: "" });
-  //   }, 6000);
-  // }
 }
 
 export default App;

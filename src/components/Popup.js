@@ -1,20 +1,15 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 
+/* display={this.state.popupType} togglePopup={this.togglePopup} /> */
 let Popup = (props) => {
-  const [visible, setVisible] = useState(true);
   useEffect(() => {
-    setTimeout(() => {
-      setVisible(!visible);
-    }, "3000");
-  }, ["3000"]);
+    const timer = setTimeout(() => {
+      props.togglePopup(0);
+    }, 3000);
+    return () => clearTimeout(timer);
+  }, [props]);
 
-  return visible ? (
-    <div className="popup" key={Math.random()}>
-      {props.text}
-    </div>
-  ) : (
-    <div />
-  );
+  return <div className="popup">{props.display}</div>;
 };
 
 export default Popup;

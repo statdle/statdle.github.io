@@ -52,11 +52,19 @@ h2 {
   font-weight: normal;
 }
 
+h3 {
+  font-size: 16px;
+  font-weight: bold;
+}
+
 input {
   background-color: var(--w7);
   color: var(--w2);
   outline-color: var(--p0);
   border-radius: 3px;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
 }
 
 em {
@@ -196,7 +204,6 @@ details[open] > p {
   padding: 0px 5px;
 }
 
-
 .line-thing {
   height: 5px;
   border-radius: 3px;
@@ -330,6 +337,11 @@ details[open] > p {
 
 #country-search:focus {
   outline: var(--p0) solid 3px;
+}
+
+.input-disabled {
+  cursor: not-allowed;
+  background-color: var(--w6);
 }
 
 #country-submit {
@@ -552,10 +564,10 @@ details[open] > p {
 
 /* POPUP */
 
-/* @keyframes animation-popup {
-  from {opacity: 1;}
-  to {opacity: 0;}
-} */
+@keyframes animation-popup {
+  from {opacity: 0;}
+  to {opacity: 1;}
+}
 
 .popup {
   background-color: var(--w2);
@@ -572,11 +584,11 @@ details[open] > p {
   text-align: center;
   box-shadow: 0 3px 5px var(--w10);
   font-weight: bold;
+  z-index: 100;
 
-  /* animation-delay: 600ms;
-  animation-duration: 600ms;
+  animation-duration: 300ms;
   animation-name: animation-popup;
-  animation-timing-function: ease-out; */
+  animation-timing-function: ease;
 }
 
 .material-icons {

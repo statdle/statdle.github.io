@@ -1,6 +1,6 @@
 import React from "react";
 
-//props history
+//props history, win
 
 class Search extends React.Component {
   constructor(props) {
@@ -133,14 +133,17 @@ class Search extends React.Component {
         <div id="autocomplete-container">{suggestions}</div>
         <form className="search-bar" onSubmit={this.handleSearch}>
           <input
-            type="search"
+            type="text"
             placeholder="Country..."
             id="country-search"
             autoComplete="off"
             onChange={this.handleChange}
             value={this.state.inputValue}
             onKeyDown={this.handleKeyDown}
+            disabled={this.props.win}
+            className={this.props.win ? "input-disabled" : ""}
           ></input>
+
           <input type="submit" id="country-submit" value="Go" />
         </form>
       </div>
