@@ -90,7 +90,10 @@ class ModalHow extends React.Component {
             <h3 className="mag-top">Example</h3>
             {exampleTwo}
             <ul>
-              <li>A new guess, like Zimbabwe is lower than San Marino</li>
+              <li>
+                A new guess, like <em>Zimbabwe</em> is lower than{" "}
+                <em>San Marino</em>
+              </li>
             </ul>
           </div>
         </div>

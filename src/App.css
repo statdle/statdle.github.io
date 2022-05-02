@@ -283,6 +283,7 @@ details[open] > p {
   animation-timing-function: ease;
 }
 
+/* broken lowkey */
 .btn-active:active {
   transform: translateY(3px);
   box-shadow: none;
@@ -363,6 +364,7 @@ details[open] > p {
 
 #country-submit:active {
   transform: translateY(3px);
+  height: 37px;
   box-shadow: none;
   background-color: var(--p0);
   transition-duration: 100ms;
