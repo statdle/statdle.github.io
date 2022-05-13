@@ -5,6 +5,9 @@ A React project following the legacy of webapps wordleifying sporcle quizzes. Fi
 **"Daily" Operation:**
 * The unknown country and catagories are seeded locally based on the date (rather than dispatched from a server). Currently, there is no mechanism to stop repeats, as it is entirely random.
 
+**Ranking**
+* If two countries have the same value, then the one alphabetically first will have the better rank
+
 **Data Sources:**
 * I used mostly whats on Wikipedia and Worldometers, more bespoke sources include: 
 * Capital Coordinates: http://techslides.com/list-of-countries-and-capitals (edited for errors)
