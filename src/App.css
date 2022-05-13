@@ -127,6 +127,31 @@ a {
   background-color: var(--p1);
 }
 
+.item-dark {
+  margin-top: 20px;
+  background-color: var(--w8);
+  border-radius: 3px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 40px;
+  box-shadow: inset 0 3px 0px var(--w9); 
+}
+
+.item-dark:hover {
+  margin-top: 20px;
+  background-color: var(--w9);
+  border-radius: 3px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 40px;
+  box-shadow: inset 0 3px 0px var(--w9); 
+}
+
+
 .mag-top {
   margin-top: 20px;
 }
@@ -229,6 +254,8 @@ details[open] > p {
   transition-duration: 300ms;
   box-shadow: inset 0 3px 0px var(--w8); 
 }
+
+
 
 @media screen and (max-height: 660px) {
   .row-item {
@@ -559,7 +586,7 @@ details[open] > p {
   padding-bottom: 20px;
 }
 
-.country-guess-container :last-child{
+.country-guess-active{
   background-color: var(--p1);
   box-shadow: inset 0 -3px 0px var(--p2);
 }

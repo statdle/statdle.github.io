@@ -46,10 +46,12 @@ class App extends React.Component {
     let average = stats.average;
     let rounds = stats.rounds;
 
+    // update best
     if (score < best || best === 0) {
       best = score;
     }
 
+    // update average
     average = Math.round(((average * rounds + score) / (rounds + 1)) * 10) / 10;
     rounds = rounds + 1;
 
@@ -68,6 +70,8 @@ class App extends React.Component {
     state.catagories = newCatagories;
     state.history = newHistory;
     state.win = newWin;
+
+    //if it exists, add finalstate as well
     if (finalState) {
       state.finalState = finalState;
     }
@@ -113,7 +117,7 @@ class App extends React.Component {
 
     // Select target country
     const targetCountry = data[countryRandIndex];
-    // console.log(targetCountry);
+    console.log(targetCountry);
 
     // Select which 4 catagories
     const seeds = this.doRandom(

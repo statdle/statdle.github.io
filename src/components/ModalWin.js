@@ -83,13 +83,14 @@ class ModalWin extends React.Component {
             Share
           </div>
           <StatsDisplay stats={stats} />
-          <WinCountries history={this.props.history} />
+          <WinCountries history={this.props.history} win={true}/>
         </>
       );
     } else {
       content = (
         <>
           <StatsDisplay stats={stats} />
+          <WinCountries history={this.props.history} win={false}/>
           <p className="results-text">
             (finish playing the round for sharing options)
           </p>

@@ -68,18 +68,12 @@ class ModalHow extends React.Component {
             </p>
             <p className="mag-top">
               Guessing a country will show its rank on 4 random catagories, and
-              how it compares to the <em> Secret Country</em>
+              how it compares to the <em> Secret Country</em>.
             </p>
-            <h3 className="mag-top">Example</h3>
             {exampleOne}
             <ul>
               <li>
-                <em>Austria</em> is rank 10 Alphabetically, above the
-                <em> Secret Country</em>
-              </li>
-              <li>
-                <em>San Marino</em> is rank 149 Alphabetically, below the
-                <em> Secret Country</em>
+                <em>Austria</em> is above the <em> Secret Country</em>, while <em> San Marino</em> is below.
               </li>
             </ul>
             <p className="mag-top">
@@ -87,13 +81,14 @@ class ModalHow extends React.Component {
               <em> Secret Country</em>, and will display a line to represent
               this.
             </p>
-            <h3 className="mag-top">Example</h3>
             {exampleTwo}
             <ul>
               <li>
                 A new guess, like <em>Zimbabwe</em> is lower than{" "}
                 <em>San Marino</em>
               </li>
+
+              <a className="item-dark" href="https://docs.google.com/forms/d/e/1FAIpQLSf9NfB5E7mMjUAhYh-GrwS8uS1s3jZRQQ9dAP8_DB4OKmU16w/viewform?usp=sf_link">Form for feedback or suggestions</a>
             </ul>
           </div>
         </div>
