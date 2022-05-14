@@ -16,7 +16,7 @@ class ModalHow extends React.Component {
       <div className="onboard-example">
         <CatagoryGroup
           values={[
-            "alp",
+            "a",
             {
               high: 10,
               highName: "Austria",
@@ -35,7 +35,7 @@ class ModalHow extends React.Component {
       <div className="onboard-example">
         <CatagoryGroup
           values={[
-            "alp",
+            "a",
             {
               high: 10,
               highName: "Austria",
