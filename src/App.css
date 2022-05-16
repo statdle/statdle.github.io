@@ -224,6 +224,7 @@ details[open] > p {
   width: 100%;
   max-width: 420px;
   padding-bottom: 60px;
+  padding-top: calc(50vh - 420px);
 }
 
 .catagory-row {
@@ -262,7 +263,8 @@ details[open] > p {
   .row-item {
     height: 35px;
     transition-duration: 300ms;
-}}
+  }
+}
 
 @media screen and (max-height: 620px) {
   .row-item {

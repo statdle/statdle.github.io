@@ -11,13 +11,14 @@ let WinCountries = (props) => {
       );
     } else if (key[0] > 3 && key[0] < props.history.length - 5) { //remove other keys
       return <></>;
-    } else if (parseInt(key[0]) === (props.history.length - 1)) {
-      return (
-        <div key={key[0]} className="country-guess country-guess-active">
+    } else if (parseInt(key[0]) === (props.history.length - 1)) { //if last element
+      // logic for highlighting last country
+      return ( 
+        <div key={key[0]} className={props.win? "country-guess country-guess-active" : "country-guess"}>
           {key[1]}
         </div>
       );
-    } else {
+    } else { //normal condition
       return (
         <div key={key[0]} className="country-guess">
           {key[1]}

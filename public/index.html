@@ -54,7 +54,10 @@
       }
       gtag("js", new Date());
 
-      gtag("config", "G-9V91HPKPMY", { cookie_flags: "SameSite=None;Secure" });
+      gtag("config", "G-9V91HPKPMY", {
+        "anonymize_ip": true, 
+        "cookie_domain": 'https://9ps.github.io/statdle/',
+        "cookie_flags": 'SameSite=None;Secure' });
     </script>
   </head>
   <body>

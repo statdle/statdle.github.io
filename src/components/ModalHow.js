@@ -76,16 +76,11 @@ class ModalHow extends React.Component {
                 <em>Austria</em> is above the <em> Secret Country</em>, while <em> San Marino</em> is below.
               </li>
             </ul>
-            <p className="mag-top">
-              Further guesses will only retain the countries closest to the
-              <em> Secret Country</em>, and will display a line to represent
-              this.
-            </p>
             {exampleTwo}
             <ul>
               <li>
-                A new guess, like <em>Zimbabwe</em> is lower than{" "}
-                <em>San Marino</em>
+                A new guess, like <em>Zimbabwe</em> is lower than
+                <em> San Marino</em> and the <em> Secret Country</em>
               </li>
 
               <a className="item-dark" href="https://docs.google.com/forms/d/e/1FAIpQLSf9NfB5E7mMjUAhYh-GrwS8uS1s3jZRQQ9dAP8_DB4OKmU16w/viewform?usp=sf_link">Form for feedback or suggestions</a>

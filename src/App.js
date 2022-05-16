@@ -117,7 +117,7 @@ class App extends React.Component {
 
     // Select target country
     const targetCountry = data[countryRandIndex];
-    console.log(targetCountry);
+    // console.log(targetCountry);
 
     // Select which 4 catagories
     const seeds = this.doRandom(
