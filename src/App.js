@@ -11,7 +11,6 @@ import Popup from "./components/Popup";
 import "./App.css";
 import data from "./assets/data.json";
 import catagoryNames from "./assets/catagoryNames.json";
-// import gtag from "ga-gtag";
 
 class App extends React.Component {
   constructor(props) {
