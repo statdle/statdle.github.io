@@ -156,8 +156,8 @@ class App extends React.Component {
     localStorage.setItem("state", JSON.stringify(state));
   }
 
-  /* update state, update display */
   updateDisplay(countryData) {
+    // update state, update display
     const check = Object.entries(this.state.catagories)[0];
     const newCatagories = {}; //we fill this instead of repeatedly calling state
     const newHistory = this.state.history; //history stores what gets inputed
@@ -204,7 +204,8 @@ class App extends React.Component {
       var key = Object.keys(this.state.catagories)[i];
 
       const catagory = this.state.catagories[key];
-      const rank = countryData[key];
+      const rank = parseInt(countryData[key]);
+      const target = parseInt(catagory.target);
 
       newCatagories[key] = {
         target: catagory.target,
@@ -215,7 +216,7 @@ class App extends React.Component {
         lineThing: 0,
       }; //adding new blank row
 
-      if (rank < catagory.target) {
+      if (rank < target) {
         //1: higher rank
         if (catagory.high === "" || rank > catagory.high) {
           newCatagories[key].high = rank;
@@ -227,11 +228,13 @@ class App extends React.Component {
         }
         newCatagories[key].low = catagory.low;
         newCatagories[key].lowName = catagory.lowName;
-      } else if (rank > catagory.target) {
+      } else if (rank > target) {
         //2: lower rank
+
         if (catagory.low === "" || rank < catagory.low) {
           newCatagories[key].low = rank;
           newCatagories[key].lowName = countryData.name;
+
         } else {
           newCatagories[key].low = catagory.low;
           newCatagories[key].lowName = catagory.lowName;
