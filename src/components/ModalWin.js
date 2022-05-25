@@ -35,7 +35,7 @@ class ModalWin extends React.Component {
     const gameNumber = (today - start) / 86400000;
 
     var text =
-      "Statdle " +
+      "#Statdle " +
       gameNumber +
       ": " +
       this.props.history.length +
@@ -57,7 +57,7 @@ class ModalWin extends React.Component {
       }
       text += " - " + catagoryNames[key[0]] + "\n";
     });
-    text += "\nhttps://9ps.github.io/statdle/";
+    text += "\nhttps://statdle.github.io/";
     navigator.clipboard.writeText(text);
     this.props.togglePopup(3);
   }
