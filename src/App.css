@@ -186,8 +186,8 @@ a {
   justify-content: space-between;
   align-items: center;
   background-color: var(--w10);
-  margin: 0 10px; 
-  padding: 5px 0px;
+  /* margin: 0 10px;  */
+  padding: 5px 10px;
 }
 
 .top-nav p {
