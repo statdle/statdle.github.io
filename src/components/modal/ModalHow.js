@@ -1,5 +1,5 @@
 import React from "react";
-import CatagoryGroup from "./CatagoryGroup";
+import CatagoryGroup from "../display/CatagoryGroup";
 
 class ModalHow extends React.Component {
   constructor(props) {

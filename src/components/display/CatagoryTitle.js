@@ -1,6 +1,6 @@
 import React from "react";
-import catagoryNames from "../assets/catagoryNames.json";
-import catagoryDescription from "../assets/catagoryDescription.json";
+import catagoryNames from "../../assets/catagoryNames.json";
+import catagoryDescription from "../../assets/catagoryDescription.json";
 
 //props: title <"name">
 let CatagoryTitle = (props) => {

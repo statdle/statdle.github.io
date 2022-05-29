@@ -1,6 +1,6 @@
 import React from "react";
-import catagoryNames from "../assets/catagoryNames.json";
-import StatsDisplay from "../components/StatsDisplay";
+import catagoryNames from "../../assets/catagoryNames.json";
+import StatsDisplay from "./StatsDisplay";
 import WinCountries from "./WinCountries";
 
 /*props: 

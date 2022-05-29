@@ -1,4 +1,4 @@
-import CatagoryGroup from "../components/CatagoryGroup.js";
+import CatagoryGroup from "../components/display/CatagoryGroup.js";
 import React from "react";
 
 //props: values={this.state.catagories}, currentCountry

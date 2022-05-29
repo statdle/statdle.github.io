@@ -4,8 +4,8 @@ import Search from "./views/Search";
 import Display from "./views/Display";
 import Top from "./views/Top";
 
-import ModalHow from "./components/ModalHow";
-import ModalWin from "./components/ModalWin";
+import ModalHow from "./components/modal/ModalHow";
+import ModalWin from "./components/modal/ModalWin";
 import Popup from "./components/Popup";
 
 import "./App.css";
@@ -18,11 +18,12 @@ class App extends React.Component {
 
     this.doSearch = this.doSearch.bind(this);
     this.updateDisplay = this.updateDisplay.bind(this);
-    this.seedValues = this.seedValues.bind(this);
+    this.setupStats = this.setupStats.bind(this);
+    this.setupGame = this.setupGame.bind(this);
     this.doRandom = this.doRandom.bind(this);
     this.toggleModal = this.toggleModal.bind(this);
     this.togglePopup = this.togglePopup.bind(this);
-    this.updateStorageState = this.updateStorageState.bind(this);
+    this.updateStorageGame = this.updateStorageGame.bind(this);
     this.updateStorageStats = this.updateStorageStats.bind(this);
 
     this.state = {
@@ -36,7 +37,158 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    this.seedValues();
+    this.setupStats();
+    this.setupGame();
+  }
+
+  setupStats() {
+    if (!localStorage.getItem("stats")) {
+      //set up stats
+      const stats = {
+        rounds: 0,
+        best: 0,
+        average: 0,
+      };
+
+      localStorage.setItem("stats", JSON.stringify(stats));
+    }
+  }
+
+  /* pick target country and catagories */
+  setupGame() {
+    let today = new Date().setHours(0, 0, 0, 0);
+    
+    // if existing game in localStorage, set values
+    if (localStorage.getItem("game")) {
+
+      const game = JSON.parse(localStorage.getItem("game"));
+
+      if (game.date === today) {
+        this.setState({
+          catagories: game.catagories,
+          history: game.history,
+          finalState: game.finalState,
+          win: game.win,
+          modalType: 0,
+        });
+        return;
+      }
+    }
+
+    // Generate randomness from todays date
+    const seedrandom = require("seedrandom");
+    const gen = seedrandom(today);
+    const countryRandIndex = Math.floor(gen() * data.length); //country randomizer
+
+    // Select target country, 4 catagories
+    const targetCountry = data[countryRandIndex];
+    const seeds = this.doRandom(
+      4,
+      Object.keys(catagoryNames).length,
+      today,
+      seedrandom
+    );
+
+    // Generate inital state values
+    const initialCatagories = {};
+    for (let i in seeds) {
+      var key = Object.keys(catagoryNames)[seeds[i]];
+      initialCatagories[key] = {
+        target: targetCountry[key],
+        high: "",
+        highName: "",
+        low: "",
+        lowName: "",
+        lineThing: 0,
+      };
+    }
+
+    //set initial state
+    this.setState({
+      catagories: initialCatagories,
+      win: false,
+    });
+
+    this.updateStorageGame(initialCatagories, [], false, {}, today);
+  }
+
+  // update state, update display
+  updateDisplay(countryData) {
+    const check = Object.entries(this.state.catagories)[0]; //used to check if target
+    
+    const newCatagories = this.state.catagories; //we fill this instead of repeatedly calling state
+    const newHistory = this.state.history; //history stores what gets inputed
+    newHistory.push(countryData.name);
+
+     //win condtion
+    if (countryData[check[0]] === check[1].target) {
+      const finalState = this.state.catagories;
+
+      this.setState({
+        finalState: finalState,
+        win: true,
+      });
+      this.toggleModal(3);
+
+      //
+      for (let i in Object.keys(this.state.catagories)) {
+        var keyWin = Object.keys(this.state.catagories)[i];
+        const catagory = this.state.catagories[keyWin];
+        newCatagories[keyWin] = {
+          target: catagory.target,
+          high: catagory.target,
+          highName: countryData.name,
+          low: catagory.target,
+          lowName: countryData.name,
+          lineThing: 0,
+        };
+      }
+      
+      this.setState({
+        catagories: newCatagories,
+        history: newHistory,
+      });
+      
+      this.updateStorageStats(newHistory.length);
+      this.updateStorageGame(newCatagories, newHistory, true, finalState);
+      return;
+    }
+
+    //loop through data catagories; name, pop, area, ...
+    for (let i in Object.keys(this.state.catagories)) {
+      var key = Object.keys(this.state.catagories)[i];
+
+      const catagory = newCatagories[key];
+      const rank = parseInt(countryData[key]);
+      const target = parseInt(catagory.target);
+
+      //1: if new is higher rank
+      if (rank < target) {
+        if (catagory.high === "" || rank > catagory.high) {
+          newCatagories[key].high = rank;
+          newCatagories[key].highName = countryData.name;
+        } else {
+          newCatagories[key].lineThing = 1;
+        }
+      //2: if new is lower rank
+      } else if (rank > target) {
+        if (catagory.low === "" || rank < catagory.low) {
+          newCatagories[key].low = rank;
+          newCatagories[key].lowName = countryData.name;
+
+        } else {
+          newCatagories[key].lineThing = 2;
+        }
+      }
+    }
+
+    // Update State
+    this.setState({
+      catagories: newCatagories,
+      history: newHistory,
+    });
+
+    this.updateStorageGame(newCatagories, newHistory, false);
   }
 
   updateStorageStats(score) {
@@ -64,202 +216,27 @@ class App extends React.Component {
   }
 
   /* newCatagories, newHistory, newWin, finalState (conditional)*/
-  updateStorageState(newCatagories, newHistory, newWin, finalState) {
-    const state = JSON.parse(localStorage.getItem("state"));
-    state.catagories = newCatagories;
-    state.history = newHistory;
-    state.win = newWin;
+  updateStorageGame(newCatagories, newHistory, newWin = false, finalGame = {}, date = 0) {
 
-    //if it exists, add finalstate as well
-    if (finalState) {
-      state.finalState = finalState;
-    }
-    localStorage.setItem("state", JSON.stringify(state));
+    //if it exists 
+    const game = JSON.parse(localStorage.getItem("game")) ?? {};
+    game.catagories = newCatagories;
+    game.history = newHistory;
+    game.win = newWin;
+    game.finalGame = finalGame;
+    game.date = (date != 0 && game.date)? game.date : date;
+
+    localStorage.setItem("game", JSON.stringify(game));
   }
 
-  /* pick target country and catagories */
-  seedValues() {
-    if (!localStorage.getItem("stats")) {
-      //set up stats
-      const stats = {
-        rounds: 0,
-        best: 0,
-        average: 0,
-      };
-
-      localStorage.setItem("stats", JSON.stringify(stats));
-    }
-
-    let today = new Date();
-    today.setHours(0, 0, 0, 0);
-
-    if (localStorage.getItem("state")) {
-      const state = JSON.parse(localStorage.getItem("state"));
-
-      if (state.date === today.toISOString()) {
-        this.setState({
-          catagories: state.catagories,
-          history: state.history,
-          finalState: state.finalState,
-          win: state.win,
-          modalType: 0,
-        });
-        return;
-      }
-    }
-
-    // Generate randomness from todays date
-    const seedrandom = require("seedrandom");
-    const date = new Date(); //used for seeding date
-    const gen = seedrandom(date.toDateString());
-    const countryRandIndex = Math.floor(gen() * data.length); //country randomizer
-
-    // Select target country
-    const targetCountry = data[countryRandIndex];
-    // console.log(targetCountry);
-
-    // Select which 4 catagories
-    const seeds = this.doRandom(
-      4,
-      Object.keys(catagoryNames).length,
-      date.toDateString(),
-      seedrandom
-    );
-
-    // Generate inital state values
-    const initialState = {};
-    for (let i in seeds) {
-      var key = Object.keys(catagoryNames)[seeds[i]];
-      initialState[key] = {
-        target: targetCountry[key],
-        high: "",
-        highName: "\u00A0",
-        low: "",
-        lowName: "\u00A0",
-        lineThing: 0,
-      };
-    }
-
-    //set initial state
-    this.setState({
-      catagories: initialState,
-      win: false,
-    });
-
-    //set local storage state
-    const state = {
-      catagories: initialState,
-      history: [],
-      date: today.toISOString(),
-    };
-
-    localStorage.setItem("state", JSON.stringify(state));
-  }
-
-  updateDisplay(countryData) {
-    // update state, update display
-    const check = Object.entries(this.state.catagories)[0];
-    const newCatagories = {}; //we fill this instead of repeatedly calling state
-    const newHistory = this.state.history; //history stores what gets inputed
-    newHistory.push(countryData.name);
-
-    // check if target country
-    if (countryData[check[0]] === check[1].target) {
-      const finalState = this.state.catagories;
-
-      this.setState({
-        finalState: finalState,
-        win: true,
-      });
-
-      this.updateStorageStats(newHistory.length);
-
-      this.toggleModal(3); //win condtion
-
-      for (let i in Object.keys(this.state.catagories)) {
-        var keyWin = Object.keys(this.state.catagories)[i];
-        const catagory = this.state.catagories[keyWin];
-        newCatagories[keyWin] = {
-          target: catagory.target,
-          high: countryData[keyWin],
-          highName: countryData.name,
-          low: countryData[keyWin],
-          lowName: countryData.name,
-          lineThing: 0,
-        };
-      }
-
-      this.setState({
-        catagories: newCatagories,
-        history: newHistory,
-      });
-
-      this.updateStorageState(newCatagories, newHistory, true, finalState);
-
-      return;
-    }
-
-    //loop through data catagories; name, pop, area,
-    for (let i in Object.keys(this.state.catagories)) {
-      var key = Object.keys(this.state.catagories)[i];
-
-      const catagory = this.state.catagories[key];
-      const rank = parseInt(countryData[key]);
-      const target = parseInt(catagory.target);
-
-      newCatagories[key] = {
-        target: catagory.target,
-        high: "",
-        highName: "",
-        low: "",
-        lowName: "",
-        lineThing: 0,
-      }; //adding new blank row
-
-      if (rank < target) {
-        //1: higher rank
-        if (catagory.high === "" || rank > catagory.high) {
-          newCatagories[key].high = rank;
-          newCatagories[key].highName = countryData.name;
-        } else {
-          newCatagories[key].high = catagory.high;
-          newCatagories[key].highName = catagory.highName;
-          newCatagories[key].lineThing = 1;
-        }
-        newCatagories[key].low = catagory.low;
-        newCatagories[key].lowName = catagory.lowName;
-      } else if (rank > target) {
-        //2: lower rank
-
-        if (catagory.low === "" || rank < catagory.low) {
-          newCatagories[key].low = rank;
-          newCatagories[key].lowName = countryData.name;
-
-        } else {
-          newCatagories[key].low = catagory.low;
-          newCatagories[key].lowName = catagory.lowName;
-          newCatagories[key].lineThing = 2;
-        }
-        newCatagories[key].high = catagory.high;
-        newCatagories[key].highName = catagory.highName;
-      }
-    }
-
-    // Update State
-    this.setState({
-      catagories: newCatagories,
-      history: newHistory,
-    });
-
-    this.updateStorageState(newCatagories, newHistory, false, false);
-  }
-
+  //little popup box display
   togglePopup(type = 0) {
     this.setState({
       popupType: type,
     });
   }
 
+  //show "already entered" popup
   doSearch(inp) {
     let searchTerm = inp.toLowerCase();
     for (let i in this.state.history) {
@@ -287,11 +264,7 @@ class App extends React.Component {
     });
   }
 
-  /* generate ordered random values
-  number: amount of returns
-  range: total 0-N
-  seed: seed for randomness
-  */
+  /* generate ordered random values */
   doRandom(number, range, seed, seedrandom) {
     var retArr = [];
     for (let i = 0; i < range; i++) {
@@ -340,31 +313,8 @@ class App extends React.Component {
       default:
         break;
     }
-    let popupDisplay = null;
-    switch (this.state.popupType) {
-      case 0:
-        break;
-      case 1:
-        popupDisplay = (
-          <Popup display={"Duplicate Country"} togglePopup={this.togglePopup} />
-        );
-        break;
-      case 2:
-        popupDisplay = (
-          <Popup display={"Invalid Country"} togglePopup={this.togglePopup} />
-        );
-        break;
-      case 3:
-        popupDisplay = (
-          <Popup
-            display={"Copied to Clipboard"}
-            togglePopup={this.togglePopup}
-          />
-        );
-        break;
-      default:
-        break;
-    }
+
+    const popupDisplay = this.state.popupType ? <Popup display={this.state.popupType} togglePopup={this.togglePopup}/> : null;
 
     return (
       <>
