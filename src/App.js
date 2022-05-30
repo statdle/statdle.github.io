@@ -60,13 +60,15 @@ class App extends React.Component {
     
     // if existing game in localStorage, set values
     if (localStorage.getItem("game")) {
-
+      console.log("existing");
       const game = JSON.parse(localStorage.getItem("game"));
-
-      if (game.date === today) {
+      console.log("c", game.date, today);
+      if (parseInt(game.date) === parseInt(today)) {
+        console.log("today"); 
         this.setState({
           catagories: game.catagories,
           history: game.history,
+          score: game.score,
           finalState: game.finalState,
           win: game.win,
           modalType: 0,
@@ -118,6 +120,7 @@ class App extends React.Component {
     
     const newCatagories = this.state.catagories; //we fill this instead of repeatedly calling state
     const newHistory = this.state.history; //history stores what gets inputed
+    const newScore = this.state.newScore;
     newHistory.push(countryData.name);
 
      //win condtion
@@ -182,7 +185,6 @@ class App extends React.Component {
       }
     }
 
-    // Update State
     this.setState({
       catagories: newCatagories,
       history: newHistory,
@@ -224,7 +226,7 @@ class App extends React.Component {
     game.history = newHistory;
     game.win = newWin;
     game.finalGame = finalGame;
-    game.date = (date != 0 && game.date)? game.date : date;
+    game.date = (date != 0 && !game.date)? date : game.date;
 
     localStorage.setItem("game", JSON.stringify(game));
   }

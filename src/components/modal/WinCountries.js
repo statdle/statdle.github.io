@@ -1,4 +1,5 @@
 import React from "react";
+import countriesEmojis from "../../assets/countriesEmojis.json";
 
 // props: stats, win [true/false]
 let WinCountries = (props) => {
@@ -8,23 +9,30 @@ let WinCountries = (props) => {
         <div key={key[0]} className="country-guess">
           ...
         </div>
-      );
-    } else if (key[0] > 3 && key[0] < props.history.length - 5) { //remove other keys
+      )
+    };
+    
+    if (key[0] > 3 && key[0] < props.history.length - 5) { //remove other keys
       return <></>;
-    } else if (parseInt(key[0]) === (props.history.length - 1)) { //if last element
+    }
+    
+    const emoji = countriesEmojis[key[1]]? countriesEmojis[key[1]] + "\xa0\xa0": "";
+
+    if (parseInt(key[0]) === (props.history.length - 1)) { //if last element
       // logic for highlighting last country
       return ( 
         <div key={key[0]} className={props.win? "country-guess country-guess-active" : "country-guess"}>
-          {key[1]}
-        </div>
-      );
-    } else { //normal condition
-      return (
-        <div key={key[0]} className="country-guess">
-          {key[1]}
+          {emoji + key[1]}
         </div>
       );
     }
+
+     //normal condition
+    return (
+        <div key={key[0]} className="country-guess">
+          {emoji + key[1]}
+        </div>
+      );
   });
 
   return (
