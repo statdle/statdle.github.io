@@ -29,6 +29,7 @@ class App extends React.Component {
     this.state = {
       catagories: {}, // {<catagoryname>: {high: <0>, highName: <"">, low: <0> lowName: <""> target: <0>, lineThing: <0,1,2>}, ...}
       history: [], //{<country>, <country>, ...}
+      guessHistory: [0, 0, 0, 0],
       modalType: 1, //0: "none", 1: "how" 2: "win from top" 3: "win"
       popupType: 0, //0: "none", 1: "Already Guessed", 2: "Invalid Country", 3: "Copied to Clipboard"
       finalState: {},
@@ -37,11 +38,13 @@ class App extends React.Component {
   }
 
   componentDidMount() {
+    localStorage.clear();
     this.setupStats();
     this.setupGame();
   }
 
   setupStats() {
+    console.log("--- setupStats");
     if (!localStorage.getItem("stats")) {
       //set up stats
       const stats = {
@@ -56,19 +59,18 @@ class App extends React.Component {
 
   /* pick target country and catagories */
   setupGame() {
+    console.log("--- setupGame");
     let today = new Date().setHours(0, 0, 0, 0);
     
     // if existing game in localStorage, set values
     if (localStorage.getItem("game")) {
-      console.log("existing");
       const game = JSON.parse(localStorage.getItem("game"));
-      console.log("c", game.date, today);
       if (parseInt(game.date) === parseInt(today)) {
-        console.log("today"); 
         this.setState({
           catagories: game.catagories,
           history: game.history,
           score: game.score,
+          guessHistory: game.guessHistory,
           finalState: game.finalState,
           win: game.win,
           modalType: 0,
@@ -108,32 +110,29 @@ class App extends React.Component {
     //set initial state
     this.setState({
       catagories: initialCatagories,
-      win: false,
     });
 
-    this.updateStorageGame(initialCatagories, [], false, {}, today);
+    this.updateStorageGame(initialCatagories, [], [], false, {}, today);
   }
 
   // update state, update display
   updateDisplay(countryData) {
-    const check = Object.entries(this.state.catagories)[0]; //used to check if target
-    
-    const newCatagories = this.state.catagories; //we fill this instead of repeatedly calling state
-    const newHistory = this.state.history; //history stores what gets inputed
-    const newScore = this.state.newScore;
+    console.log("--- updateDisplay");
+    let check = Object.entries(this.state.catagories)[0]; //used to check if target
+    let newCatagories = {...this.state.catagories}; //we fill this instead of repeatedly calling state
+    let newHistory = this.state.history; //history stores what gets inputed
+    let newGuessHistory = this.state.guessHistory;
     newHistory.push(countryData.name);
 
      //win condtion
     if (countryData[check[0]] === check[1].target) {
-      const finalState = this.state.catagories;
-
-      this.setState({
-        finalState: finalState,
-        win: true,
+      this.setState((state) => {
+        return {finalState: state.catagories}
       });
+
+      this.updateStorageStats(newHistory.length);
       this.toggleModal(3);
 
-      //
       for (let i in Object.keys(this.state.catagories)) {
         var keyWin = Object.keys(this.state.catagories)[i];
         const catagory = this.state.catagories[keyWin];
@@ -145,15 +144,16 @@ class App extends React.Component {
           lowName: countryData.name,
           lineThing: 0,
         };
+        newGuessHistory[i] += 1;
       }
       
       this.setState({
         catagories: newCatagories,
         history: newHistory,
+        guessHistory: newGuessHistory,
       });
       
-      this.updateStorageStats(newHistory.length);
-      this.updateStorageGame(newCatagories, newHistory, true, finalState);
+      this.updateStorageGame(newCatagories, newHistory, newGuessHistory, true, newCatagories);
       return;
     }
 
@@ -170,6 +170,7 @@ class App extends React.Component {
         if (catagory.high === "" || rank > catagory.high) {
           newCatagories[key].high = rank;
           newCatagories[key].highName = countryData.name;
+          newGuessHistory[i] += 1;
         } else {
           newCatagories[key].lineThing = 1;
         }
@@ -178,7 +179,7 @@ class App extends React.Component {
         if (catagory.low === "" || rank < catagory.low) {
           newCatagories[key].low = rank;
           newCatagories[key].lowName = countryData.name;
-
+          newGuessHistory[i] += 1;
         } else {
           newCatagories[key].lineThing = 2;
         }
@@ -188,9 +189,10 @@ class App extends React.Component {
     this.setState({
       catagories: newCatagories,
       history: newHistory,
+      guessHistory: newGuessHistory,
     });
 
-    this.updateStorageGame(newCatagories, newHistory, false);
+    this.updateStorageGame(newCatagories, newHistory, newGuessHistory, false);
   }
 
   updateStorageStats(score) {
@@ -218,15 +220,16 @@ class App extends React.Component {
   }
 
   /* newCatagories, newHistory, newWin, finalState (conditional)*/
-  updateStorageGame(newCatagories, newHistory, newWin = false, finalGame = {}, date = 0) {
+  updateStorageGame(newCatagories, newHistory, newGuessHistory, newWin = false, finalGame = {}, date = 0) {
 
     //if it exists 
     const game = JSON.parse(localStorage.getItem("game")) ?? {};
     game.catagories = newCatagories;
     game.history = newHistory;
+    game.guessHistory = newGuessHistory;
     game.win = newWin;
     game.finalGame = finalGame;
-    game.date = (date != 0 && !game.date)? date : game.date;
+    game.date = (date !== 0 && !game.date)? date : game.date;
 
     localStorage.setItem("game", JSON.stringify(game));
   }
@@ -297,6 +300,7 @@ class App extends React.Component {
             catagories={this.state.finalState}
             special={false}
             win={this.state.win}
+            guessHistory={this.state.guessHistory}
           />
         );
         break;
@@ -308,7 +312,8 @@ class App extends React.Component {
             history={this.state.history}
             catagories={this.state.finalState}
             special={true}
-            win={this.state.win}
+            win={true}
+            guessHistory={this.state.guessHistory}
           />
         );
         break;

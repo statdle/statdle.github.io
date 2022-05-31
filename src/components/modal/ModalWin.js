@@ -33,17 +33,21 @@ class ModalWin extends React.Component {
     let today = new Date();
     today.setHours(0, 0, 0, 0);
     const gameNumber = (today - start) / 86400000;
+    const guessAmount = this.props.history.length;
 
     var text =
       "#Statdle " +
       gameNumber +
       ": " +
-      this.props.history.length +
+      guessAmount +
       fillerText +
-      "\n\nlast guess range - category\n";
+      "\n\n🟪 Guesses, Range, Category\n";
 
-    Object.entries(this.props.catagories).forEach((key) => {
-      text += "↓↑ ";
+    // need to loop through both catagories, and 
+    const guessHistory = this.props.guessHistory; 
+    Object.entries(this.props.catagories).forEach((key, index) => {
+      text += Math.floor(guessHistory[index] * 100 / guessAmount);
+      text += "% 🟪 ↓↑ ";
       const high = key[1].high;
       const low = key[1].low;
       if (high === "" && low === "") {

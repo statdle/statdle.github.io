@@ -29,7 +29,7 @@ let WinCountries = (props) => {
 
      //normal condition
     return (
-        <div key={key[0]} className="country-guess">
+        <div key={key[0] + key[1]} className="country-guess">
           {emoji + key[1]}
         </div>
       );
