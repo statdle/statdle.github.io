@@ -1,22 +1,32 @@
-A React project following the legacy of webapps wordleifying sporcle quizzes. Find the Secret Nation-State using Statistics!
+A React project following the legacy of webapps wordleifying sporcle quizzes. Find the Secret Nation State using Statistics! Built using ReactJS.
 
-## Statdle Technicalities/FAQ
+## Data Sources
 
-**"Daily" Operation:**
-* The unknown country and catagories are seeded locally based on the date (rather than dispatched from a server). Currently, there is no mechanism to stop repeats, as it is entirely random.
+| Catagory | Data Source |
+| :--- | :--- |
+| Alphabetically			|	[worldometers](https://www.worldometers.info/geography/alphabetical-list-of-countries/)	 |
+| Population				|	[worldometers](https://www.worldometers.info/geography/alphabetical-list-of-countries/) |
+| Area					    |	[worldometers](https://www.worldometers.info/geography/alphabetical-list-of-countries/) |
+| Density					|	[worldometers](https://www.worldometers.info/geography/alphabetical-list-of-countries/) |
+| GDP						|	[united nations](https://unstats.un.org/unsd/snaama/Basic) |
+| GDP Per Capita			|	[united nations](https://unstats.un.org/unsd/snaama/Basic) |
+| Capitals Alphabetically	|	[tech slides](http://techslides.com/list-of-countries-and-capitals) |
+| Capital Latitude [N → S]  |	[tech slides](http://techslides.com/list-of-countries-and-capitals) |
+| Capital Longitude [W → E] |	[tech slides](http://techslides.com/list-of-countries-and-capitals) |
+| Average Temperature		|	[world bank](https://climateknowledgeportal.worldbank.org/) |
+| Country Rectangularness	|	[pappubahry](https://pappubahry.com/misc/rectangles/) |
+| Population Growth			|	[united nations](https://population.un.org/wpp/Download/Standard/Population/) |
+| Average Elevation			|	[atlasbig](https://www.atlasbig.com/en-us/countries-average-elevation) |
 
-**Ranking**
-* If two countries have the same value, then the one alphabetically first will have the better rank
+## Manipulations
 
-**Data Sources:**
-* I used mostly whats on Wikipedia and Worldometers, more bespoke sources include: 
-* Capital Coordinates: http://techslides.com/list-of-countries-and-capitals (edited for errors)
-* Average Elevation: https://www.atlasbig.com/en-us/countries-average-elevation (the Wikipedia, CIA sources were incorrect and incomplete, this one probably is as well, but has more precision and half of a source)
+As with all data pertaining the countries, there are specific inclusions, exclusions, innacuracies and manipulations that are made. Missing data from some sources are repaired or substituded to the best of my ability. If two countries have the same value for a catagory, **the one first alphabetically has the better rank** (I have tried to avoid scenarios like this). The average elevation data is also quite suspect, in future I might try to produce my own dataset.
 
-**Capital Names:**
+Not included: Vatican City, Greenland, Kosovo, Somaliland, Taiwan/Chinese Taipei 
+Included: Palestine
 
 | Country      | Capital |
-| ----------- | ----------- |
+| :--- | :--- |
 | Bolivia | La Paz |
 | Burundi | Gitega |
 | Egypt | Cairo |
@@ -29,5 +39,6 @@ A React project following the legacy of webapps wordleifying sporcle quizzes. Fi
 | South Africa | Pretoria |
 | Ukraine | Kyiv |
 
-* The actual city populations of Djibouti and Luxembourg were used
-* City Population data was sourced from Wikipedia (but I used the excel tool)
+---
+
+[form for feedback](https://docs.google.com/forms/d/e/1FAIpQLSf9NfB5E7mMjUAhYh-GrwS8uS1s3jZRQQ9dAP8_DB4OKmU16w/viewform)
