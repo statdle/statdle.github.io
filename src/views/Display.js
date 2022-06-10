@@ -1,7 +1,7 @@
 import CatagoryGroup from "../components/display/CatagoryGroup.js";
 import React from "react";
 
-//props: values={this.state.catagories}, currentCountry
+//props: values={this.state.catagories}
 function Display(props) {
   const catagories = Object.entries(props.values).map((values, index) => {
 

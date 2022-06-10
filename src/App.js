@@ -336,7 +336,6 @@ class App extends React.Component {
         />
         <Display
           values={this.state.catagories}
-          currentCountry={this.state.history[this.state.history.length - 1]}
         />
         <Search doSearch={this.doSearch} win={this.state.win} />
       </>
