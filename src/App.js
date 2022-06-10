@@ -27,7 +27,7 @@ class App extends React.Component {
     this.updateStorageStats = this.updateStorageStats.bind(this);
 
     this.state = {
-      catagories: {}, // {<catagoryname>: {high: <0>, highName: <"">, low: <0> lowName: <""> target: <0>, lineThing: <0,1,2>}, ...}
+      catagories: {}, // {<catagoryname>: {high: <0>, highName: <"">, low: <0> lowName: <""> target: <0>, activeRow: <0>}, ...}
       history: [], //{<country>, <country>, ...}
       guessHistory: [0, 0, 0, 0],
       modalType: 1, //0: "none", 1: "how" 2: "win from top" 3: "win"
@@ -38,7 +38,7 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    localStorage.clear();
+    // localStorage.clear();
     this.setupStats();
     this.setupGame();
   }
@@ -103,7 +103,7 @@ class App extends React.Component {
         highName: "",
         low: "",
         lowName: "",
-        lineThing: 0,
+        activeRow: -1,
       };
     }
 
@@ -142,7 +142,7 @@ class App extends React.Component {
           highName: countryData.name,
           low: catagory.target,
           lowName: countryData.name,
-          lineThing: 0,
+          activeRow: -1,
         };
         newGuessHistory[i] += 1;
       }
@@ -170,18 +170,21 @@ class App extends React.Component {
         if (catagory.high === "" || rank > catagory.high) {
           newCatagories[key].high = rank;
           newCatagories[key].highName = countryData.name;
+          newCatagories[key].activeRow = 1;
           newGuessHistory[i] += 1;
+
         } else {
-          newCatagories[key].lineThing = 1;
+          newCatagories[key].activeRow = 0;
         }
       //2: if new is lower rank
       } else if (rank > target) {
         if (catagory.low === "" || rank < catagory.low) {
           newCatagories[key].low = rank;
           newCatagories[key].lowName = countryData.name;
+          newCatagories[key].activeRow = 2;
           newGuessHistory[i] += 1;
         } else {
-          newCatagories[key].lineThing = 2;
+          newCatagories[key].activeRow = 3;
         }
       }
     }
@@ -223,7 +226,7 @@ class App extends React.Component {
   updateStorageGame(newCatagories, newHistory, newGuessHistory, newWin = false, finalGame = {}, date = 0) {
 
     //if it exists 
-    const game = JSON.parse(localStorage.getItem("game")) ?? {};
+    const game = JSON.parse(localStorage.getItem("game")) || {};
     game.catagories = newCatagories;
     game.history = newHistory;
     game.guessHistory = newGuessHistory;
