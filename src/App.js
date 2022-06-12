@@ -142,7 +142,7 @@ class App extends React.Component {
           highName: countryData.name,
           low: catagory.target,
           lowName: countryData.name,
-          activeRow: -1,
+          activeRow: -2,
         };
         newGuessHistory[i] += 1;
       }
