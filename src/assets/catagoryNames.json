@@ -8,6 +8,5 @@
 "h": "Capital Latitude [N → S]",
 "i": "Capital Longitude [W → E]",
 "j": "Average Temperature",
-"k": "Country Rectangularness",
-"l": "Population Growth",
-"m": "Average Elevation"}
+"k": "Population Growth",
+"l": "Average Elevation"}
