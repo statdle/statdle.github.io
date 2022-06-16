@@ -1,5 +1,6 @@
 import React from "react";
 import countriesEmojis from "../../assets/countriesEmojis.json";
+import Twemoji from "../../assets/Twemoji";
 
 // props: direction, rank, name, active
 let CatagoryRow = (props) => {
@@ -13,7 +14,7 @@ let CatagoryRow = (props) => {
         <span className="row-item rank-number active">
           {props.rank ? "#" + props.rank : ""}
         </span>
-        <span className="row-item country-name active">{emoji + props.name}</span>
+        <span className="row-item country-name active"><Twemoji emoji={emoji}/>{props.name}</span>
       </div>
     );
   } else {
@@ -23,7 +24,7 @@ let CatagoryRow = (props) => {
         <span className="row-item rank-number">
           {props.rank ? "#" + props.rank : ""}
         </span>
-        <span className="row-item country-name">{emoji + props.name}</span>
+        <span className="row-item country-name"><Twemoji emoji={emoji}/>{props.name}</span>
       </div>
     );
   }

@@ -64,7 +64,7 @@ class ModalHow extends React.Component {
           </div>
           <div className="modal-body">
             <h1 className="normal-text">
-              Find the Secret Nation-<em>State</em> using <em>Stat</em>istics! A new game everyday!
+              Find the Secret Country using Statistics! A new game everyday!
             </h1>
             <p className="mag-top">
             You are given 4 random "stats" that will help you figure out what the hidden country is. Guessing a country will reveal it's rank among each stat in relation to the hidden country.

@@ -4518,6 +4518,15 @@
     "jsonfile" "^6.0.1"
     "universalify" "^2.0.0"
 
+"fs-extra@^8.0.1":
+  "integrity" "sha512-yhlQgA6mnOJUKOsRUFsgJdQCvkKhcz8tlZG5HBQfReYZy46OwLcY+Zia0mtdHsOo9y/hP+CxMN0TU9QxoOtG4g=="
+  "resolved" "https://registry.npmjs.org/fs-extra/-/fs-extra-8.1.0.tgz"
+  "version" "8.1.0"
+  dependencies:
+    "graceful-fs" "^4.2.0"
+    "jsonfile" "^4.0.0"
+    "universalify" "^0.1.0"
+
 "fs-extra@^8.1.0":
   "integrity" "sha512-yhlQgA6mnOJUKOsRUFsgJdQCvkKhcz8tlZG5HBQfReYZy46OwLcY+Zia0mtdHsOo9y/hP+CxMN0TU9QxoOtG4g=="
   "resolved" "https://registry.npmjs.org/fs-extra/-/fs-extra-8.1.0.tgz"
@@ -4581,11 +4590,6 @@
   "integrity" "sha512-xckBUXyTIqT97tq2x2AMb+g163b5JFysYk0x4qxNFwbfQkmNZoiRHb6sPzI9/QV33WeuvVYBUIiD4NzNIyqaRQ=="
   "resolved" "https://registry.npmjs.org/functions-have-names/-/functions-have-names-1.2.3.tgz"
   "version" "1.2.3"
-
-"ga-gtag@^1.1.1":
-  "integrity" "sha512-r+odwlYMzQTHPOW863by2K6NzvRoYfLAcSkI3bkQQYYL1MNwzno1ciyRCnpyw6vZsc5jpIYKSN/my5/H6R5aEg=="
-  "resolved" "https://registry.npmjs.org/ga-gtag/-/ga-gtag-1.1.1.tgz"
-  "version" "1.1.1"
 
 "gensync@^1.0.0-beta.2":
   "integrity" "sha512-3hN7NaskYvMDLQY55gnW3NQ+mesEAepTqlg+VEbj7zzqEMBVNhzcGYYeqFo/TlYz6eQiFcp1HcsCZO+nGgS8zg=="
@@ -5861,6 +5865,15 @@
   "integrity" "sha512-m6F1R3z8jjlf2imQHS2Qez5sjKWQzbuuhuJ/FKYFRZvPE3PuHcSMVZzfsLhGVOkfd20obL5SWEBew5ShlquNxg=="
   "resolved" "https://registry.npmjs.org/jsonfile/-/jsonfile-4.0.0.tgz"
   "version" "4.0.0"
+  optionalDependencies:
+    "graceful-fs" "^4.1.6"
+
+"jsonfile@^5.0.0":
+  "integrity" "sha512-NQRZ5CRo74MhMMC3/3r5g2k4fjodJ/wh8MxjFbCViWKFjxrnudWSY5vomh+23ZaXzAS7J3fBZIR2dV6WbmfM0w=="
+  "resolved" "https://registry.npmjs.org/jsonfile/-/jsonfile-5.0.0.tgz"
+  "version" "5.0.0"
+  dependencies:
+    "universalify" "^0.1.2"
   optionalDependencies:
     "graceful-fs" "^4.1.6"
 
@@ -7256,7 +7269,7 @@
     "kleur" "^3.0.3"
     "sisteransi" "^1.0.5"
 
-"prop-types@^15.6.0", "prop-types@^15.8.1":
+"prop-types@^15.8.1":
   "integrity" "sha512-oj87CgZICdulUohogVAR7AjlC0327U4el4L6eAvOqCeudMDVU0NThNaV+b9Df4dXgSP1gXMTnPdhfe/2qDH5cg=="
   "resolved" "https://registry.npmjs.org/prop-types/-/prop-types-15.8.1.tgz"
   "version" "15.8.1"
@@ -7389,16 +7402,6 @@
   "resolved" "https://registry.npmjs.org/react-error-overlay/-/react-error-overlay-6.0.11.tgz"
   "version" "6.0.11"
 
-"react-ga@^3.3.0":
-  "integrity" "sha512-o8RScHj6Lb8cwy3GMrVH6NJvL+y0zpJvKtc0+wmH7Bt23rszJmnqEQxRbyrqUzk9DTJIHoP42bfO5rswC9SWBQ=="
-  "resolved" "https://registry.npmjs.org/react-ga/-/react-ga-3.3.0.tgz"
-  "version" "3.3.0"
-
-"react-ga4@^1.4.1":
-  "integrity" "sha512-ioBMEIxd4ePw4YtaloTUgqhQGqz5ebDdC4slEpLgy2sLx1LuZBC9iYCwDymTXzcntw6K1dHX183ulP32nNdG7w=="
-  "resolved" "https://registry.npmjs.org/react-ga4/-/react-ga4-1.4.1.tgz"
-  "version" "1.4.1"
-
 "react-is@^16.12.0 || ^17.0.0 || ^18.0.0", "react-is@^17.0.1":
   "integrity" "sha512-w2GsyukL62IJnlaff/nRegPQR94C/XXamvMWmSHRJ4y7Ts/4ocGRmTHvOs8PSE6pB3dWOrD/nueuU5sduBsQ4w=="
   "resolved" "https://registry.npmjs.org/react-is/-/react-is-17.0.2.tgz"
@@ -7496,7 +7499,7 @@
     "react-shallow-renderer" "^16.15.0"
     "scheduler" "^0.22.0"
 
-"react@*", "react@^15.6.2 || ^16.0 || ^17", "react@^16.0.0 || ^17.0.0 || ^18.0.0", "react@^18.1.0", "react@>= 16":
+"react@*", "react@^16.0.0 || ^17.0.0 || ^18.0.0", "react@^18.1.0", "react@>= 16":
   "integrity" "sha512-4oL8ivCz5ZEPyclFQXaNksK3adutVS8l2xzZU0cqEFrE9Sb7fC0EFK5uEk74wIreL1DERyjvsU915j1pcT2uEQ=="
   "resolved" "https://registry.npmjs.org/react/-/react-18.1.0.tgz"
   "version" "18.1.0"
@@ -8551,6 +8554,21 @@
   "version" "3.21.0"
   dependencies:
     "tslib" "^1.8.1"
+
+"twemoji-parser@14.0.0":
+  "integrity" "sha512-9DUOTGLOWs0pFWnh1p6NF+C3CkQ96PWmEFwhOVmT3WbecRC+68AIqpsnJXygfkFcp4aXbOp8Dwbhh/HQgvoRxA=="
+  "resolved" "https://registry.npmjs.org/twemoji-parser/-/twemoji-parser-14.0.0.tgz"
+  "version" "14.0.0"
+
+"twemoji@^14.0.2":
+  "integrity" "sha512-BzOoXIe1QVdmsUmZ54xbEH+8AgtOKUiG53zO5vVP2iUu6h5u9lN15NcuS6te4OY96qx0H7JK9vjjl9WQbkTRuA=="
+  "resolved" "https://registry.npmjs.org/twemoji/-/twemoji-14.0.2.tgz"
+  "version" "14.0.2"
+  dependencies:
+    "fs-extra" "^8.0.1"
+    "jsonfile" "^5.0.0"
+    "twemoji-parser" "14.0.0"
+    "universalify" "^0.1.2"
 
 "type-check@^0.4.0", "type-check@~0.4.0":
   "integrity" "sha512-XleUoc9uwGXqjWwXaUTZAmzMcFZ5858QA2vvx1Ur5xIcixXIP+8LnFDgRplU30us6teqdlskFfu+ae4K79Ooew=="

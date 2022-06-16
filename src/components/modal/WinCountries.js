@@ -1,5 +1,6 @@
 import React from "react";
 import countriesEmojis from "../../assets/countriesEmojis.json";
+import Twemoji from "../../assets/Twemoji";
 
 // props: stats, win [true/false]
 let WinCountries = (props) => {
@@ -7,7 +8,7 @@ let WinCountries = (props) => {
   let countries = Object.entries(props.history).map((key) => {
     if (key[0] === "3" && props.history.length > 10) { //add new ... if condition
       return (
-        <div key={key[0]} className="country-guess">
+        <div key={key[0]} className="country-guess country-guess-dots">
           ...
         </div>
       )
@@ -23,7 +24,7 @@ let WinCountries = (props) => {
       // logic for highlighting last country
       return ( 
         <div key={key[0]} className={props.win? "country-guess country-guess-active" : "country-guess"}>
-          {emoji + key[1]}
+          <Twemoji emoji={emoji}/>{key[1]}
         </div>
       );
     }
@@ -31,7 +32,7 @@ let WinCountries = (props) => {
      //normal condition
     return (
         <div key={key[0] + key[1]} className="country-guess">
-          {emoji + key[1]}
+          <Twemoji emoji={emoji}/>{key[1]}
         </div>
       );
   });

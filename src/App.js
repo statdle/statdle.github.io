@@ -61,9 +61,10 @@ class App extends React.Component {
   setupGame() {
     console.log("--- setupGame");
     let today = new Date().setHours(0, 0, 0, 0);
-    
+
     // if existing game in localStorage, set values
     if (localStorage.getItem("game")) {
+
       const game = JSON.parse(localStorage.getItem("game"));
       if (parseInt(game.date) === parseInt(today)) {
         this.setState({
@@ -77,6 +78,8 @@ class App extends React.Component {
         });
         return;
       }
+    
+
     }
 
     // Generate randomness from todays date
@@ -223,7 +226,7 @@ class App extends React.Component {
   }
 
   /* newCatagories, newHistory, newWin, finalState (conditional)*/
-  updateStorageGame(newCatagories, newHistory, newGuessHistory, newWin = false, finalGame = {}, date = 0) {
+  updateStorageGame(newCatagories, newHistory, newGuessHistory, newWin = false, finalGame = {}, date) {
 
     //if it exists 
     const game = JSON.parse(localStorage.getItem("game")) || {};
@@ -232,8 +235,9 @@ class App extends React.Component {
     game.guessHistory = newGuessHistory;
     game.win = newWin;
     game.finalGame = finalGame;
-    game.date = (date !== 0 && !game.date)? date : game.date;
-
+    if(date && !game.date){
+      game.date = date;
+    }
     localStorage.setItem("game", JSON.stringify(game));
   }
 
