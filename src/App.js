@@ -61,11 +61,12 @@ class App extends React.Component {
   setupGame() {
     console.log("--- setupGame");
     let today = new Date().setHours(0, 0, 0, 0);
-
+    console.log("today", today);
     // if existing game in localStorage, set values
     if (localStorage.getItem("game")) {
 
       const game = JSON.parse(localStorage.getItem("game"));
+      console.log("game.date", game.date, "today", today);
       if (parseInt(game.date) === parseInt(today)) {
         this.setState({
           catagories: game.catagories,
@@ -156,7 +157,7 @@ class App extends React.Component {
         guessHistory: newGuessHistory,
       });
       
-      this.updateStorageGame(newCatagories, newHistory, newGuessHistory, true, newCatagories);
+      this.updateStorageGame(newCatagories, newHistory, newGuessHistory, true, newCatagories, 0);
       return;
     }
 
@@ -198,7 +199,7 @@ class App extends React.Component {
       guessHistory: newGuessHistory,
     });
 
-    this.updateStorageGame(newCatagories, newHistory, newGuessHistory, false);
+    this.updateStorageGame(newCatagories, newHistory, newGuessHistory, false, 0, 0);
   }
 
   updateStorageStats(score) {
@@ -226,7 +227,7 @@ class App extends React.Component {
   }
 
   /* newCatagories, newHistory, newWin, finalState (conditional)*/
-  updateStorageGame(newCatagories, newHistory, newGuessHistory, newWin = false, finalGame = {}, date) {
+  updateStorageGame(newCatagories, newHistory, newGuessHistory, newWin = false, finalGame = 0, date = 0) {
 
     //if it exists 
     const game = JSON.parse(localStorage.getItem("game")) || {};
@@ -234,9 +235,12 @@ class App extends React.Component {
     game.history = newHistory;
     game.guessHistory = newGuessHistory;
     game.win = newWin;
-    game.finalGame = finalGame;
+    if (finalGame){
+      game.finalGame = finalGame;      
+    }
     if(date && !game.date){
       game.date = date;
+      console.log("ran");
     }
     localStorage.setItem("game", JSON.stringify(game));
   }

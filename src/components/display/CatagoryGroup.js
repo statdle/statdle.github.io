@@ -11,14 +11,14 @@ let CatagoryGroup = (props) => {
       <LineThing active={props.active[0]} />
       <CatagoryRow
         className={props.active[1]}
-        direction={"↑"}
+        direction={"↓"}
         rank={props.values[1].high}
         name={props.values[1].highName}
         active={props.active[1]}
       />
       <CatagoryRow
         className={props.active[2]}
-        direction={"↓"}
+        direction={"↑"}
         rank={props.values[1].low}
         name={props.values[1].lowName}
         active={props.active[2]}
