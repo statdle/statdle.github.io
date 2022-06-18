@@ -44,7 +44,7 @@ class App extends React.Component {
   }
 
   setupStats() {
-    console.log("--- setupStats");
+    // console.log("--- setupStats");
     if (!localStorage.getItem("stats")) {
       //set up stats
       const stats = {
@@ -59,14 +59,12 @@ class App extends React.Component {
 
   /* pick target country and catagories */
   setupGame() {
-    console.log("--- setupGame");
+    // console.log("--- setupGame");
     let today = new Date().setHours(0, 0, 0, 0);
-    console.log("today", today);
     // if existing game in localStorage, set values
     if (localStorage.getItem("game")) {
 
       const game = JSON.parse(localStorage.getItem("game"));
-      console.log("game.date", game.date, "today", today);
       if (parseInt(game.date) === parseInt(today)) {
         this.setState({
           catagories: game.catagories,
@@ -121,7 +119,7 @@ class App extends React.Component {
 
   // update state, update display
   updateDisplay(countryData) {
-    console.log("--- updateDisplay");
+    // console.log("--- updateDisplay");
     let check = Object.entries(this.state.catagories)[0]; //used to check if target
     let newCatagories = {...this.state.catagories}; //we fill this instead of repeatedly calling state
     let newHistory = this.state.history; //history stores what gets inputed
@@ -240,7 +238,6 @@ class App extends React.Component {
     }
     if(date && !game.date){
       game.date = date;
-      console.log("ran");
     }
     localStorage.setItem("game", JSON.stringify(game));
   }
