@@ -297,8 +297,9 @@ class App extends React.Component {
       case 0:
         break;
       case 1:
-        modalDisplay = <ModalHow toggleModal={this.toggleModal} />;
-        break;
+        return (
+          <ModalHow toggleModal={this.toggleModal} />
+        );
       case 2:
         modalDisplay = (
           <ModalWin
