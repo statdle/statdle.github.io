@@ -8,7 +8,6 @@ function Display(props) {
     let active = [false, false, false, false]; // LineThing, high, low, LineThing
     if(values[1].activeRow === -2){ //win condition
       active = [false, true, true, false];
-      console.log("d: win");
     } else if(values[1].activeRow !== -1){
       active[values[1].activeRow] = true;
     }

@@ -687,3 +687,12 @@ details[open] > p {
   height: 1.5em;
   vertical-align: -0.25em;
 }
+
+.bottom-button {
+  position: fixed;
+  margin: 0px auto;
+  bottom: 0;
+  max-width: 420px;
+  left: 0;
+  right: 0;
+}

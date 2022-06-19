@@ -6,7 +6,7 @@ const exampleOne = (
     <div className="onboard-example">
       <CatagoryGroup
         values={[
-          "a",
+          "alp",
           {
             high: 10,
             highName: "Austria",
@@ -25,7 +25,7 @@ const exampleOne = (
     <div className="onboard-example">
       <CatagoryGroup
         values={[
-          "a",
+          "alp",
           {
             high: 10,
             highName: "Austria",
@@ -52,7 +52,7 @@ const exampleOne = (
           {exampleOne}
           <ul>
             <li>
-              <em>Austria</em> is rank #14, above the <em>Secret Country</em>, while <em>San Marino</em> is below at rank #129. Hence the <em>Secret Country</em> is between #14 and #129. 
+              <em>Austria</em> is rank #10, above the <em>Secret Country</em>, while <em>San Marino</em> is below at rank #149. Hence the <em>Secret Country</em> is between #14 and #129. 
             </li>
           </ul>
           {exampleTwo}
