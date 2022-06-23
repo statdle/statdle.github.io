@@ -3,7 +3,7 @@ import catagoryNames from "../../assets/catagoryNames.json";
 import catagoryDescription from "../../assets/catagoryDescription.json";
 
 //props: title <"name">
-let CatagoryTitle = (props) => {
+const CatagoryTitle = (props) => {
   return (
     <details>
       <summary className="catagory-title">{catagoryNames[props.title]}</summary>

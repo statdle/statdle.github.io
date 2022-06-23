@@ -4,7 +4,7 @@ import CatagoryTitle from "./CatagoryTitle.js";
 import LineThing from "./LineThing.js";
 
 // props: values[<catgoryName>, high, highname, low, lowName, target], active<[0, 0, 0, 0]>
-let CatagoryGroup = (props) => {
+const CatagoryGroup = (props) => {
   return (
     <div key={props.values[0]} className="catagory-row">
       <CatagoryTitle title={props.values[0]} />

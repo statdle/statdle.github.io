@@ -3,7 +3,7 @@ import countriesEmojis from "../../assets/countriesEmojis.json";
 import Twemoji from "../../assets/Twemoji";
 
 // props: direction, rank, name, active
-let CatagoryRow = (props) => {
+const CatagoryRow = (props) => {
   const emoji = countriesEmojis[props.name]? countriesEmojis[props.name] + "\xa0\xa0": "";
   if (props.active) {
     return (

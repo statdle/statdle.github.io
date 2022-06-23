@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 
 /* display={this.state.popupType} togglePopup={this.togglePopup} /> */
-let Popup = (props) => {
+const Popup = (props) => {
   useEffect(() => {
     const timer = setTimeout(() => {
       props.togglePopup(0);

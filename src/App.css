@@ -558,6 +558,10 @@ details[open] > p {
   margin: 0 auto;
 }
 
+.modal-how-bottom {
+  padding-bottom: 100px;
+}
+
 .onboard-example {
   padding: 10px;
   max-width: 400px;
@@ -692,7 +696,7 @@ details[open] > p {
   position: fixed;
   margin: 0px auto;
   bottom: 0;
-  max-width: 420px;
   left: 0;
   right: 0;
+  background-color: var(--w10);
 }

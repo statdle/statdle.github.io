@@ -1,7 +1,7 @@
 import React from "react";
 
 // props: active [true, false]
-let LineThing = (props) => {
+const LineThing = (props) => {
   if (props.active) {
     return (
       <div className="line-row">

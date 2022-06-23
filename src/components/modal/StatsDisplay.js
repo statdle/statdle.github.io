@@ -1,7 +1,7 @@
 import React from "react";
 
 // props: stats
-let StatsDisplay = (props) => {
+const StatsDisplay = (props) => {
   return (
     <>
       <p className="modal-subtitle">Statistics:</p>
