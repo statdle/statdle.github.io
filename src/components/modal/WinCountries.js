@@ -3,7 +3,7 @@ import countriesEmojis from "../../assets/countriesEmojis.json";
 import Twemoji from "../../assets/Twemoji";
 
 // props: stats, win [true/false]
-let WinCountries = (props) => {
+const WinCountries = (props) => {
   // TODO refactor as a filter
   let countries = Object.entries(props.history).map((key) => {
     if (key[0] === "3" && props.history.length > 10) { //add new ... if condition

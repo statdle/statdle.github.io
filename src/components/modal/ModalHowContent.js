@@ -41,7 +41,7 @@ const exampleOne = (
   );
 
   return (
-        <div className="modal-body">
+        <div className="modal-body modal-how-bottom">
           <h1 className="normal-text">
             Find the Secret Country using Statistics! A new game everyday!
           </h1>
