@@ -1,0 +1,77 @@
+@import "../variables";
+
+.btn {
+  display: flex;
+  padding: 5px;
+  cursor: pointer;
+  align-items: center;
+  user-select: none;
+
+  &--wide {
+    display: flex;
+    margin: 10px auto;
+    align-items: center;
+    justify-content: center;
+    max-width: 300px;
+    padding: 10px 5px;
+    border-radius: 3px;
+    cursor: pointer;
+    background-color: $p1;
+  }
+
+  &--dark {
+    &:hover {
+      background-color: $w7;
+      border-radius: 4px;
+    }
+
+    &:active {
+      background-color: $w7;
+      border-radius: 4px;
+    }
+  }
+
+  &--active {
+    background-color: $p1;
+    box-shadow: inset 0 -3px 0px $p2;
+
+    &:hover {
+      box-shadow: inset 0 -3px 0px $p1;
+      background-color: $p0;
+    }
+
+    &:active {
+      transform: translateY(3px);
+      box-shadow: none;
+      background-color: $p0;
+      transition-duration: 100ms;
+    }
+  }
+}
+
+.material-icons {
+  font-size: 24px;
+  font-family: "Material Icons Outlined";
+  font-weight: normal;
+  font-style: normal;
+  display: inline-block;
+  line-height: 1;
+  text-transform: none;
+  letter-spacing: normal;
+  word-wrap: normal;
+  white-space: nowrap;
+  direction: ltr;
+  color: $w2;
+
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  -moz-osx-font-smoothing: grayscale;
+  font-feature-settings: "liga";
+
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  -o-user-select: none;
+  user-select: none;
+}

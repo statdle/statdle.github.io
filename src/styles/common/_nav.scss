@@ -1,0 +1,30 @@
+@import "../variables";
+@import "./button";
+
+.nav__wrapper {
+  position: sticky;
+  top: 0;
+  width: 100%;
+  border-bottom: 3px solid $w8;
+  margin-bottom: 5px;
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  padding: 5px 10px;
+  background-color: $w10;
+
+  &__item {
+    width: 33.3%;
+    overflow-x: hidden;
+    font-size: 18px;
+    text-align: center;
+  }
+  &__left {
+    text-align: left;
+  }
+  &__right {
+    text-align: right;
+  }
+}

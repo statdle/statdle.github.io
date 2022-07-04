@@ -1,0 +1,69 @@
+@keyframes animation-details-open {
+  0% {
+    opacity: 0;
+    margin-top: -20px;
+  }
+  25% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+    margin-top: 0px;
+  }
+}
+
+@keyframes animation-popup {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes animation-modal-content {
+  from {
+    opacity: 0;
+    margin-top: 100px;
+  }
+  to {
+    opacity: 1;
+    margin-top: 0px;
+  }
+}
+
+@keyframes animation-modal-content-special {
+  0% {
+    opacity: 0;
+    margin-top: 100px;
+  }
+  75% {
+    opacity: 0;
+    margin-top: 100px;
+  }
+  100% {
+    opacity: 1;
+    margin-top: 0px;
+  }
+}
+
+@keyframes animation-modal-backing {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes animation-modal-backing-special {
+  0% {
+    opacity: 0;
+  }
+  75% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}

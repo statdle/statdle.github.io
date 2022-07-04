@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import './popup.scss';
 
 /* display={this.state.popupType} togglePopup={this.togglePopup} /> */
 const Popup = (props) => {

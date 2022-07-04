@@ -1,0 +1,22 @@
+@import "../../../styles/variables";
+@import "../../../styles/common/row";
+
+.rank-number-line {
+  width: 60px;
+  margin-right: 5px;
+}
+
+.position-symbol-line {
+  width: 25px;
+  margin-right: 5px;
+}
+
+.country-name-line {
+  flex: 1;
+  padding-left: 10px;
+}
+
+.catagory-line {
+  height: 5px;
+  border-radius: 3px;
+}

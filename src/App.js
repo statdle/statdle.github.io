@@ -4,11 +4,11 @@ import Search from "./views/Search";
 import Display from "./views/Display";
 import Top from "./views/Top";
 
-import ModalHow from "./components/modal/ModalHow";
+import ModalHow from "./components/how/ModalHow";
 import ModalWin from "./components/modal/ModalWin";
-import Popup from "./components/Popup";
+import Popup from "./components/popup/Popup";
 
-import "./App.css";
+import "./styles/_defaults.scss";
 import data from "./assets/data.json";
 import catagoryNames from "./assets/catagoryNames.json";
 
@@ -63,7 +63,7 @@ class App extends React.Component {
 
     // if existing game in localStorage, set values
     if (localStorage.getItem("game")) {
-    
+
       const game = JSON.parse(localStorage.getItem("game"));
 
       if (game.date === today) {
@@ -120,17 +120,17 @@ class App extends React.Component {
   // update state, update display
   updateDisplay(countryData) {
     let check = Object.entries(this.state.catagories)[0]; //used to check if target
-    let newCatagories = {...this.state.catagories}; //we fill this instead of repeatedly calling state
+    let newCatagories = { ...this.state.catagories }; //we fill this instead of repeatedly calling state
     let newHistory = this.state.history; //history stores what gets inputed
     let newGuessHistory = this.state.guessHistory;
     newHistory.push(countryData.name);
-    
-     //win condtion
+
+    //win condtion
     if (countryData[check[0]] === check[1].target) {
       let finalGame = this.state.catagories;
 
       this.setState((state) => {
-        return {finalGame: state.catagories}
+        return { finalGame: state.catagories }
       });
 
       this.updateStorageStats(newHistory.length);
@@ -149,7 +149,7 @@ class App extends React.Component {
         };
         newGuessHistory[i] += 1;
       }
-      
+
       this.setState({
         catagories: newCatagories,
         history: newHistory,
@@ -180,7 +180,7 @@ class App extends React.Component {
         } else {
           newCatagories[key].activeRow = 0;
         }
-      //2: if new is lower rank
+        //2: if new is lower rank
       } else if (rank > target) {
         if (catagory.low === "" || rank < catagory.low) {
           newCatagories[key].low = rank;
@@ -235,10 +235,10 @@ class App extends React.Component {
     game.history = newHistory;
     game.guessHistory = newGuessHistory;
     game.win = newWin;
-    if (finalGame){
-      game.finalGame = finalGame;      
+    if (finalGame) {
+      game.finalGame = finalGame;
     }
-    if(date){
+    if (date) {
       game.date = date;
     }
 
@@ -333,7 +333,7 @@ class App extends React.Component {
         break;
     }
 
-    const popupDisplay = this.state.popupType ? <Popup display={this.state.popupType} togglePopup={this.togglePopup}/> : null;
+    const popupDisplay = this.state.popupType ? <Popup display={this.state.popupType} togglePopup={this.togglePopup} /> : null;
 
     return (
       <>

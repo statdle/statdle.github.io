@@ -2,7 +2,7 @@ import React from "react";
 import catagoryNames from "../../assets/catagoryNames.json";
 import StatsDisplay from "./StatsDisplay";
 import WinCountries from "./WinCountries";
-
+import './modalWin.scss';
 /*props: 
 catagories: 
 history... ["Uzbekistan", "Singapore", "Bangladesh", "Malaysia… */
@@ -44,7 +44,7 @@ class ModalWin extends React.Component {
       "\n\n🟪 Guesses, Range, Category\n";
 
     // need to loop through both catagories, and 
-    const guessHistory = this.props.guessHistory; 
+    const guessHistory = this.props.guessHistory;
     Object.entries(this.props.catagories).forEach((key, index) => {
       text += Math.floor(guessHistory[index] * 100 / guessAmount);
       text += "% 🟪 ↓↑ ";
@@ -80,21 +80,21 @@ class ModalWin extends React.Component {
 
       content = (
         <>
-          <h1 className="text-center">
+          <p className="guess-count">
             {this.props.history.length + " " + fillerText}
-          </h1>
-          <div className="btn-wide btn-modal btn-active" onClick={this.share}>
+          </p>
+          <div className="btn btn--wide btn--active" onClick={this.share}>
             Share
           </div>
           <StatsDisplay stats={stats} />
-          <WinCountries history={this.props.history} win={true}/>
+          <WinCountries history={this.props.history} win={true} />
         </>
       );
     } else {
       content = (
         <>
           <StatsDisplay stats={stats} />
-          <WinCountries history={this.props.history} win={false}/>
+          <WinCountries history={this.props.history} win={false} />
           <p className="results-text">
             (finish playing the round for sharing options)
           </p>
@@ -104,22 +104,22 @@ class ModalWin extends React.Component {
 
     return (
       <div
-        className={
-          this.props.special
-            ? "modal-backing modal-backing-special"
-            : "modal-backing"
-        }
+        className={"modal-backing" +
+          (this.props.special
+            ? " modal-backing-special"
+            : ""
+          )}
         onClick={() => this.props.toggleModal()}
       >
         <div
-          className={
-            this.props.special
-              ? "modal-content modal-content-special"
-              : "modal-content"
-          }
+          className={"modal-content" +
+            (this.props.special
+              ? " modal-content-special"
+              : ""
+            )}
           onClick={this.stopPropagation}
         >
-          <div className="modal-title">
+          <div className="modal__title">
             <h2>Results</h2>
             <span
               className="material-icons btn"

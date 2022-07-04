@@ -1,0 +1,22 @@
+@import "../../../styles/variables";
+@import "../../../styles/animations";
+
+.catagory-title {
+  cursor: pointer;
+  font-size: 18px;
+  text-align: left;
+  color: $w3;
+
+  :hover {
+    color: $w1;
+  }
+}
+
+.catagory-description {
+  color: $w3;
+  padding-bottom: 5px;
+}
+
+details[open] > .catagory-description {
+  animation: animation-details-open 600ms ease;
+}

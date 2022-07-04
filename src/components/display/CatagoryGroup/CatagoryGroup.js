@@ -1,14 +1,15 @@
 import React from "react";
-import CatagoryRow from "./CatagoryRow.js";
-import CatagoryTitle from "./CatagoryTitle.js";
-import LineThing from "./LineThing.js";
+import CatagoryRow from "../CatagoryRow/CatagoryRow.js";
+import CatagoryTitle from "../CatagoryTitle/CatagoryTitle.js";
+import CatagoryLine from "../CatagoryLine/CatagoryLine.js";
+import './catagoryGroup.scss';
 
 // props: values[<catgoryName>, high, highname, low, lowName, target], active<[0, 0, 0, 0]>
 const CatagoryGroup = (props) => {
   return (
     <div key={props.values[0]} className="catagory-row">
       <CatagoryTitle title={props.values[0]} />
-      <LineThing active={props.active[0]} />
+      <CatagoryLine active={props.active[0]} />
       <CatagoryRow
         className={props.active[1]}
         direction={"↓"}
@@ -23,7 +24,7 @@ const CatagoryGroup = (props) => {
         name={props.values[1].lowName}
         active={props.active[2]}
       />
-      <LineThing active={props.active[3]} />
+      <CatagoryLine active={props.active[3]} />
     </div>
   );
 };

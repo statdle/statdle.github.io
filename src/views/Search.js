@@ -1,5 +1,6 @@
 import React from "react";
 import countries from "../assets/countries.js";
+import './search.scss';
 
 //props history, win
 class Search extends React.Component {
@@ -119,8 +120,8 @@ class Search extends React.Component {
           key={item}
           onClick={this.autocompleteClick}
           className={
-            "autocomplete-suggestion " +
-            (this.state.inputValue === item ? "selected" : "")
+            "suggestion " +
+            (this.state.inputValue === item ? "suggestion__selected" : "")
           }
         >
           {item}
@@ -129,22 +130,21 @@ class Search extends React.Component {
     });
 
     return (
-      <div id="search-module">
-        <div id="autocomplete-container">{suggestions}</div>
-        <form className="search-bar" onSubmit={this.handleSearch}>
+      <div className="search__container">
+        <div className="suggestion__container">{suggestions}</div>
+        <form className="form" onSubmit={this.handleSearch}>
           <input
             type="text"
             placeholder="Country..."
-            id="country-search"
             autoComplete="off"
             onChange={this.handleChange}
             value={this.state.inputValue}
             onKeyDown={this.handleKeyDown}
             disabled={this.props.win}
-            className={this.props.win ? "input-disabled" : ""}
+            className={"country-search " + (this.props.win ? "country-search--disabled" : "")}
           ></input>
 
-          <input type="submit" id="country-submit" value="Go" />
+          <input type="submit" className="country-submit" value="Go" />
         </form>
       </div>
     );

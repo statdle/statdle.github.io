@@ -1,0 +1,48 @@
+@import "../variables";
+
+.row-group {
+  margin-bottom: 5px;
+  display: flex;
+}
+
+.row-item {
+  background-color: $w7;
+  border-radius: 3px;
+  display: flex;
+  align-items: center;
+  height: 40px;
+  transition-duration: 300ms;
+  box-shadow: inset 0 3px 0px $w8;
+
+  @media screen and (max-height: 660px) {
+    height: 35px;
+    transition-duration: 300ms;
+  }
+
+  @media screen and (max-height: 620px) {
+    height: 30px;
+    transition-duration: 300ms;
+  }
+}
+
+.active {
+  background-color: $p1;
+  box-shadow: inset 0 -3px 0px $p2;
+  animation-duration: 300ms;
+  animation-name: animation-active;
+  animation-timing-function: ease;
+}
+
+@keyframes animation-active {
+  0% {
+    scale: 1;
+    background-color: $p2;
+  }
+  50% {
+    scale: 1.02;
+  }
+  100% {
+    scale: 1;
+    background-color: $p1;
+  }
+}

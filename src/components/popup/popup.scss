@@ -1,0 +1,22 @@
+@import "../../styles/animations";
+@import "../../styles/variables";
+
+.popup {
+  background-color: $w2;
+  color: $w10;
+  padding: 10px 20px;
+  border-radius: 3px;
+  display: block;
+  position: absolute;
+  top: 50px;
+  left: 0;
+  right: 0;
+  width: 100px;
+  margin: 0 auto;
+  text-align: center;
+  box-shadow: 0 3px 5px $w10;
+  font-weight: bold;
+  z-index: 100;
+
+  animation: animation-popup 300ms ease;
+}

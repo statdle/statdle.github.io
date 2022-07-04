@@ -1,0 +1,30 @@
+@import "../../../styles/variables";
+@import "../../../styles/common/row";
+
+.position-symbol {
+  width: 25px;
+  margin-right: 5px;
+  justify-content: center;
+}
+
+.rank-number {
+  width: 60px;
+  margin-right: 5px;
+  justify-content: center;
+}
+
+.country-name {
+  flex: 1;
+  padding-left: 10px;
+  justify-content: left;
+
+  @media screen and (max-width: 360px) {
+    font-family: "IBM Plex Sans Condensed", "Roboto Condensed", sans-serif;
+  }
+}
+
+.emoji {
+  width: auto;
+  height: 1.5em;
+  vertical-align: -0.25em;
+}
