@@ -83,9 +83,9 @@ class ModalWin extends React.Component {
           <p className="guess-count">
             {this.props.history.length + " " + fillerText}
           </p>
-          <div className="btn btn--wide btn--active" onClick={this.share}>
+          <button tabindex="0" className="btn btn--wide btn--active" onClick={this.share}>
             Share
-          </div>
+          </button>
           <StatsDisplay stats={stats} />
           <WinCountries history={this.props.history} win={true} />
         </>
@@ -111,7 +111,7 @@ class ModalWin extends React.Component {
           )}
         onClick={() => this.props.toggleModal()}
       >
-        <div
+        <body
           className={"modal-content" +
             (this.props.special
               ? " modal-content-special"
@@ -121,15 +121,15 @@ class ModalWin extends React.Component {
         >
           <div className="modal__title">
             <h2>Results</h2>
-            <span
+            <button
               className="material-icons btn"
               onClick={() => this.props.toggleModal()}
             >
               close
-            </span>
+            </button>
           </div>
           <div className="modal-body">{content}</div>
-        </div>
+        </body>
       </div>
     );
   }

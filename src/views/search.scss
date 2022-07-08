@@ -49,7 +49,11 @@
   flex: 1;
   border-radius: 3px;
 
-  :focus {
+  &:focus {
+    outline: $p0 solid 3px;
+  }
+
+  &:active {
     outline: $p0 solid 3px;
   }
 
@@ -61,24 +65,5 @@
 
 .country-submit {
   margin-left: 5px;
-  height: 40px;
   width: 60px;
-  border: 0;
-  border-radius: 3px !important;
-  background-color: $p1;
-  cursor: pointer;
-  box-shadow: inset 0 -3px 0px $p2;
-
-  &:hover {
-    background-color: $p0;
-    box-shadow: inset 0 -3px 0px $p1;
-  }
-
-  &:active {
-    transform: translateY(3px);
-    height: 37px;
-    box-shadow: none;
-    background-color: $p0;
-    transition-duration: 100ms;
-  }
 }

@@ -16,7 +16,7 @@ function Display(props) {
     return <CatagoryGroup active={active} values={values} key={index} />;
   });
 
-  return <div id="catagories-container">{catagories}</div>;
+  return <main id="catagories-container">{catagories}</main>;
 }
 
 export default Display;

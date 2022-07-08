@@ -1,19 +1,16 @@
 @import "../variables";
 @import "./button";
 
-.nav__wrapper {
-  position: sticky;
-  top: 0;
-  width: 100%;
-  border-bottom: 3px solid $w8;
-  margin-bottom: 5px;
-}
-
 .nav {
+  position: sticky;
   display: flex;
   align-items: center;
-  padding: 5px 10px;
+  top: 0;
+
   background-color: $w10;
+
+  padding: 5px 10px;
+  border-bottom: 3px solid $w8;
 
   &__item {
     width: 33.3%;

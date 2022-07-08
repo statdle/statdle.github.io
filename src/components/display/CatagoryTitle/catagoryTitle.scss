@@ -7,8 +7,12 @@
   text-align: left;
   color: $w3;
 
-  :hover {
+  &:hover {
     color: $w1;
+  }
+
+  &:focus {
+    outline: $p0 solid 3px;
   }
 }
 

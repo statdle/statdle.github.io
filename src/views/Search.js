@@ -19,6 +19,10 @@ class Search extends React.Component {
     this.autocompleteClick = this.autocompleteClick.bind(this);
   }
 
+  componentDidMount() {
+    this.searchInput.focus();
+  }
+
   autocompleteClick(e) {
     this.setState({
       inputValue: e.target.textContent,
@@ -113,6 +117,7 @@ class Search extends React.Component {
     });
   }
 
+
   render() {
     const suggestions = this.state.autocompleteCountries.map((item) => {
       return (
@@ -142,9 +147,11 @@ class Search extends React.Component {
             onKeyDown={this.handleKeyDown}
             disabled={this.props.win}
             className={"country-search " + (this.props.win ? "country-search--disabled" : "")}
+            ref={inp => (this.searchInput = inp)}
+            aria-label="Country"
           ></input>
 
-          <input type="submit" className="country-submit" value="Go" />
+          <input type="submit" className="country-submit btn btn--active" value="Go" />
         </form>
       </div>
     );

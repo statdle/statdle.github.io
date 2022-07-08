@@ -59,3 +59,15 @@ a {
 b {
   font-weight: bold;
 }
+
+summary {
+  display: flex;
+  list-style: none;
+
+  &::after {
+    content: "?";
+    flex-grow: 1;
+    text-align: right;
+    padding-right: 10px;
+  }
+}
