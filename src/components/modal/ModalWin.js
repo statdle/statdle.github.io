@@ -42,13 +42,13 @@ class ModalWin extends React.Component {
       ": " +
       guessAmount +
       fillerText +
-      "\n\n🟪 Guesses, Range, Category\n";
+      "\n\nCorrect % | Range | Category\n";
 
     // need to loop through both catagories, and 
     const guessHistory = this.props.guessHistory;
     Object.entries(this.props.catagories).forEach((key, index) => {
       text += Math.floor(guessHistory[index] * 100 / guessAmount);
-      text += "% 🟪 ↓↑ ";
+      text += "% | ";
       const high = key[1].high;
       const low = key[1].low;
       if (high === "" && low === "") {
@@ -60,7 +60,7 @@ class ModalWin extends React.Component {
       } else {
         text += low - high;
       }
-      text += " - " + catagoryNames[key[0]] + "\n";
+      text += " | " + catagoryNames[key[0]] + "\n";
     });
     text += "\nhttps://statdle.github.io/";
     navigator.clipboard.writeText(text);

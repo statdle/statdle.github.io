@@ -6,8 +6,8 @@ import './catagoryTitle.scss';
 //props: title <"name">
 const CatagoryTitle = (props) => {
   return (
-    <details>
-      <summary className="catagory-title">{catagoryNames[props.title]}</summary>
+    <details >
+      <summary role="button" className="catagory-title">{catagoryNames[props.title]}</summary>
       <p className="catagory-description">{catagoryDescription[props.title]}</p>
     </details>
   );

@@ -10,24 +10,24 @@ const Popup = (props) => {
     return () => clearTimeout(timer);
   }, [props]);
 
+  let text = "";
   switch (props.display) {
     case 0:
       break;
     case 1:
-      return (
-        <div className="popup">Duplicate Country</div>
-      );
+      text = "Duplicate Country";
+      break;
     case 2:
-      return (
-        <div className="popup">Invalid Country</div>
-      );
+      text = "Invalid Country";
+      break;
     case 3:
-      return (
-        <div className="popup">Copied to Clipboard</div>
-      );
+      text = "Copied to Clipboard";
+      break;
     default:
-      return <div className="popup">{props.display}</div>;
+      text = props.display;
   }
+
+  return (<div role="alert" className="popup">{text}</div>);
 };
 
 export default Popup;

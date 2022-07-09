@@ -45,13 +45,18 @@ class Search extends React.Component {
         autocompleteCountries: [],
         autocompleteIndex: -1,
       });
-    } else if (e.keyCode === 38) {
-      //UP
+      return;
+    }
+
+    if (this.state.autocompleteCountries.length === 0) {
+      return;
+    }
+
+    // UP
+    if (e.keyCode === 38) {
       e.preventDefault();
 
-      if (this.state.autocompleteCountries.length === 0) {
-        return;
-      } else if (autocompleteIndex === -1 || autocompleteIndex === 0) {
+      if (autocompleteIndex === -1 || autocompleteIndex === 0) {
         autocompleteIndex = autocompleteLength;
       }
 
@@ -59,21 +64,45 @@ class Search extends React.Component {
         autocompleteIndex: autocompleteIndex - 1,
         inputValue: autocompleteCountries[autocompleteIndex - 1],
       });
-    } else if (e.keyCode === 40) {
-      //DOWN
+      return;
+    }
+
+    //DOWN
+    if (e.keyCode === 40) {
       e.preventDefault();
 
-      if (this.state.autocompleteCountries.length === 0) {
-        return;
-      } else if (autocompleteIndex === autocompleteLength - 1) {
+      if (autocompleteIndex === autocompleteLength - 1) {
         autocompleteIndex = -1;
       }
-
       this.setState({
         autocompleteIndex: autocompleteIndex + 1,
         inputValue: autocompleteCountries[autocompleteIndex + 1],
       });
+      return;
     }
+
+    // HOME
+    if (e.keyCode === 36) {
+      e.preventDefault();
+
+      this.setState({
+        autocompleteIndex: 0,
+        inputValue: autocompleteCountries[0],
+      });
+      return;
+    }
+
+    // END
+    if (e.keyCode === 35) {
+      e.preventDefault();
+
+      this.setState({
+        autocompleteIndex: autocompleteLength - 1,
+        inputValue: autocompleteCountries[autocompleteLength - 1],
+      });
+      return;
+    }
+
   }
 
   handleChange(e) {
@@ -122,6 +151,8 @@ class Search extends React.Component {
     const suggestions = this.state.autocompleteCountries.map((item) => {
       return (
         <div
+          role="option"
+          aria-selected={this.state.inputValue === item ? "true" : "false"}
           key={item}
           onClick={this.autocompleteClick}
           className={
@@ -136,9 +167,10 @@ class Search extends React.Component {
 
     return (
       <div className="search__container">
-        <div className="suggestion__container">{suggestions}</div>
+        <div role="listbox" aria-label="filtered countries" className="suggestion__container">{suggestions}</div>
         <form className="form" onSubmit={this.handleSearch}>
           <input
+            aria-label="Guess Country"
             type="text"
             placeholder="Country..."
             autoComplete="off"
@@ -148,10 +180,9 @@ class Search extends React.Component {
             disabled={this.props.win}
             className={"country-search " + (this.props.win ? "country-search--disabled" : "")}
             ref={inp => (this.searchInput = inp)}
-            aria-label="Country"
           ></input>
 
-          <input type="submit" className="country-submit btn btn--active" value="Go" />
+          <input type="submit" aria-label="submit" className="country-submit btn btn--active" value="Guess" />
         </form>
       </div>
     );

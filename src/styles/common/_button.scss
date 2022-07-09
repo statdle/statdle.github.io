@@ -12,13 +12,15 @@
   cursor: pointer;
 
   &:hover {
+    background-color: $w9;
+  }
+
+  &:focus {
     background-color: $w8;
-    border-radius: 4px;
   }
 
   &:active {
     background-color: $w8;
-    border-radius: 4px;
   }
 
   &--wide {
@@ -46,6 +48,7 @@
     }
 
     &:focus {
+      background-color: $p1;
       outline: $p0 solid 3px;
     }
 
