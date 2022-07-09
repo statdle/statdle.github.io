@@ -13,14 +13,14 @@ const Top = (props) => {
       <div className="nav__item nav__right">
         <button
           tabIndex="0"
-          className="material-icons btn btn--dark"
+          className="material-icons btn"
           onClick={() => props.toggleModal(2)}
         >
           leaderboard
         </button>
         <button
           tabIndex="0"
-          className="material-icons btn btn--dark"
+          className="material-icons btn"
           onClick={() => props.toggleModal(1)}
         >
           help_outline

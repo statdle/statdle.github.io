@@ -5,7 +5,7 @@ import './catagoryRow.scss';
 
 // props: direction, rank, name, active
 const CatagoryRow = (props) => {
-  const emoji = countriesEmojis[props.name] ? countriesEmojis[props.name] + "\xa0\xa0" : "";
+  const emoji = countriesEmojis[props.name] || "";
   if (props.active) {
     return (
       <div className="row-group">
@@ -15,7 +15,10 @@ const CatagoryRow = (props) => {
         <span className="row-item rank-number active">
           {props.rank ? "#" + props.rank : ""}
         </span>
-        <span className="row-item country-name active"><Twemoji emoji={emoji} />{props.name}</span>
+        <span className="row-item country-name active">
+          <Twemoji className="emoji" emoji={emoji} />
+          <span>{props.name}</span>
+        </span>
       </div>
     );
   } else {
@@ -25,7 +28,10 @@ const CatagoryRow = (props) => {
         <span className="row-item rank-number">
           {props.rank ? "#" + props.rank : ""}
         </span>
-        <span className="row-item country-name"><Twemoji emoji={emoji} />{props.name}</span>
+        <span className="row-item country-name">
+          <Twemoji className="emoji" emoji={emoji} />
+          <span>{props.name}</span>
+        </span>
       </div>
     );
   }

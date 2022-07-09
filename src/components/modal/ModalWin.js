@@ -3,6 +3,7 @@ import catagoryNames from "../../assets/catagoryNames.json";
 import StatsDisplay from "./StatsDisplay";
 import WinCountries from "./WinCountries";
 import './modalWin.scss';
+const FocusTrap = require('focus-trap-react');
 /*props: 
 catagories: 
 history... ["Uzbekistan", "Singapore", "Bangladesh", "Malaysia… */
@@ -83,7 +84,7 @@ class ModalWin extends React.Component {
           <p className="guess-count">
             {this.props.history.length + " " + fillerText}
           </p>
-          <button tabindex="0" className="btn btn--wide btn--active" onClick={this.share}>
+          <button className="btn btn--wide btn--active" onClick={this.share}>
             Share
           </button>
           <StatsDisplay stats={stats} />
@@ -103,34 +104,36 @@ class ModalWin extends React.Component {
     }
 
     return (
-      <div
-        className={"modal-backing" +
-          (this.props.special
-            ? " modal-backing-special"
-            : ""
-          )}
-        onClick={() => this.props.toggleModal()}
-      >
-        <body
-          className={"modal-content" +
+      <FocusTrap>
+        <div
+          className={"modal-backing" +
             (this.props.special
-              ? " modal-content-special"
+              ? " modal-backing-special"
               : ""
             )}
-          onClick={this.stopPropagation}
+          onClick={() => this.props.toggleModal()}
         >
-          <div className="modal__title">
-            <h2>Results</h2>
-            <button
-              className="material-icons btn"
-              onClick={() => this.props.toggleModal()}
-            >
-              close
-            </button>
+          <div
+            className={"modal-content" +
+              (this.props.special
+                ? " modal-content-special"
+                : ""
+              )}
+            onClick={this.stopPropagation}
+          >
+            <div className="modal__title">
+              <h2>Results</h2>
+              <button
+                className="material-icons btn"
+                onClick={() => this.props.toggleModal()}
+              >
+                close
+              </button>
+            </div>
+            <div className="modal-body">{content}</div>
           </div>
-          <div className="modal-body">{content}</div>
-        </body>
-      </div>
+        </div>
+      </FocusTrap>
     );
   }
 }

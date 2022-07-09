@@ -1,26 +1,15 @@
 @import "../variables";
 
 .btn {
-  background-color: $w10;
   display: flex;
-  padding: 5px;
-  cursor: pointer;
   align-items: center;
   user-select: none;
   justify-content: center;
 
-  &--wide {
-    width: 100%;
-    display: flex;
-    margin: 10px auto;
-    align-items: center;
-    justify-content: center;
-    max-width: 300px;
-    padding: 10px 5px;
-    border-radius: 3px;
-    cursor: pointer;
-    background-color: $p1;
-  }
+  background-color: $w10;
+  border-radius: 4px;
+  padding: 5px;
+  cursor: pointer;
 
   &:hover {
     background-color: $w8;
@@ -32,21 +21,17 @@
     border-radius: 4px;
   }
 
-  &--dark {
-    &:hover {
-      background-color: $w7;
-      border-radius: 4px;
-    }
-
-    &:focus {
-      background-color: $w7;
-      border-radius: 4px;
-    }
-
-    &:active {
-      background-color: $w7;
-      border-radius: 4px;
-    }
+  &--wide {
+    width: 100%;
+    display: flex;
+    margin: 10px auto;
+    align-items: center;
+    justify-content: center;
+    max-width: 300px;
+    padding: 10px 5px;
+    border-radius: 4px;
+    cursor: pointer;
+    background-color: $p1;
   }
 
   &--active {
