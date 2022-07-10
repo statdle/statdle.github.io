@@ -17,10 +17,20 @@ class Search extends React.Component {
     this.handleAutocomplete = this.handleAutocomplete.bind(this);
     this.handleKeyDown = this.handleKeyDown.bind(this);
     this.autocompleteClick = this.autocompleteClick.bind(this);
+    this.scrollToSelected = this.scrollToSelected.bind(this);
+
+    this.searchInput = React.createRef();
+    this.selectedSuggestion = React.createRef();
   }
 
   componentDidMount() {
     this.searchInput.focus();
+  }
+
+  scrollToSelected() {
+    if (this.autocompleteIndex !== -1) {
+      this.selectedSuggestion.current.scrollIntoView();
+    }
   }
 
   autocompleteClick(e) {
@@ -63,7 +73,7 @@ class Search extends React.Component {
       this.setState({
         autocompleteIndex: autocompleteIndex - 1,
         inputValue: autocompleteCountries[autocompleteIndex - 1],
-      });
+      }, () => { this.scrollToSelected(); });
       return;
     }
 
@@ -77,7 +87,7 @@ class Search extends React.Component {
       this.setState({
         autocompleteIndex: autocompleteIndex + 1,
         inputValue: autocompleteCountries[autocompleteIndex + 1],
-      });
+      }, () => { this.scrollToSelected(); });
       return;
     }
 
@@ -88,7 +98,7 @@ class Search extends React.Component {
       this.setState({
         autocompleteIndex: 0,
         inputValue: autocompleteCountries[0],
-      });
+      }, () => { this.scrollToSelected(); });
       return;
     }
 
@@ -99,7 +109,9 @@ class Search extends React.Component {
       this.setState({
         autocompleteIndex: autocompleteLength - 1,
         inputValue: autocompleteCountries[autocompleteLength - 1],
-      });
+      }, () => { this.scrollToSelected(); });
+
+      this.scrollToSelected();
       return;
     }
 
@@ -149,20 +161,33 @@ class Search extends React.Component {
 
   render() {
     const suggestions = this.state.autocompleteCountries.map((item) => {
-      return (
-        <div
-          role="option"
-          aria-selected={this.state.inputValue === item ? "true" : "false"}
-          key={item}
-          onClick={this.autocompleteClick}
-          className={
-            "suggestion " +
-            (this.state.inputValue === item ? "suggestion__selected" : "")
-          }
-        >
-          {item}
-        </div>
-      );
+      if (this.state.inputValue === item) {
+        return (
+          <div
+            role="option"
+            aria-selected="true"
+            key={item}
+            onClick={this.autocompleteClick}
+            className="suggestion suggestion__selected"
+            ref={this.selectedSuggestion}
+          >
+            {item}
+          </div>
+        );
+      } else {
+        return (
+          <div
+            role="option"
+            aria-selected="false"
+            key={item}
+            onClick={this.autocompleteClick}
+            className="suggestion"
+          >
+            {item}
+          </div>
+        );
+      }
+
     });
 
     return (
@@ -182,7 +207,7 @@ class Search extends React.Component {
             ref={inp => (this.searchInput = inp)}
           ></input>
 
-          <input type="submit" aria-label="submit" className="country-submit btn btn--active" value="Guess" />
+          <input type="submit" aria-label="guess" className="country-submit btn btn--active" value="Guess" />
         </form>
       </div>
     );
