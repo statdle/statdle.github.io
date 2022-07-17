@@ -45,8 +45,8 @@ class Search extends React.Component {
     const autocompleteCountries = this.state.autocompleteCountries;
     const autocompleteLength = autocompleteCountries.length;
 
+    //Enter
     if (e.keyCode === 13) {
-      //Enter
       e.preventDefault();
       this.props.doSearch(this.state.inputValue);
 
@@ -58,6 +58,7 @@ class Search extends React.Component {
       return;
     }
 
+    // required for UP, DOWN, etc ... 
     if (this.state.autocompleteCountries.length === 0) {
       return;
     }

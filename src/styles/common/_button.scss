@@ -23,6 +23,10 @@
     background-color: $w8;
   }
 
+  &:focus:not(:focus-visible) {
+    outline: none;
+  }
+
   &--wide {
     width: 100%;
     display: flex;

@@ -15,6 +15,10 @@
   &:focus {
     outline: $p0 solid 3px;
   }
+
+  &:focus:not(:focus-visible) {
+    outline: none;
+  }
 }
 
 .catagory-description {
