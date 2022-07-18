@@ -38,7 +38,7 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    localStorage.clear();
+    // localStorage.clear();
     this.setupStats();
     this.setupGame();
   }
@@ -125,8 +125,9 @@ class App extends React.Component {
     let newGuessHistory = this.state.guessHistory;
     newHistory.push(countryData.name);
 
-    //win condtion
-    if (countryData[check[0]] === check[1].target) {
+    //is it possible for this to be failed
+    //win condition
+    if (parseInt(countryData[check[0]]) === parseInt(check[1].target)) {
       let finalGame = this.state.catagories;
 
       this.setState((state) => {
