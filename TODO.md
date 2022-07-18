@@ -1,7 +1,14 @@
 ## small
 
 - on enter, add autocorrected country to input
-- remove icon font, replace with icons in folder
+- add better confirmation of win and win animation handling
+
+## medium
+
+**ga hooks**
+
+- use ga4 to add hooks to inputs
+- "guess", "results", "how to"
 
 ## large
 
@@ -10,11 +17,6 @@
 - reduce the amount content displayed at once
 - make figma mockups
 - add pagination to examples
-
-**ga hooks**
-
-- use ga4 to add hooks to inputs
-- "guess", "results", "how to"
 
 **country information**
 
@@ -36,3 +38,9 @@
 **backend**
 
 - look into better backend solutions
+
+---
+
+# completed
+
+- remove icon font, replace with icons in folder

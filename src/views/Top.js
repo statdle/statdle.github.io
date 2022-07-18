@@ -1,5 +1,7 @@
 import React from "react";
 import '../styles/common/_nav.scss';
+import Help from '../assets/icons/help.svg';
+import Results from '../assets/icons/results.svg';
 
 const Top = (props) => {
   let fillerText = " Guesses";
@@ -17,20 +19,19 @@ const Top = (props) => {
           role="menuitem"
           aria-label="results"
           tabIndex="0"
-          className="material-icons btn"
+          className="btn btn--icon space_right"
           onClick={() => props.toggleModal(2)}
         >
-          leaderboard
-
+          <img className="icons" src={Results} alt="Results" aria-label="results" />
         </button>
         <button
           role="menuitem"
           aria-label="how to play"
           tabIndex="0"
-          className="material-icons btn"
+          className="btn btn--icon"
           onClick={() => props.toggleModal(1)}
         >
-          help_outline
+          <img className="icons" src={Help} alt="How to Play" aria-label="how to play" />
         </button>
       </div>
     </nav>

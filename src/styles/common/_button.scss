@@ -64,31 +64,9 @@
       transition-duration: 100ms;
     }
   }
-}
 
-.material-icons {
-  font-size: 24px;
-  font-family: "Material Icons Outlined";
-  font-weight: normal;
-  font-style: normal;
-  display: inline-block;
-  line-height: 1;
-  text-transform: none;
-  letter-spacing: normal;
-  word-wrap: normal;
-  white-space: nowrap;
-  direction: ltr;
-  color: $w2;
-
-  -webkit-font-smoothing: antialiased;
-  text-rendering: optimizeLegibility;
-  -moz-osx-font-smoothing: grayscale;
-  font-feature-settings: "liga";
-
-  -webkit-user-select: none;
-  -khtml-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  -o-user-select: none;
-  user-select: none;
+  &--icon {
+    display: inline-block;
+    aspect-ratio: 1;
+  }
 }
