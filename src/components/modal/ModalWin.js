@@ -3,6 +3,9 @@ import catagoryNames from "../../assets/catagoryNames.json";
 import StatsDisplay from "./StatsDisplay";
 import WinCountries from "./WinCountries";
 import './modalWin.scss';
+import Close from '../../assets/icons/close.svg';
+
+
 const FocusTrap = require('focus-trap-react');
 /*props: 
 catagories: 
@@ -108,7 +111,7 @@ class ModalWin extends React.Component {
         <div
           className={"modal-backing" +
             (this.props.special
-              ? " modal-backing-special"
+              ? " modal-backing--special"
               : ""
             )}
           onClick={() => this.props.toggleModal()}
@@ -116,18 +119,15 @@ class ModalWin extends React.Component {
           <div
             className={"modal-content" +
               (this.props.special
-                ? " modal-content-special"
+                ? " modal-content--special"
                 : ""
               )}
             onClick={this.stopPropagation}
           >
             <div className="modal__title">
               <h2>Results</h2>
-              <button
-                className="material-icons btn"
-                onClick={() => this.props.toggleModal()}
-              >
-                close
+              <button className="btn btn--icon" onClick={() => this.props.toggleModal()}>
+                <img className="icons" src={Close} alt="Close" aria-label="close" />
               </button>
             </div>
             <div className="modal-body">{content}</div>

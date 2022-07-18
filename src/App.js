@@ -38,7 +38,7 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    // localStorage.clear();
+    localStorage.clear();
     this.setupStats();
     this.setupGame();
   }
@@ -134,6 +134,7 @@ class App extends React.Component {
       });
 
       this.updateStorageStats(newHistory.length);
+      this.togglePopup(4);
       this.toggleModal(3);
 
       for (let i in Object.keys(this.state.catagories)) {

@@ -19,10 +19,10 @@ const Top = (props) => {
           role="menuitem"
           aria-label="results"
           tabIndex="0"
-          className="btn btn--icon space_right"
+          className="btn btn--icon"
           onClick={() => props.toggleModal(2)}
         >
-          <img className="icons" src={Results} alt="Results" aria-label="results" />
+          <img className="icons" src={Results} alt="Results" />
         </button>
         <button
           role="menuitem"
@@ -31,7 +31,7 @@ const Top = (props) => {
           className="btn btn--icon"
           onClick={() => props.toggleModal(1)}
         >
-          <img className="icons" src={Help} alt="How to Play" aria-label="how to play" />
+          <img className="icons" src={Help} alt="How to Play" />
         </button>
       </div>
     </nav>

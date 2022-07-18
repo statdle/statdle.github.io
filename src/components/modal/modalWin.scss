@@ -20,7 +20,7 @@
   animation: animation-modal-backing 300ms ease;
 
   &--special {
-    animation-name: animation-modal-backing-special 1200ms ease;
+    animation: animation-modal-backing-special 1500ms ease;
   }
 }
 
@@ -38,10 +38,10 @@
   border-radius: 3px;
   overflow-y: hidden;
 
-  animation-name: animation-modal-content 300ms ease;
+  // animation: animation-modal-content 300ms ease;
 
   &--special {
-    animation-name: animation-modal-content-special 1200ms ease;
+    animation: animation-modal-content-special 1500ms ease;
   }
 }
 

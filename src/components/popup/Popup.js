@@ -23,6 +23,9 @@ const Popup = (props) => {
     case 3:
       text = "Copied to Clipboard";
       break;
+    case 4:
+      text = "Well Done!";
+      break;
     default:
       text = props.display;
   }
