@@ -1,9 +1,10 @@
 ## small
 
 - on enter, add autocorrected country to input
-- add better confirmation of win and win animation handling
 
 ## medium
+
+- make animations for display reveal better
 
 **ga hooks**
 
@@ -44,3 +45,4 @@
 # completed
 
 - remove icon font, replace with icons in folder
+- add better confirmation of win and win animation handling

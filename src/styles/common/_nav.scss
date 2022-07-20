@@ -9,11 +9,10 @@
 
   background-color: $w10;
 
-  padding: 5px 10px;
+  padding: 0 10px;
   border-bottom: 3px solid $w8;
 
   &__item {
-    height: 100%;
     width: 33.33%;
     overflow-x: hidden;
     font-size: 18px;

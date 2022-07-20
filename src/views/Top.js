@@ -11,9 +11,9 @@ const Top = (props) => {
   return (
     <nav className="nav" role="menubar">
       <h1 className="nav__item nav__left">Statdle</h1>
-      <p className="nav__item"
+      <b className="nav__item"
         role="menuitem"
-      >{props.guessCount + fillerText}</p>
+      >{props.guessCount + fillerText}</b>
       <div className="nav__item nav__right">
         <button
           role="menuitem"

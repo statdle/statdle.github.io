@@ -1,5 +1,6 @@
 @import "variables";
 @import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Condensed&family=IBM+Plex+Sans:wght@400;600&display=swap");
+@import "resets";
 
 * {
   vertical-align: baseline;
@@ -61,7 +62,7 @@ b {
 
 summary {
   display: flex;
-  list-style: none;
+  list-style-type: none;
 
   &::after {
     content: "?";

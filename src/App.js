@@ -21,6 +21,7 @@ class App extends React.Component {
     this.setupStats = this.setupStats.bind(this);
     this.setupGame = this.setupGame.bind(this);
     this.doRandom = this.doRandom.bind(this);
+    this.seedCatagories = this.seedCatagories.bind(this);
     this.toggleModal = this.toggleModal.bind(this);
     this.togglePopup = this.togglePopup.bind(this);
     this.updateStorageGame = this.updateStorageGame.bind(this);
@@ -90,17 +91,16 @@ class App extends React.Component {
 
     // Select target country, 4 catagories
     const targetCountry = data[countryRandIndex];
-    const seeds = this.doRandom(
-      4,
-      Object.keys(catagoryNames).length,
+    const seededCatagories = this.seedCatagories(
+      Object.keys(catagoryNames),
       today,
       seedrandom
     );
 
     // Generate inital state values
     const initialCatagories = {};
-    for (let i in seeds) {
-      var key = Object.keys(catagoryNames)[seeds[i]];
+    for (let i in seededCatagories) {
+      var key = seededCatagories[i];
       initialCatagories[key] = {
         target: targetCountry[key],
         high: "",
@@ -281,6 +281,31 @@ class App extends React.Component {
       modalType: type,
     });
   }
+
+
+  /* generate 4 randomish catagories values */
+  seedCatagories(catagories, seed, seedrandom) {
+    if (seed === "Wed Jul 20 2022") {
+      return ["den", "gdpc", "grow", "high"];
+    }
+
+    let catagoriesCopy = { ...catagories };
+    let mandatoryCatagories = ["alp", "latt", "long"];
+    let catagoriesReturn = [];
+    let mandatory = mandatoryCatagories[Math.floor(seedrandom(seed)() * mandatoryCatagories.length)];
+    catagoriesReturn.push(mandatory);
+    delete catagoriesCopy[mandatory];
+
+    for (let i = 0; i < 3; i++) {
+      const rand = Math.floor(seedrandom(seed + i)() * Object.keys(catagoriesCopy).length);
+      const newVal = catagoriesCopy[rand];
+      catagoriesReturn.push(newVal);
+      delete catagoriesCopy[rand];
+    }
+
+    return catagoriesReturn;
+  }
+
 
   /* generate ordered random values */
   doRandom(number, range, seed, seedrandom) {
