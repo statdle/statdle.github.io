@@ -39,7 +39,6 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    // localStorage.clear();
     this.setupStats();
     this.setupGame();
   }
@@ -64,10 +63,11 @@ class App extends React.Component {
 
     // if existing game in localStorage, set values
     if (localStorage.getItem("game")) {
-
       const game = JSON.parse(localStorage.getItem("game"));
-
-      if (game.date === today) {
+      // temporary
+      if (game.date === "Sun Jul 24 2022") {
+        ;
+      } else if (game.date === today) {
         this.setState({
           catagories: game.catagories,
           history: game.history,
@@ -285,24 +285,21 @@ class App extends React.Component {
 
   /* generate 4 randomish catagories values */
   seedCatagories(catagories, seed, seedrandom) {
-    if (seed === "Wed Jul 20 2022") {
-      return ["den", "gdpc", "grow", "high"];
-    }
 
-    let catagoriesCopy = { ...catagories };
+    // mandatory important catagory seeding
     let mandatoryCatagories = ["alp", "latt", "long"];
-    let catagoriesReturn = [];
     let mandatory = mandatoryCatagories[Math.floor(seedrandom(seed)() * mandatoryCatagories.length)];
-    catagoriesReturn.push(mandatory);
-    delete catagoriesCopy[mandatory];
 
+    let catagoriesReturn = [];
+    catagoriesReturn.push(mandatory);
+    let catagoriesCopy = catagories.filter(e => e !== mandatory);
+
+    // other three catagories seeding
     for (let i = 0; i < 3; i++) {
       const rand = Math.floor(seedrandom(seed + i)() * Object.keys(catagoriesCopy).length);
-      const newVal = catagoriesCopy[rand];
-      catagoriesReturn.push(newVal);
-      delete catagoriesCopy[rand];
+      const newCatagory = catagoriesCopy.splice(rand, 1);
+      catagoriesReturn.push(...newCatagory);
     }
-
     return catagoriesReturn;
   }
 
