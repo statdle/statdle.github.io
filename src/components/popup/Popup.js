@@ -26,6 +26,9 @@ const Popup = (props) => {
     case 4:
       text = "Well Done!";
       break;
+    case 5:
+      text = "Unlucky Champion!";
+      break;
     default:
       text = props.display;
   }

@@ -1,5 +1,4 @@
 import React from "react";
-import catagoryNames from "../../assets/catagoryNames.json";
 import StatsDisplay from "./StatsDisplay";
 import WinCountries from "./WinCountries";
 import './modalWin.scss';
@@ -7,16 +6,13 @@ import Close from '../../assets/icons/close.svg';
 
 
 const FocusTrap = require('focus-trap-react');
-/*props: 
-catagories: 
-history... ["Uzbekistan", "Singapore", "Bangladesh", "Malaysia… */
+
 class ModalWin extends React.Component {
   constructor(props) {
     super(props);
 
     this.share = this.share.bind(this);
     this.stopPropagation = this.stopPropagation.bind(this);
-    this.getNumber = this.stopPropagation.bind(this);
   }
 
   stopPropagation(e) {
@@ -25,47 +21,47 @@ class ModalWin extends React.Component {
     }
   }
 
+
   /* what is returned when share clicked */
   share(e) {
-    let fillerText = " Guesses";
-    if (this.props.history.length === 1) {
-      fillerText = " Guess";
-    }
-
     // Get day of challenge
     const start = new Date("April 20, 2022 00:00:00");
     let today = new Date();
     today.setHours(0, 0, 0, 0);
-    const gameNumber = (today - start) / 86400000;
-    const guessAmount = this.props.history.length;
+    const history = this.props.history;
 
-    var text =
-      "#Statdle " +
-      gameNumber +
-      ": " +
-      guessAmount +
-      fillerText +
-      "\n\nCorrect % | Range | Category\n";
+    const gameNumber = (today - start) / 86400000;
+    const guessAmount = this.props.win ? history.length : "X";
+    var text = "#Statdle " + gameNumber + "\n" + guessAmount + "/10 Guesses\n";
+
+    const num = ["0️⃣", "1️⃣", "2️⃣", "3️⃣", "4️⃣"];
+    const col = ["🟪", "🟦", "🟩", "🟨", "🟧", "🟥"];
 
     // need to loop through both catagories, and 
-    const guessHistory = this.props.guessHistory;
-    Object.entries(this.props.catagories).forEach((key, index) => {
-      text += Math.floor(guessHistory[index] * 100 / guessAmount);
-      text += "% | ";
-      const high = key[1].high;
-      const low = key[1].low;
-      if (high === "" && low === "") {
-        text += 194;
-      } else if (low === "") {
-        text += 194 - high;
-      } else if (high === "") {
-        text += low;
-      } else {
-        text += low - high;
+
+    for (let i = 0; i < history.length; i++) {
+      text += num[history[i].correct];
+      for (let j = 0; j < history[i].range.length; j++) {
+        let difference = history[i].range[j];
+        if (difference === 0) {
+          text += col[0];
+        } else if (difference <= 10) {
+          text += col[1];
+        } else if (difference <= 25) {
+          text += col[2];
+        } else if (difference <= 50) {
+          text += col[3];
+        } else if (difference <= 100) {
+          text += col[4];
+        } else if (difference > 100) {
+          text += col[5];
+        }
       }
-      text += " | " + catagoryNames[key[0]] + "\n";
-    });
-    text += "\nhttps://statdle.github.io/";
+      text += "\n";
+    }
+
+    text += "\nstatdle.github.io/";
+
     navigator.clipboard.writeText(text);
     this.props.togglePopup(3);
   }
@@ -74,24 +70,25 @@ class ModalWin extends React.Component {
     let stats = JSON.parse(localStorage.getItem("stats"));
     let content;
 
-    if (this.props.win) {
-      //share buttons
-
-      let fillerText = " Guesses";
-      if (this.props.history.length === 1) {
-        fillerText = " Guess";
+    if (this.props.ended) {
+      let fillerText = "";
+      if (this.props.win) {
+        fillerText += this.props.history.length;
+        fillerText += this.props.history.length === 1 ? " Guess" : " Guesses";
+      } else {
+        fillerText = this.props.targetCountry;
       }
 
       content = (
         <>
           <p className="guess-count">
-            {this.props.history.length + " " + fillerText}
+            {fillerText}
           </p>
           <button className="btn btn--wide btn--active" onClick={this.share}>
             Share
           </button>
           <StatsDisplay stats={stats} />
-          <WinCountries history={this.props.history} win={true} />
+          <WinCountries history={this.props.history} win={this.props.win} />
         </>
       );
     } else {

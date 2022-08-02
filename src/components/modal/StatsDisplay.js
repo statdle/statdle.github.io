@@ -7,7 +7,7 @@ const StatsDisplay = (props) => {
       <h3 className="small-space">Statistics:</h3>
       <div className="stat__container">
         <div className="stat">
-          <p className="stat__text">{props.stats.rounds}</p>
+          <p className="stat__text">{props.stats.rounds + props.stats.losingRounds}</p>
           <div>Rounds</div>
         </div>
         <div className="stat">

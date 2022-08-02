@@ -4,16 +4,13 @@ import Help from '../assets/icons/help.svg';
 import Results from '../assets/icons/results.svg';
 
 const Top = (props) => {
-  let fillerText = " Guesses";
-  if (props.guessCount === 1) {
-    fillerText = " Guess";
-  }
+
   return (
     <nav className="nav" role="menubar">
       <h1 className="nav__item nav__left">Statdle</h1>
       <b className="nav__item"
         role="menuitem"
-      >{props.guessCount + fillerText}</b>
+      >{props.guessCount + " / 10 Guesses"}</b>
       <div className="nav__item nav__right">
         <button
           role="menuitem"

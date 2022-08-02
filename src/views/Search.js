@@ -2,7 +2,7 @@ import React from "react";
 import countries from "../assets/countries.js";
 import './search.scss';
 
-//props history, win
+//props history, ended
 class Search extends React.Component {
   constructor(props) {
     super(props);
@@ -203,8 +203,8 @@ class Search extends React.Component {
             onChange={this.handleChange}
             value={this.state.inputValue}
             onKeyDown={this.handleKeyDown}
-            disabled={this.props.win}
-            className={"country-search " + (this.props.win ? "country-search--disabled" : "")}
+            disabled={this.props.ended}
+            className={"country-search " + (this.props.ended ? "country-search--disabled" : "")}
             ref={inp => (this.searchInput = inp)}
           ></input>
 
