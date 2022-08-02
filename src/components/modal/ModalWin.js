@@ -87,6 +87,8 @@ class ModalWin extends React.Component {
           <button className="btn btn--wide btn--active" onClick={this.share}>
             Share
           </button>
+          <p className="info-text">🔢: Amount of new information per guess</p>
+          <p className="info-text">🟥 → 🟪: ↑↓ Range of a catagory</p>
           <StatsDisplay stats={stats} />
           <WinCountries history={this.props.history} win={this.props.win} />
         </>
