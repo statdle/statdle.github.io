@@ -5,22 +5,22 @@ import Twemoji from "../../assets/Twemoji";
 // props: stats, win [true/false]
 const WinCountries = (props) => {
   let countries = Object.entries(props.history).map((obj, index) => {
-    const val = obj[1].name;
+    const name = obj[1].name;
+    const emoji = countriesEmojis[name] || "";
 
-    const emoji = countriesEmojis[val] ? countriesEmojis[val] + "\xa0\xa0" : "";
-
-    if (index === (props.history.length - 1)) { //if last element
+    if (index === (props.history.length - 1)) {
       return (
-        <div key={index} className={props.win ? "country-guess country-guess--active" : "country-guess"}>
-          <Twemoji emoji={emoji} />{val}
+        <div key={index} className={props.win ? "row-item row-item--active country-guess" : "row-item country-guess"}>
+          <Twemoji className="emoji" emoji={emoji} />
+          <span>{name}</span>
         </div>
       );
     }
 
-    //normal condition
     return (
-      <div key={index} className="country-guess">
-        <Twemoji emoji={emoji} />{val}
+      <div key={index} className="row-item country-guess">
+        <Twemoji className="emoji" emoji={emoji} />
+        <span>{name}</span>
       </div>
     );
   });

@@ -17,6 +17,7 @@
 
   &:focus {
     background-color: $w8;
+    outline: $p0 solid 3px;
   }
 
   &:active {
@@ -52,7 +53,7 @@
     }
 
     &:focus {
-      background-color: $p1;
+      background-color: $p0;
       outline: $p0 solid 3px;
     }
 
@@ -62,6 +63,10 @@
       box-shadow: none;
       background-color: $p0;
       transition-duration: 100ms;
+    }
+
+    &:focus:not(:focus-visible) {
+      outline: none;
     }
   }
 

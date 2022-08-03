@@ -1,3 +1,5 @@
+@import "./variables";
+
 @keyframes animation-details-open {
   0% {
     opacity: 0;
@@ -67,5 +69,19 @@
   }
   100% {
     opacity: 1;
+  }
+}
+
+@keyframes animation-active {
+  0% {
+    scale: 1;
+    background-color: $p2;
+  }
+  50% {
+    scale: 1.02;
+  }
+  100% {
+    scale: 1;
+    background-color: $p1;
   }
 }

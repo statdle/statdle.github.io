@@ -23,6 +23,7 @@ class App extends React.Component {
     this.seedCatagories = this.seedCatagories.bind(this);
     this.toggleModal = this.toggleModal.bind(this);
     this.togglePopup = this.togglePopup.bind(this);
+    this.setStorageGame = this.setStorageGame.bind(this);
     this.updateStorageGame = this.updateStorageGame.bind(this);
     this.updateStorageStats = this.updateStorageStats.bind(this);
 
@@ -37,7 +38,7 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    localStorage.clear();
+    // localStorage.clear();
     this.setupStats();
     this.setupGame();
   }
@@ -106,11 +107,11 @@ class App extends React.Component {
         activeRow: -1,
       };
     }
-
     this.setState({
       catagories: initialCatagories,
       targetCountry: targetCountry.name,
     });
+
 
     this.setStorageGame(targetCountry.name, initialCatagories, today);
   }
@@ -145,8 +146,6 @@ class App extends React.Component {
 
     //win condition
     if (name === this.state.targetCountry) {
-      let finalGame = this.state.catagories;
-
       this.updateStorageStats(this.state.history.length);
       this.togglePopup(4);
       this.toggleModal(3);
@@ -165,15 +164,16 @@ class App extends React.Component {
         newHistory.range.push(0);
       }
       newHistory.correct = 4;
+      let finalHistory = this.state.history.concat(newHistory);
 
       this.setState({
         catagories: newCatagories,
-        history: this.state.history.concat(newHistory),
+        history: finalHistory,
         win: true,
         ended: true,
       });
 
-      this.updateStorageGame(newCatagories, newHistory, true, true);
+      this.updateStorageGame(newCatagories, finalHistory, true, true);
       return;
 
     } else if (this.state.history.length >= 9) {
@@ -205,8 +205,6 @@ class App extends React.Component {
           catagory.activeRow = 0;
         }
 
-
-
         //2: if new is lower rank
       } else if (rank > target) {
         if (catagory.low === 0 || rank < catagory.low) {
@@ -227,23 +225,25 @@ class App extends React.Component {
       } else {
         range = catagory.low - catagory.high;
       }
-      console.log(range);
       newHistory.range.push(range);
     }
 
+    let finalHistory = this.state.history.concat(newHistory);
+
     this.setState({
       catagories: newCatagories,
-      history: this.state.history.concat(newHistory),
+      history: finalHistory,
       ended: ended,
     });
 
-    this.updateStorageGame(newCatagories, newHistory, false, ended);
+    this.updateStorageGame(newCatagories, finalHistory, false, ended);
   }
 
   /* -------------------- */
 
   /* initially setting local storage */
   setStorageGame(targetCountry, catagories, date) {
+    console.log("hi set");
     let game = {};
     game.targetCountry = targetCountry;
     game.catagories = catagories;
@@ -258,6 +258,8 @@ class App extends React.Component {
 
   /* update values after country entry */
   updateStorageGame(catagories, history, win = false, ended = false) {
+    console.log("hi update");
+
     let game = JSON.parse(localStorage.getItem("game")) || {};
     game.catagories = catagories;
     game.history = history;
@@ -353,7 +355,7 @@ class App extends React.Component {
             togglePopup={this.togglePopup}
 
             targetCountry={this.state.targetCountry}
-            catagories={this.state.finalGame}
+            catagories={this.state.catagories}
             history={this.state.history}
 
             special={false}
@@ -370,7 +372,7 @@ class App extends React.Component {
             togglePopup={this.togglePopup}
 
             targetCountry={this.state.targetCountry}
-            catagories={this.state.finalGame}
+            catagories={this.state.catagories}
             history={this.state.history}
 
             special={true}

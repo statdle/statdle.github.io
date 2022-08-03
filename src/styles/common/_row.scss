@@ -1,4 +1,5 @@
 @import "../variables";
+@import "../animations";
 
 .row-group {
   margin-bottom: 5px;
@@ -33,16 +34,9 @@
   animation-timing-function: ease;
 }
 
-@keyframes animation-active {
-  0% {
-    scale: 1;
-    background-color: $p2;
-  }
-  50% {
-    scale: 1.02;
-  }
-  100% {
-    scale: 1;
-    background-color: $p1;
-  }
+.emoji {
+  width: auto;
+  height: 1.5em;
+  vertical-align: -0.25em;
+  margin-right: 5px;
 }
