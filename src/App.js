@@ -11,6 +11,7 @@ import Popup from "./components/popup/Popup";
 import "./styles/_defaults.scss";
 import data from "./assets/data.json";
 import catagoryNames from "./assets/catagoryNames.json";
+import { isCompositeComponent } from "react-dom/test-utils";
 
 class App extends React.Component {
   constructor(props) {
@@ -69,7 +70,7 @@ class App extends React.Component {
       });
 
       const game = JSON.parse(localStorage.getItem("game"));
-      if (game.date === today) {
+      if (game.date === today && !game.guessHistory) { //temporary measure for today to reset current
         this.setState({
           targetCountry: game.targetCountry,
           catagories: game.catagories,
