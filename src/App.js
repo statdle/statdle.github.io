@@ -11,7 +11,6 @@ import Popup from "./components/popup/Popup";
 import "./styles/_defaults.scss";
 import data from "./assets/data.json";
 import catagoryNames from "./assets/catagoryNames.json";
-import { isCompositeComponent } from "react-dom/test-utils";
 
 class App extends React.Component {
   constructor(props) {
@@ -244,7 +243,6 @@ class App extends React.Component {
 
   /* initially setting local storage */
   setStorageGame(targetCountry, catagories, date) {
-    console.log("hi set");
     let game = {};
     game.targetCountry = targetCountry;
     game.catagories = catagories;
@@ -259,7 +257,6 @@ class App extends React.Component {
 
   /* update values after country entry */
   updateStorageGame(catagories, history, win = false, ended = false) {
-    console.log("hi update");
 
     let game = JSON.parse(localStorage.getItem("game")) || {};
     game.catagories = catagories;

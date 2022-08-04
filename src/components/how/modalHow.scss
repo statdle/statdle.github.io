@@ -42,10 +42,39 @@
   }
 }
 
-.small-space {
-  margin-top: 20px;
+.modal {
+  &__text {
+    line-height: 1.5;
+    margin: 20px;
+  }
+
+  &__swiper {
+    border-top: 4px solid $w8;
+    border-bottom: 4px solid $w8;
+  }
+
+  &--link {
+    text-decoration: underline;
+  }
 }
 
-.big-space {
-  margin-top: 40px;
+.swiper {
+  &__text {
+    margin: 0 auto 40px auto;
+    max-width: 300px;
+    text-align: center;
+    line-height: 1.5;
+  }
+
+  &-pagination-bullet-active {
+    background: $p0;
+  }
+
+  &-button-prev {
+    color: $p0;
+  }
+
+  &-button-next {
+    color: $p0;
+  }
 }

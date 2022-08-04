@@ -25,7 +25,7 @@
   }
 }
 
-.modal-content {
+.modal {
   display: block;
   align-self: center;
 
@@ -36,20 +36,28 @@
 
   background-color: $w7;
   cursor: auto;
-  border-radius: 3px;
-  overflow-y: hidden;
+  border-radius: 9px;
 
-  // animation: animation-modal-content 300ms ease;
+  animation: animation-modal-content 300ms ease;
 
   &--special {
     animation: animation-modal-content-special 1500ms ease;
   }
-}
 
-.modal-body {
-  max-width: 400px;
-  padding: 0 10px;
-  margin: 0 auto;
+  &__body {
+    max-width: 400px;
+    padding: 10px;
+    margin: 0 auto;
+  }
+
+  &__title {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 20px;
+    align-items: center;
+    background-color: $w10;
+    border-radius: 9px 9px 0 0;
+  }
 }
 
 .stat {
@@ -65,30 +73,20 @@
     padding: 5px 0px;
     margin-bottom: 5px;
   }
+
+  &__container {
+    display: flex;
+    justify-content: space-around;
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px 0px 30px 0px;
+  }
 }
 
-.modal__title {
-  display: flex;
-  justify-content: space-between;
-  padding: 10px 20px;
-  align-items: center;
-  background-color: $w10;
-}
-
-.stat__container {
-  display: flex;
-  justify-content: space-around;
-  max-width: 400px;
-  margin: 0 auto;
-  padding: 20px 0px 30px 0px;
-}
-
-.results-text {
+.guess-count {
+  font-size: 24px;
   text-align: center;
-  padding: 40px 0;
-  color: $w3;
-  width: 250px;
-  margin: 0 auto;
+  margin: 20px 0px;
 }
 
 .info {
@@ -102,14 +100,6 @@
   }
 }
 
-.country-guess__container {
-  padding: 20px 0px;
-  max-width: 300px;
-  margin: 0 auto;
-  flex-direction: column;
-  display: flex;
-}
-
 .country-guess {
   background-color: $w8;
   box-shadow: inset 0 3px 0px $w9;
@@ -118,10 +108,12 @@
   padding-left: 10px;
   max-width: 300px;
   flex: 1;
-}
 
-.guess-count {
-  font-size: 24px;
-  text-align: center;
-  margin: 20px 0px;
+  &__container {
+    padding: 20px 0px;
+    max-width: 300px;
+    margin: 0 auto;
+    flex-direction: column;
+    display: flex;
+  }
 }

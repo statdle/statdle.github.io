@@ -81,9 +81,9 @@ class ModalWin extends React.Component {
 
       content = (
         <>
-          <p className="guess-count">
+          <h2 className="guess-count">
             {fillerText}
-          </p>
+          </h2>
           <button className="btn btn--wide btn--active" onClick={this.share}>
             Share
           </button>
@@ -100,7 +100,7 @@ class ModalWin extends React.Component {
         <>
           <StatsDisplay stats={stats} />
           <WinCountries history={this.props.history} win={false} />
-          <p className="results-text">
+          <p className="info__text">
             (finish playing the round for sharing options)
           </p>
         </>
@@ -118,9 +118,9 @@ class ModalWin extends React.Component {
           onClick={() => this.props.toggleModal()}
         >
           <div
-            className={"modal-content" +
+            className={"modal" +
               (this.props.special
-                ? " modal-content--special"
+                ? " modal--special"
                 : ""
               )}
             onClick={this.stopPropagation}
@@ -131,7 +131,7 @@ class ModalWin extends React.Component {
                 <img className="icons" src={Close} alt="Close" aria-label="close" />
               </button>
             </div>
-            <div className="modal-body">{content}</div>
+            <div className="modal__body">{content}</div>
           </div>
         </div>
       </FocusTrap>
