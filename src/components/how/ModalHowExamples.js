@@ -54,9 +54,9 @@ const ModalHowExamples = () => {
                     "alp",
                     {
                         high: 10,
-                        highName: "Cuba",
+                        highName: "Austria",
                         low: 30,
-                        lowName: "Laos",
+                        lowName: "Cambodia",
                         target: 20,
                     },
                 ]}
