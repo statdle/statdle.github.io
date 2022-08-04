@@ -48,6 +48,11 @@
     margin: 20px;
   }
 
+  &__subtitle {
+    text-align: center;
+    margin-bottom: 5px;
+  }
+
   &__swiper {
     border-top: 4px solid $w8;
     border-bottom: 4px solid $w8;

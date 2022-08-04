@@ -12,6 +12,7 @@ const ModalHowContent = () => {
         <li>You are given 4 random catagories to help you figure out what the secret country is</li>
         <li>Guessing any country will reveal it's rank among each category, and if that rank is above or below the secret country</li>
       </ul>
+      <h2 className="modal__subtitle">Example</h2>
       <ModalHowExamples />
       <ul className="modal__text">
         <li>For more information on a catagory, click on its name</li>
