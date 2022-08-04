@@ -83,9 +83,9 @@ const ModalHowExamples = () => {
             />
         </div>
     );
-
+    console.log(window.innerWidth);
     return (
-        <Swiper navigation={true} modules={[Navigation, Pagination]} pagination={true} className="modal__swiper">
+        <Swiper navigation={window.innerWidth > 550 ? true : false} modules={[Navigation, Pagination]} pagination={true} className="modal__swiper">
             <SwiperSlide>
                 {example1}
                 <p className="swiper__text">
