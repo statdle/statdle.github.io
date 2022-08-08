@@ -50,12 +50,13 @@
 
   &__subtitle {
     text-align: center;
-    margin-bottom: 5px;
+    margin-bottom: 10px;
+    border-bottom: 4px solid $w8;
   }
 
   &__swiper {
-    border-top: 4px solid $w8;
     border-bottom: 4px solid $w8;
+    cursor: grab;
   }
 
   &--link {
@@ -71,8 +72,12 @@
     line-height: 1.5;
   }
 
+  &-pagination-bullet {
+    background-color: $w1;
+  }
+
   &-pagination-bullet-active {
-    background: $p0;
+    background-color: $p0;
   }
 
   &-button-prev {

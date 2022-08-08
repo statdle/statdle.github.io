@@ -1,4 +1,5 @@
 import React from "react";
+import ReactGA from "react-ga4";
 
 import Search from "./views/Search";
 import Display from "./views/Display";
@@ -45,7 +46,6 @@ class App extends React.Component {
 
   setupStats() {
     if (!localStorage.getItem("stats")) {
-      //set up stats
       const stats = {
         rounds: 0,
         losingRounds: 0,
@@ -332,6 +332,10 @@ class App extends React.Component {
   toggleModal(type = 0) {
     this.setState({
       modalType: type,
+    });
+
+    ReactGA.gtag("event", "select_content", {
+      content_type: type,
     });
   }
 
