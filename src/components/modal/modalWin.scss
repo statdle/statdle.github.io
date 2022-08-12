@@ -30,9 +30,13 @@
   align-self: center;
 
   margin: 0 auto;
-  width: 90%;
+  max-height: 90%;
+  min-height: 520px;
   max-width: 520px;
+  width: 90%;
   min-width: 320px;
+
+  overflow: auto;
 
   background-color: $w7;
   cursor: auto;
@@ -93,6 +97,12 @@
   border-radius: 4px;
   background-color: $w8;
   padding: 5px;
+  max-width: 300px;
+  margin: 0 auto 20px auto;
+  &__summary {
+    padding: 5px;
+  }
+
   &__text {
     text-align: center;
     color: $w3;

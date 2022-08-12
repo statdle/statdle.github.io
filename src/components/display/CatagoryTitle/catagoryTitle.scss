@@ -2,23 +2,10 @@
 @import "../../../styles/animations";
 
 .catagory-title {
-  cursor: pointer;
   font-size: 18px;
   text-align: left;
   color: $w3;
   border-radius: 4px;
-
-  &:hover {
-    color: $w1;
-  }
-
-  &:focus {
-    outline: $p0 solid 3px;
-  }
-
-  &:focus:not(:focus-visible) {
-    outline: none;
-  }
 }
 
 .catagory-description {

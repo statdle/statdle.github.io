@@ -3,9 +3,12 @@ import StatsDisplay from "./StatsDisplay";
 import WinCountries from "./WinCountries";
 import './modalWin.scss';
 import Close from '../../assets/icons/close.svg';
+import Twemoji from '../../assets/Twemoji.js'
 
-
+const num = ["0️⃣", "1️⃣", "2️⃣", "3️⃣", "4️⃣"];
+const col = ["🟪", "🟦", "🟩", "🟨", "🟧", "🟥"];
 const FocusTrap = require('focus-trap-react');
+
 
 class ModalWin extends React.Component {
   constructor(props) {
@@ -13,7 +16,9 @@ class ModalWin extends React.Component {
 
     this.share = this.share.bind(this);
     this.stopPropagation = this.stopPropagation.bind(this);
+
   }
+
 
   stopPropagation(e) {
     if (e) {
@@ -34,8 +39,7 @@ class ModalWin extends React.Component {
     const guessAmount = this.props.win ? history.length : "X";
     var text = "#Statdle " + gameNumber + "\n" + guessAmount + "/10 Guesses\n";
 
-    const num = ["0️⃣", "1️⃣", "2️⃣", "3️⃣", "4️⃣"];
-    const col = ["🟪", "🟦", "🟩", "🟨", "🟧", "🟥"];
+
 
     // need to loop through both catagories, and 
 
@@ -87,10 +91,31 @@ class ModalWin extends React.Component {
           <button className="btn btn--wide btn--active" onClick={this.share}>
             Share
           </button>
-          <div className="info">
-            <p className="info__text">🔢: Amount of new information per guess</p>
-            <p className="info__text">🟥 → 🟪: ↑↓ Range of a catagory</p>
-          </div>
+          <details className="info">
+            <summary className="info__summary">Share content symbolism</summary>
+            <p className="info__text">Per Guess:</p>
+
+            <p className="info__text">
+              <Twemoji className="emoji" emoji={num[0]} />
+              <Twemoji className="emoji" emoji={num[1]} />
+              <Twemoji className="emoji" emoji={num[2]} />
+              <Twemoji className="emoji" emoji={num[3]} />
+              <Twemoji className="emoji" emoji={num[4]} />
+            </p>
+            <p className="info__text">
+              Amount of catagories with new information</p>
+
+            <p className="info__text">
+              <Twemoji className="emoji" emoji={col[5]} />
+              <Twemoji className="emoji" emoji={col[4]} />
+              <Twemoji className="emoji" emoji={col[3]} />
+              <Twemoji className="emoji" emoji={col[2]} />
+              <Twemoji className="emoji" emoji={col[1]} />
+              <Twemoji className="emoji" emoji={col[0]} />
+            </p>
+            <p className="info__text">
+              Rank range of a catagory, where red is a rank range of {">"} 100, and purple is 0</p>
+          </details>
           <StatsDisplay stats={stats} />
           <WinCountries history={this.props.history} win={this.props.win} />
         </>

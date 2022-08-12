@@ -69,7 +69,7 @@ const ModalHowExamples = () => {
                     </p>
                 </SwiperSlide>
                 <SwiperSlide>
-                    <p className="swiper__text">A country like <em>Denmark</em> is lower ranked than <em>Cambodia</em>
+                    <p className="swiper__text">A country like <em>Denmark</em> is lower ranked than <em>Cambodia</em>, shown with a line
                     </p>
                 </SwiperSlide>
                 <SwiperSlide>
