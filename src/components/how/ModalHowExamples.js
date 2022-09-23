@@ -9,43 +9,10 @@ import "swiper/scss/pagination";
 
 const ModalHowExamples = () => {
     const [count, setCount] = useState(0);
-    const values = [[
-        "alp",
-        {
-            high: 10,
-            highName: "Austria",
-            low: 0,
-            lowName: "",
-            target: 20,
-        },
-    ], [
-        "alp",
-        {
-            high: 10,
-            highName: "Austria",
-            low: 30,
-            lowName: "Cambodia",
-            target: 20,
-        },
-    ], [
-        "alp",
-        {
-            high: 10,
-            highName: "Austria",
-            low: 30,
-            lowName: "Cambodia",
-            target: 20,
-        },
-    ], [
-        "alp",
-        {
-            high: 20,
-            highName: "Bhutan",
-            low: 20,
-            lowName: "Bhutan",
-            target: 20,
-        },
-    ]];
+    const values = [["0",{"target":20,"high":10,"highValues":["AT","Austria","Austria"],"low":0,"lowValues":["","",""],"activeRow":1}],
+    ["0",{"target":20,"high":10,"highValues":["AT","Austria","Austria"],"low":30,"lowValues":["KH","Cambodia","Cambodia"],"activeRow":2}],
+    ["0",{"target":20,"high":10,"highValues":["AT","Austria","Austria"],"low":30,"lowValues":["KH","Cambodia","Cambodia"],"activeRow":3}],
+    ["0",{"target":20,"high":20,"highValues":["BT","Bhutan","Bhutan"],"low":20,"lowValues":["BT","Bhutan","Bhutan"],"activeRow":2}]];
     const active = [[0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1], [0, 1, 1, 0]];
 
     return (

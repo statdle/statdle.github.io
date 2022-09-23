@@ -15,7 +15,8 @@ const ModalHowContent = () => {
       <h2 className="modal__subtitle">Example</h2>
       <ModalHowExamples />
       <ul className="modal__text">
-        <li>For more information on a catagory, click on its name</li>
+        <li>For more information on a catagory, click on the catagory name</li>
+        <li>For the value of a country, click on the country name</li>
         <li className="modal--link"><a href="https://docs.google.com/forms/d/e/1FAIpQLSf9NfB5E7mMjUAhYh-GrwS8uS1s3jZRQQ9dAP8_DB4OKmU16w/viewform?usp=sf_link">Form for feedback and suggestions ↗</a></li>
       </ul>
     </div>

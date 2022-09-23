@@ -1,12 +1,12 @@
 import React from "react";
-import countriesEmojis from "../../assets/countriesEmojis.json";
+import {COUNTRYEMOJI} from "../../assets/data";
 import Twemoji from "../../assets/Twemoji";
 
 // props: stats, win [true/false]
 const WinCountries = (props) => {
   let countries = Object.entries(props.history).map((obj, index) => {
     const name = obj[1].name;
-    const emoji = countriesEmojis[name] || "";
+    const emoji = COUNTRYEMOJI[obj[1].code] || "";
 
     if (index === (props.history.length - 1)) {
       return (

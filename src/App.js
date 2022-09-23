@@ -1,6 +1,8 @@
 import React from "react";
 import ReactGA from "react-ga4";
 
+// import Setup from "./services/Setup";
+
 import Search from "./views/Search";
 import Display from "./views/Display";
 import Top from "./views/Top";
@@ -10,8 +12,10 @@ import ModalWin from "./components/modal/ModalWin";
 import Popup from "./components/popup/Popup";
 
 import "./styles/_defaults.scss";
-import data from "./assets/data.json";
-import catagoryNames from "./assets/catagoryNames.json";
+
+import { DATA, VALUETEXT } from "./assets/data";
+
+const NUMCOUNTRIES = 194;
 
 class App extends React.Component {
   constructor(props) {
@@ -19,19 +23,21 @@ class App extends React.Component {
 
     this.doSearch = this.doSearch.bind(this);
     this.updateDisplay = this.updateDisplay.bind(this);
-    this.setupStats = this.setupStats.bind(this);
-    this.setupGame = this.setupGame.bind(this);
-    this.seedCatagories = this.seedCatagories.bind(this);
+    this.updateDisplayWin = this.updateDisplayWin.bind(this);
     this.toggleModal = this.toggleModal.bind(this);
     this.togglePopup = this.togglePopup.bind(this);
     this.setStorageGame = this.setStorageGame.bind(this);
     this.updateStorageGame = this.updateStorageGame.bind(this);
     this.updateStorageStats = this.updateStorageStats.bind(this);
 
+    this.parseValue = this.parseValue.bind(this);
+    // this.seedTest = this.seedTest.bind(this);
+
     this.state = {
-      catagories: {}, // {<catagoryname>: {high: <0>, highName: <"">, low: <0> lowName: <""> target: <0>, activeRow: <0>}, ...}
+      categories: {}, // {<categoryname>: {high: <0>, highName: <"">, low: <0> lowName: <""> target: <0>, activeRow: <0>}, ...}
       history: [], //[{name: "", correct: 0, range: N}, ...]
-      modalType: 1, //0: "none", 1: "how" 2: "win from top" 3: "win"
+      // TODO FLIP this back
+      modalType: 0, //0: "none", 1: "how" 2: "win from top" 3: "win"
       popupType: 0, //0: "none", 1: "Already Guessed", 2: "Invalid Country", 3: "Copied to Clipboard"
       win: false,
       ended: false,
@@ -40,6 +46,7 @@ class App extends React.Component {
 
   componentDidMount() {
     // localStorage.clear();
+    // this.seedTest();
     this.setupStats();
     this.setupGame();
   }
@@ -57,22 +64,43 @@ class App extends React.Component {
     }
   }
 
-  /* pick target country and catagories */
+
+  seedTest() {
+    const seedrandom = require("seedrandom");
+    let count = Array(14).fill(0);
+    for(let i = 0; i < 1000; i++){
+      let arr = this.seedCategories(
+        i,
+        seedrandom
+      );
+      if(arr.length !== 4){
+        console.log(arr);
+      }
+      for(let i in arr){
+        count[arr[i]] += 1;
+      }
+    }
+    console.log("a", count);
+  }
+
+  /* pick target country and categories */
   setupGame() {
 
     // check localStorage
-    let today = new Date().toDateString();
+    let da = new Date();
+    let today = da.toDateString();
+    
     if (localStorage.getItem("game")) {
 
       this.setState({
         modalType: 0,
       });
-
+      // TODO add patch for today
       const game = JSON.parse(localStorage.getItem("game"));
-      if (game.date === today && !game.guessHistory) { //temporary measure for today to reset current
+      if (game.date === today && !game.guessHistory && game.date !== "Sat Sep 24 2022") {
         this.setState({
           targetCountry: game.targetCountry,
-          catagories: game.catagories,
+          categories: game.categories,
           history: game.history,
           win: game.win,
           ended: game.ended,
@@ -83,147 +111,130 @@ class App extends React.Component {
 
     // Generate randomness from todays date
     const seedrandom = require("seedrandom");
-    const gen = seedrandom(today);
-    const countryRandIndex = Math.floor(gen() * data.length); //country randomizer
-
-    // Select target country, 4 catagories
-    const targetCountry = data[countryRandIndex];
-    const seededCatagories = this.seedCatagories(
-      Object.keys(catagoryNames),
+    const targetCountry = this.seedTarget(today, seedrandom);
+    const seededCategories = this.seedCategories(
       today,
       seedrandom
     );
 
     // Generate inital state values
-    const initialCatagories = {};
-    for (let i in seededCatagories) {
-      var key = seededCatagories[i];
-      initialCatagories[key] = {
-        target: targetCountry[key],
+    const initialCategories = {};
+    for (let i in seededCategories) {
+      var index = seededCategories[i];
+
+      initialCategories[index] = {
+        target: DATA[targetCountry][index][0],
         high: 0,
-        highName: "",
+        highValues: ["", "", ""],
         low: 0,
-        lowName: "",
+        lowValues: ["", "", ""],
         activeRow: -1,
       };
     }
+
     this.setState({
-      catagories: initialCatagories,
-      targetCountry: targetCountry.name,
+      categories: initialCategories,
+      targetCountry: targetCountry,
     });
 
 
-    this.setStorageGame(targetCountry.name, initialCatagories, today);
+    this.setStorageGame(targetCountry.name, initialCategories, today);
   }
 
-  /* generate 4 randomish catagories values */
-  seedCatagories(catagories, seed, seedrandom) {
+  /* generate 1 random value */
+  seedTarget(seed, seedrandom) {
+    const gen = seedrandom(seed);
+    const countryRandIndex = Math.floor(gen() * NUMCOUNTRIES); //country randomizer
 
-    let catagoriesReturn = [];
+    return Object.keys(DATA)[countryRandIndex];
+  }
 
-    let mandatoryCatagories = ["alp", "latt", "long"];
-    let mandatory = mandatoryCatagories[Math.floor(seedrandom(seed)() * mandatoryCatagories.length)];
-    catagoriesReturn.push(mandatory);
-    let catagoriesCopy = catagories.filter(e => e !== mandatory);
 
-    // other three catagories seeding
+  /* generate 4 randomish categories values */
+  // TODO make this more normal
+  seedCategories(seed, seedrandom) {
+    let initialCategories = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13];
+    let categoriesReturn = [];
+
+    let mandatory = Math.floor(seedrandom(seed)() * 3);
+    categoriesReturn.push(mandatory);
+    let categoriesCopy = initialCategories.filter(e => e !== mandatory);
+
+    // other three categories seeding
     for (let i = 0; i < 3; i++) {
-      const randomIndex = Math.floor(seedrandom(seed + i)() * Object.keys(catagoriesCopy).length);
-      const newCatagory = catagoriesCopy.splice(randomIndex, 1);
-      catagoriesReturn.push(...newCatagory);
+      const randomIndex = Math.floor(seedrandom(seed + i)() * categoriesCopy.length);
+      const newCategory = categoriesCopy.splice(randomIndex, 1);
+      categoriesReturn.push(...newCategory);
     }
-    return catagoriesReturn;
+    return categoriesReturn;
   }
 
   /* -------------------- */
 
   /* logic and display changes for valid country submission */
-  updateDisplay(countryData) {
-    let name = countryData.name;
-    let newCatagories = { ...this.state.catagories }; //creates a seperated copy
-    let newHistory = { name: name, correct: 0, range: [] };
+  updateDisplay(newCountry) {
+
+    let newCategories = { ...this.state.categories }; //creates a seperated copy
+    let newValues = DATA[newCountry]; // {[], [], []...}
+    let newHistory = { code: newCountry, name: newValues[0][1], correct: 0, range: [] };
     let ended = false;
 
     //win condition
-    if (name === this.state.targetCountry) {
-      this.updateStorageStats(this.state.history.length);
-      this.togglePopup(4);
-      this.toggleModal(3);
-
-      for (let i in Object.keys(this.state.catagories)) {
-        var keyWin = Object.keys(this.state.catagories)[i];
-        const catagory = this.state.catagories[keyWin];
-        newCatagories[keyWin] = {
-          target: catagory.target,
-          high: catagory.target,
-          highName: name,
-          low: catagory.target,
-          lowName: name,
-          activeRow: -2,
-        };
-        newHistory.range.push(0);
-      }
-      newHistory.correct = 4;
-      let finalHistory = this.state.history.concat(newHistory);
-
-      this.setState({
-        catagories: newCatagories,
-        history: finalHistory,
-        win: true,
-        ended: true,
-      });
-
-      this.updateStorageGame(newCatagories, finalHistory, true, true);
+    if (newCountry === this.state.targetCountry) {
+      this.updateDisplayWin(newCategories, newHistory, newCountry, newValues);
       return;
+    }
 
-    } else if (this.state.history.length >= 9) {
+    if (this.state.history.length >= 9) {
       // lose condition
-
       this.updateStorageStats(0);
       this.togglePopup(5);
       this.toggleModal(3);
       ended = true;
     }
 
-    //loop through data catagories; name, pop, area, ...
-    for (let i in Object.keys(this.state.catagories)) {
-      var key = Object.keys(this.state.catagories)[i];
+    //loop through data categories; name, pop, area, ...
+    for (let i in Object.keys(this.state.categories)) {
+      const categoryIndex = Object.keys(this.state.categories)[i];
+      const category = this.state.categories[categoryIndex];
 
-      const catagory = newCatagories[key];
-      const rank = parseInt(countryData[key]);
-      const target = parseInt(catagory.target);
+      const target = category.target;
+
+      const rank = newValues[categoryIndex][0];
+      const value = this.parseValue(newValues[categoryIndex][1], i);
+      const name = newValues[0][1];
 
 
       //1: if new is higher rank
       if (rank < target) {
-        if (catagory.high === 0 || rank > catagory.high) {
-          catagory.high = rank;
-          catagory.highName = name;
-          catagory.activeRow = 1;
+        if (category.high === 0 || rank > category.high) {
+          category.high = rank;
+          category.highValues = [newCountry, name, value];
+          category.activeRow = 1;
           newHistory.correct += 1;
         } else {
-          catagory.activeRow = 0;
+          category.activeRow = 0;
         }
 
         //2: if new is lower rank
       } else if (rank > target) {
-        if (catagory.low === 0 || rank < catagory.low) {
-          catagory.low = rank;
-          catagory.lowName = name;
-          catagory.activeRow = 2;
+        if (category.low === 0 || rank < category.low) {
+          category.low = rank;
+          category.lowValues = [newCountry, name, value];
+          category.activeRow = 2;
           newHistory.correct += 1;
         } else {
-          catagory.activeRow = 3;
+          category.activeRow = 3;
         }
       }
 
       let range;
-      if (catagory.low === 0) {
-        range = 194 - catagory.high;
-      } else if (catagory.high === 0) {
-        range = catagory.low;
+      if (category.low === 0) {
+        range = 194 - category.high;
+      } else if (category.high === 0) {
+        range = category.low;
       } else {
-        range = catagory.low - catagory.high;
+        range = category.low - category.high;
       }
       newHistory.range.push(range);
     }
@@ -231,21 +242,69 @@ class App extends React.Component {
     let finalHistory = this.state.history.concat(newHistory);
 
     this.setState({
-      catagories: newCatagories,
+      categories: newCategories,
       history: finalHistory,
       ended: ended,
     });
 
-    this.updateStorageGame(newCatagories, finalHistory, false, ended);
+    this.updateStorageGame(newCategories, finalHistory, false, ended);
   }
 
-  /* -------------------- */
+  parseValue(value, i){
+    const categoryIndex = parseInt(Object.keys(this.state.categories)[i]);
+    const valueText = VALUETEXT[categoryIndex];
+    if(value === ""){
+      return;
+    }
+    if(valueText[0]){
+      return valueText[1] + parseFloat(value).toLocaleString() + valueText[2];
+    }
+    return valueText[1] + value + valueText[2];
+  };
+
+
+  updateDisplayWin(newCategories, newHistory, newCountry, newValues) {
+
+    this.updateStorageStats(this.state.history.length);
+    this.togglePopup(4);
+    this.toggleModal(3);
+
+
+    for (let i in Object.keys(this.state.categories)) {
+      const categoryIndex = Object.keys(this.state.categories)[i];
+      const category = this.state.categories[categoryIndex];
+      const value = this.parseValue(newValues[categoryIndex][1], i);
+      const name = newValues[0][1];
+
+      newCategories[categoryIndex] = {
+        high: category.target,
+        highValues: [newCountry, name, value],
+        low: category.target,
+        lowValues: [newCountry, name, value],
+        activeRow: -2,
+      };
+      newHistory.range.push(0);
+    }
+    newHistory.correct = 4;
+    let finalHistory = this.state.history.concat(newHistory);
+
+
+    this.setState({
+      categories: newCategories,
+      history: finalHistory,
+      win: true,
+      ended: true,
+    });
+
+    this.updateStorageGame(newCategories, finalHistory, true, true);
+    return;
+  }
 
   /* initially setting local storage */
-  setStorageGame(targetCountry, catagories, date) {
+  setStorageGame(targetCountry, categories, date) {
     let game = {};
     game.targetCountry = targetCountry;
-    game.catagories = catagories;
+    game.categories = categories;
     game.date = date;
 
     game.history = [];
@@ -256,10 +315,10 @@ class App extends React.Component {
   }
 
   /* update values after country entry */
-  updateStorageGame(catagories, history, win = false, ended = false) {
+  updateStorageGame(categories, history, win = false, ended = false) {
 
     let game = JSON.parse(localStorage.getItem("game")) || {};
-    game.catagories = catagories;
+    game.categories = categories;
     game.history = history;
     game.win = win;
     game.ended = ended;
@@ -307,23 +366,19 @@ class App extends React.Component {
     });
   }
 
-  //show "already entered" popup
   doSearch(inp) {
-    let searchTerm = inp.toLowerCase();
+    if (!inp) {
+      this.togglePopup(2);
+      return;
+    }
     for (let i in this.state.history) {
-      if (searchTerm === this.state.history[i].name.toLowerCase()) {
+      if (inp === this.state.history[i].code) {
         this.togglePopup(1);
         return;
       }
     }
 
-    for (let i in data) {
-      if (searchTerm === data[i].name.toLowerCase()) {
-        this.updateDisplay(data[i]);
-        return;
-      }
-    }
-    this.togglePopup(2);
+    this.updateDisplay(inp);
   }
 
   /* changes modal display
@@ -357,7 +412,7 @@ class App extends React.Component {
             togglePopup={this.togglePopup}
 
             targetCountry={this.state.targetCountry}
-            catagories={this.state.catagories}
+            categories={this.state.categories}
             history={this.state.history}
 
             special={false}
@@ -374,7 +429,7 @@ class App extends React.Component {
             togglePopup={this.togglePopup}
 
             targetCountry={this.state.targetCountry}
-            catagories={this.state.catagories}
+            categories={this.state.categories}
             history={this.state.history}
 
             special={true}
@@ -398,7 +453,7 @@ class App extends React.Component {
           toggleModal={this.toggleModal}
         />
         <Display
-          values={this.state.catagories}
+          values={this.state.categories}
         />
         <Search doSearch={this.doSearch} ended={this.state.ended} />
       </>

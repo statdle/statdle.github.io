@@ -1,11 +1,12 @@
 import React from "react";
-import countriesEmojis from "../../../assets/countriesEmojis.json";
+import {COUNTRYEMOJI} from "../../../assets/data";
 import Twemoji from "../../../assets/Twemoji";
 import './catagoryRow.scss';
 
-// props: direction, rank, name, active
+// props: direction, rank, code, name, value, active, valueText
 const CatagoryRow = (props) => {
-  const emoji = countriesEmojis[props.name] || "";
+
+  const emoji = COUNTRYEMOJI[props.code] || "";
   if (props.active) {
     return (
       <div className="row-group">
@@ -15,10 +16,12 @@ const CatagoryRow = (props) => {
         <span className="row-item rank-number active">
           {props.rank ? "#" + props.rank : ""}
         </span>
-        <span className="row-item country-name active">
+
+        <button className="row-item country-name active" onClick={props.flipShowValues}>
           <Twemoji className="emoji" emoji={emoji} />
-          <span>{props.name}</span>
-        </span>
+          <span>{props.showValues ? props.value : props.name}</span>
+        </button>
+
       </div>
     );
   } else {
@@ -28,10 +31,10 @@ const CatagoryRow = (props) => {
         <span className="row-item rank-number">
           {props.rank ? "#" + props.rank : ""}
         </span>
-        <span className="row-item country-name">
+        <button className="row-item country-name" onClick={props.flipShowValues}>
           <Twemoji className="emoji" emoji={emoji} />
-          <span>{props.name}</span>
-        </span>
+          <span>{props.showValues ? props.value : props.name}</span>
+        </button>
       </div>
     );
   }

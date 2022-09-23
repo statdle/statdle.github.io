@@ -8,6 +8,7 @@
 
 .row-item {
   background-color: $w7;
+  color: $w2;
   border-radius: 3px;
   display: inline-flex;
   align-items: center;
@@ -33,6 +34,7 @@
   animation-name: animation-active;
   animation-timing-function: ease;
 }
+
 
 .emoji {
   width: auto;

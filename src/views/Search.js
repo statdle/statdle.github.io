@@ -1,6 +1,6 @@
 import React from "react";
-import countries from "../assets/countries.js";
 import './search.scss';
+import { COUNTRYNAMES } from "../assets/data.js";
 
 //props history, ended
 class Search extends React.Component {
@@ -10,6 +10,7 @@ class Search extends React.Component {
       inputValue: "",
       autocompleteCountries: [],
       autocompleteIndex: -1,
+      validCountry: false,
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -18,6 +19,7 @@ class Search extends React.Component {
     this.handleKeyDown = this.handleKeyDown.bind(this);
     this.autocompleteClick = this.autocompleteClick.bind(this);
     this.scrollToSelected = this.scrollToSelected.bind(this);
+    this.runSearch = this.runSearch.bind(this);
 
     this.searchInput = React.createRef();
     this.selectedSuggestion = React.createRef();
@@ -48,13 +50,7 @@ class Search extends React.Component {
     //Enter
     if (e.keyCode === 13) {
       e.preventDefault();
-      this.props.doSearch(this.state.inputValue);
-
-      this.setState({
-        inputValue: "",
-        autocompleteCountries: [],
-        autocompleteIndex: -1,
-      });
+      this.runSearch();
       return;
     }
 
@@ -138,9 +134,13 @@ class Search extends React.Component {
     }
 
     //filter countries
-    const reducedCountries = countries.filter(
+
+    // TODO
+    const reducedCountries = Object.keys(COUNTRYNAMES).filter(
       (country) => country.toLowerCase().search(str.toLowerCase()) === 0
     );
+
+
 
     //update state
     this.setState({
@@ -150,13 +150,17 @@ class Search extends React.Component {
 
   handleSearch(e) {
     e.preventDefault();
+    this.runSearch();
+  }
 
-    this.props.doSearch(this.state.inputValue);
+  runSearch(){
+    this.props.doSearch(COUNTRYNAMES[this.state.inputValue] ?? 0);
 
     this.setState({
       inputValue: "",
       autocompleteIndex: -1,
-    });
+      autocompleteCountries: [],
+   });
   }
 
 
@@ -208,7 +212,7 @@ class Search extends React.Component {
             ref={inp => (this.searchInput = inp)}
           ></input>
 
-          <input type="submit" aria-label="guess" className="country-submit btn btn--active" value="Guess" />
+          <input type="submit" aria-label="guess" className={"country-submit btn " + (this.state.inputValue ? "btn--active" : "btn--inactive")} value="Guess" />
         </form>
       </div>
     );

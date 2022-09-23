@@ -1,5 +1,6 @@
 @import "../../../styles/variables";
 @import "../../../styles/common/row";
+@import "../../../styles/animations";
 
 .position-symbol {
   width: 25px;
@@ -17,6 +18,16 @@
   flex: 1;
   padding-left: 10px;
   justify-content: left;
+  cursor: pointer;
+
+  &:focus {
+    outline: $p0 solid 3px;
+  }
+
+  &:focus:not(:focus-visible) {
+    outline: none;
+  }
+
 
   @media screen and (max-width: 360px) {
     font-family: "IBM Plex Sans Condensed", "Roboto Condensed", sans-serif;

@@ -12,10 +12,9 @@ function Display(props) {
     } else if (values[1].activeRow !== -1) {
       active[values[1].activeRow] = true;
     }
-
-    return <CatagoryGroup active={active} values={values} key={index} />;
+    
+    return <CatagoryGroup active={active} values={values} key={index}/>;
   });
-
   return <main id="catagories-container">{catagories}</main>;
 }
 
