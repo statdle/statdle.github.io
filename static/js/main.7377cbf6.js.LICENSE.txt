@@ -8,6 +8,8 @@
 * @license MIT, https://github.com/focus-trap/tabbable/blob/master/LICENSE
 */
 
+/*! Copyright Twitter Inc. and other contributors. Licensed under MIT */
+
 /**
  * @license React
  * react-dom.production.min.js
