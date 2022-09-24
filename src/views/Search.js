@@ -2,7 +2,7 @@ import React from "react";
 import './search.scss';
 import { COUNTRYNAMES } from "../assets/data.js";
 
-//props history, ended
+//props: history, ended
 class Search extends React.Component {
   constructor(props) {
     super(props);
@@ -10,16 +10,17 @@ class Search extends React.Component {
       inputValue: "",
       autocompleteCountries: [],
       autocompleteIndex: -1,
+      countryHistory: [],
       validCountry: false,
     };
 
     this.handleChange = this.handleChange.bind(this);
-    this.handleSearch = this.handleSearch.bind(this);
     this.handleAutocomplete = this.handleAutocomplete.bind(this);
     this.handleKeyDown = this.handleKeyDown.bind(this);
     this.autocompleteClick = this.autocompleteClick.bind(this);
     this.scrollToSelected = this.scrollToSelected.bind(this);
-    this.runSearch = this.runSearch.bind(this);
+    this.handleSearch = this.handleSearch.bind(this);
+    this.resetState = this.resetState.bind(this);
 
     this.searchInput = React.createRef();
     this.selectedSuggestion = React.createRef();
@@ -39,6 +40,7 @@ class Search extends React.Component {
     this.setState({
       inputValue: e.target.textContent,
       autocompleteCountries: [],
+      validCountry: true,
     });
   }
 
@@ -49,8 +51,7 @@ class Search extends React.Component {
 
     //Enter
     if (e.keyCode === 13) {
-      e.preventDefault();
-      this.runSearch();
+      this.handleSearch(e);
       return;
     }
 
@@ -68,6 +69,7 @@ class Search extends React.Component {
       }
 
       this.setState({
+        validCountry: true,
         autocompleteIndex: autocompleteIndex - 1,
         inputValue: autocompleteCountries[autocompleteIndex - 1],
       }, () => { this.scrollToSelected(); });
@@ -82,6 +84,7 @@ class Search extends React.Component {
         autocompleteIndex = -1;
       }
       this.setState({
+        validCountry: true,
         autocompleteIndex: autocompleteIndex + 1,
         inputValue: autocompleteCountries[autocompleteIndex + 1],
       }, () => { this.scrollToSelected(); });
@@ -93,6 +96,7 @@ class Search extends React.Component {
       e.preventDefault();
 
       this.setState({
+        validCountry: true,
         autocompleteIndex: 0,
         inputValue: autocompleteCountries[0],
       }, () => { this.scrollToSelected(); });
@@ -104,6 +108,7 @@ class Search extends React.Component {
       e.preventDefault();
 
       this.setState({
+        validCountry: true,
         autocompleteIndex: autocompleteLength - 1,
         inputValue: autocompleteCountries[autocompleteLength - 1],
       }, () => { this.scrollToSelected(); });
@@ -129,51 +134,67 @@ class Search extends React.Component {
     if (str.length < 1) {
       this.setState({
         autocompleteCountries: [],
+        validCountry: false,
       });
       return;
     }
 
-    //filter countries
-
-    // TODO
     const reducedCountries = Object.keys(COUNTRYNAMES).filter(
       (country) => country.toLowerCase().search(str.toLowerCase()) === 0
     );
-
-
+    const validCountry = reducedCountries.length === 1 ? true : false;
 
     //update state
     this.setState({
       autocompleteCountries: reducedCountries,
+      validCountry: validCountry
     });
   }
 
-  handleSearch(e) {
+  handleSearch(e){
     e.preventDefault();
-    this.runSearch();
+    if(!this.state.validCountry){
+      return;
+    }
+
+    const searchItem = (COUNTRYNAMES[this.state.inputValue] ?? COUNTRYNAMES[this.state.autocompleteCountries[0]]) ?? 0;
+    if(searchItem === 0){ 
+      this.props.togglePopup(2); //invalid
+      this.resetState();
+      return;
+    }
+
+    for (let i in this.props.history) {
+      if (searchItem === this.props.history[i].code) {
+        this.props.togglePopup(1); //duplicate
+        this.resetState();
+        return;
+      }      
+    }
+    this.props.doSearch(searchItem);
+    this.resetState();
+    return;
   }
 
-  runSearch(){
-    this.props.doSearch(COUNTRYNAMES[this.state.inputValue] ?? 0);
-
+  resetState(){
     this.setState({
       inputValue: "",
       autocompleteIndex: -1,
       autocompleteCountries: [],
+      validCountry: false,
    });
   }
 
-
   render() {
     const suggestions = this.state.autocompleteCountries.map((item) => {
-      if (this.state.inputValue === item) {
+      if (this.state.inputValue === item || this.state.autocompleteCountries.length === 1) {
         return (
           <div
             role="option"
             aria-selected="true"
             key={item}
             onClick={this.autocompleteClick}
-            className="suggestion suggestion__selected"
+            className="suggestion suggestion--selected"
             ref={this.selectedSuggestion}
           >
             {item}
@@ -212,7 +233,7 @@ class Search extends React.Component {
             ref={inp => (this.searchInput = inp)}
           ></input>
 
-          <input type="submit" aria-label="guess" className={"country-submit btn " + (this.state.inputValue ? "btn--active" : "btn--inactive")} value="Guess" />
+          <input type="submit" aria-label="guess" className={"country-submit btn " + (this.state.validCountry ? "btn--active" : "btn--inactive")} value="Guess" />
         </form>
       </div>
     );

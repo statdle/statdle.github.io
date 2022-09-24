@@ -6,27 +6,9 @@
   user-select: none;
   justify-content: center;
 
-  background-color: $w10;
   border-radius: 4px;
   padding: 5px;
   cursor: pointer;
-
-  &:hover {
-    background-color: $w9;
-  }
-
-  &:focus {
-    background-color: $w8;
-    outline: $p0 solid 3px;
-  }
-
-  &:active {
-    background-color: $w8;
-  }
-
-  &:focus:not(:focus-visible) {
-    outline: none;
-  }
 
   &--wide {
     width: 100%;
@@ -53,8 +35,11 @@
     }
 
     &:focus {
-      background-color: $p0;
       outline: $p0 solid 3px;
+    }
+
+    &:focus:not(:focus-visible) {
+      outline: none;
     }
 
     &:active {
@@ -64,32 +49,49 @@
       background-color: $p0;
       transition-duration: 100ms;
     }
-
-    &:focus:not(:focus-visible) {
-      outline: none;
-    }
   }
 
   &--icon {
+    background-color: $w10;
     display: inline-block;
     aspect-ratio: 1;
     width: auto;
+    border-radius: 4px;
+    padding: 5px;
+
+    &:hover {
+      background-color: $w9;
+    }
+  
+    &:focus {
+      background-color: $w8;
+      border: $p0 solid 3px;
+    }
+  
+    &:active {
+      background-color: $w8;
+    }
+  
+    &:focus:not(:focus-visible) {
+      border: none;
+    }
+
   }
 
   &--inactive {
     cursor: not-allowed;
     background-color: $w6;
     box-shadow: inset 0 -3px 0px $w7;
-    &:hover {
-      background-color: $w6;
-    }
 
     &:focus {
-      background-color: $w6;
+      box-shadow: none;
+      border: $p1 solid 3px;
     }
 
-    &:active {
-      background-color: $w6;
+    &:focus:not(:focus-visible) {
+      box-shadow: inset 0 -3px 0px $w7;
+      border: none;
     }
   }
 }
+

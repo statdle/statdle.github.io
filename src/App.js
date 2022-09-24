@@ -8,7 +8,7 @@ import Display from "./views/Display";
 import Top from "./views/Top";
 
 import ModalHow from "./components/how/ModalHow";
-import ModalWin from "./components/modal/ModalWin";
+import ModalWin from "./components/win/ModalWin";
 import Popup from "./components/popup/Popup";
 
 import "./styles/_defaults.scss";
@@ -37,7 +37,7 @@ class App extends React.Component {
       categories: {}, // {<categoryname>: {high: <0>, highName: <"">, low: <0> lowName: <""> target: <0>, activeRow: <0>}, ...}
       history: [], //[{name: "", correct: 0, range: N}, ...]
       // TODO FLIP this back
-      modalType: 0, //0: "none", 1: "how" 2: "win from top" 3: "win"
+      modalType: 1, //0: "none", 1: "how" 2: "win from top" 3: "win"
       popupType: 0, //0: "none", 1: "Already Guessed", 2: "Invalid Country", 3: "Copied to Clipboard"
       win: false,
       ended: false,
@@ -91,11 +91,10 @@ class App extends React.Component {
     let today = da.toDateString();
     
     if (localStorage.getItem("game")) {
-
       this.setState({
         modalType: 0,
       });
-      // TODO add patch for today
+
       const game = JSON.parse(localStorage.getItem("game"));
       if (game.date === today && !game.guessHistory && game.date !== "Sat Sep 24 2022") {
         this.setState({
@@ -116,7 +115,6 @@ class App extends React.Component {
       today,
       seedrandom
     );
-
     // Generate inital state values
     const initialCategories = {};
     for (let i in seededCategories) {
@@ -138,7 +136,7 @@ class App extends React.Component {
     });
 
 
-    this.setStorageGame(targetCountry.name, initialCategories, today);
+    this.setStorageGame(targetCountry, initialCategories, today);
   }
 
   /* generate 1 random value */
@@ -359,7 +357,7 @@ class App extends React.Component {
 
   /* -------------------- */
 
-  //little popup box display
+  //input: 0: Duplicate Country, 1: Invalid Country, 2: Copied to Clipboard, 3: Well Done!, 4: Unlucky Champion!
   togglePopup(type = 0) {
     this.setState({
       popupType: type,
@@ -371,13 +369,6 @@ class App extends React.Component {
       this.togglePopup(2);
       return;
     }
-    for (let i in this.state.history) {
-      if (inp === this.state.history[i].code) {
-        this.togglePopup(1);
-        return;
-      }
-    }
-
     this.updateDisplay(inp);
   }
 
@@ -455,7 +446,7 @@ class App extends React.Component {
         <Display
           values={this.state.categories}
         />
-        <Search doSearch={this.doSearch} ended={this.state.ended} />
+        <Search doSearch={this.doSearch} togglePopup={this.togglePopup} history={this.state.history} ended={this.state.ended} />
       </>
     );
   }

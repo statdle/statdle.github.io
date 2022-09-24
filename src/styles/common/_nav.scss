@@ -24,4 +24,9 @@
   &__right {
     text-align: right;
   }
+
+  @media screen and (max-width: 400px) {
+    font-family: "IBM Plex Sans Condensed", "Roboto", sans-serif;
+
+  }
 }

@@ -4,6 +4,7 @@ import WinCountries from "./WinCountries";
 import './modalWin.scss';
 import Close from '../../assets/icons/close.svg';
 import Twemoji from '../../assets/Twemoji.js'
+import { DATA } from "../../assets/data";
 
 const num = ["0️⃣", "1️⃣", "2️⃣", "3️⃣", "4️⃣"];
 const col = ["🟪", "🟦", "🟩", "🟨", "🟧", "🟥"];
@@ -38,8 +39,6 @@ class ModalWin extends React.Component {
     const gameNumber = (today - start) / 86400000;
     const guessAmount = this.props.win ? history.length : "X";
     var text = "#Statdle " + gameNumber + "\n" + guessAmount + "/10 Guesses\n";
-
-
 
     // need to loop through both catagories, and 
 
@@ -80,7 +79,7 @@ class ModalWin extends React.Component {
         fillerText += this.props.history.length;
         fillerText += this.props.history.length === 1 ? " Guess" : " Guesses";
       } else {
-        fillerText = this.props.targetCountry;
+        fillerText = DATA[this.props.targetCountry][0][1];
       }
 
       content = (

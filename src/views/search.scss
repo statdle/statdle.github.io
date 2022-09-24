@@ -21,20 +21,24 @@
 
 .suggestion {
   border-bottom: 2px solid $w10;
+
   padding: 5px 0px 5px 10px;
   background-color: $w7;
   color: $w2;
   cursor: pointer;
+      align-items: center;
+
 
   &:hover {
-    background-color: $w6;
-    color: $w2;
+    background-color: $p2;
+    color: $w1;
   }
 
-  &__selected {
+  &--selected {
     background-color: $w6;
     color: $w1;
   }
+
 }
 
 .form {

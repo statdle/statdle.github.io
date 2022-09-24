@@ -20,7 +20,7 @@ const ModalHowExamples = () => {
             <div className="onboard-example">
                 <CatagoryGroup values={values[count]} active={active[count]} />
             </div>
-            <Swiper navigation={window.innerWidth > 550 ? true : false}
+            <Swiper navigation={true}
                 modules={[Navigation, Pagination]}
                 pagination={true}
                 className="modal__swiper"
