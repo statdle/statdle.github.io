@@ -96,7 +96,7 @@ class App extends React.Component {
       });
 
       const game = JSON.parse(localStorage.getItem("game"));
-      if (game.date === today && !game.guessHistory && game.date !== "Sat Sep 24 2022") {
+      if (game.date === today && !game.guessHistory) {
         this.setState({
           targetCountry: game.targetCountry,
           categories: game.categories,
@@ -110,7 +110,7 @@ class App extends React.Component {
 
     // Generate randomness from todays date
     const seedrandom = require("seedrandom");
-    const targetCountry = this.seedTarget(today, seedrandom);
+    const targetCountry = (today === "Fri Sep 30 2022" ? "PL" : this.seedTarget(today, seedrandom));
     const seededCategories = this.seedCategories(
       today,
       seedrandom
