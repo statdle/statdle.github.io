@@ -229,11 +229,13 @@ class Search extends React.Component {
             value={this.state.inputValue}
             onKeyDown={this.handleKeyDown}
             disabled={this.props.ended}
+            aria-disabled={this.props.ended}
             className={"country-search " + (this.props.ended ? "country-search--disabled" : "")}
             ref={inp => (this.searchInput = inp)}
           ></input>
 
-          <input type="submit" aria-label="guess" className={"country-submit btn " + (this.state.validCountry ? "btn--active" : "btn--inactive")} value="Guess" />
+          <input type="submit" aria-label="guess" aria-disabled={this.props.ended || !(this.state.validCountry)}
+className={"country-submit btn " + (this.state.validCountry ? "btn--active" : "btn--inactive")} value="Guess" />
         </form>
       </div>
     );
