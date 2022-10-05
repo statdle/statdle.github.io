@@ -36,7 +36,7 @@ class ModalWin extends React.Component {
     today.setHours(0, 0, 0, 0);
     const history = this.props.history;
 
-    const gameNumber = (today - start) / 86400000;
+    const gameNumber = Math.round((today - start) / 86400000);
     const guessAmount = this.props.win ? history.length : "X";
     var text = "#Statdle " + gameNumber + "\n" + guessAmount + "/10 Guesses\n";
 
