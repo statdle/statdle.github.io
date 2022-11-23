@@ -31,7 +31,6 @@ class App extends React.Component {
     this.updateStorageStats = this.updateStorageStats.bind(this);
 
     this.parseValue = this.parseValue.bind(this);
-    // this.seedTest = this.seedTest.bind(this);
 
     this.state = {
       categories: {}, // {<categoryname>: {high: <0>, highName: <"">, low: <0> lowName: <""> target: <0>, activeRow: <0>}, ...}
@@ -45,7 +44,7 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    // localStorage.clear();
+    localStorage.clear();
     // this.seedTest();
     this.setupStats();
     this.setupGame();
@@ -69,7 +68,7 @@ class App extends React.Component {
     const seedrandom = require("seedrandom");
     let count = Array(14).fill(0);
     for(let i = 0; i < 1000; i++){
-      let arr = this.seedCategories(
+      let arr = this.easySeedCategories(
         i,
         seedrandom
       );
@@ -110,8 +109,8 @@ class App extends React.Component {
 
     // Generate randomness from todays date
     const seedrandom = require("seedrandom");
-    const targetCountry = (today === "Fri Sep 30 2022" ? "PL" : this.seedTarget(today, seedrandom));
-    const seededCategories = this.seedCategories(
+    const targetCountry = this.seedTarget(today, seedrandom);
+    const seededCategories = this.easySeedCategories(
       today,
       seedrandom
     );
@@ -163,6 +162,17 @@ class App extends React.Component {
       const randomIndex = Math.floor(seedrandom(seed + i)() * categoriesCopy.length);
       const newCategory = categoriesCopy.splice(randomIndex, 1);
       categoriesReturn.push(...newCategory);
+    }
+    return categoriesReturn;
+  }
+
+  easySeedCategories(seed, seedrandom) {
+    let mandatory = [[0,3],[1,2],[4,5,7,8],[6,9,10,11,12,13]];
+    let categoriesReturn = [];
+
+    for (let i = 0; i < 4; i++) {
+      let index = Math.floor(seedrandom(seed + (i*2))() * mandatory[i].length);
+      categoriesReturn.push(mandatory[i][index]);
     }
     return categoriesReturn;
   }
