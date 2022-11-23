@@ -44,8 +44,8 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    localStorage.clear();
-    // this.seedTest();
+    // localStorage.clear();
+    // this.seedTest2();
     this.setupStats();
     this.setupGame();
   }
@@ -67,7 +67,7 @@ class App extends React.Component {
   seedTest() {
     const seedrandom = require("seedrandom");
     let count = Array(14).fill(0);
-    for(let i = 0; i < 1000; i++){
+    for(let i = 0; i < 20; i++){
       let arr = this.easySeedCategories(
         i,
         seedrandom
@@ -80,6 +80,22 @@ class App extends React.Component {
       }
     }
     console.log("a", count);
+  }
+
+  seedTest2() {
+    const seedrandom = require("seedrandom");
+    let da = new Date();
+    let today = da.toDateString();
+    for(let i = 0; i < 20; i++){
+      let arr = this.easySeedCategories(
+        today + i,
+        seedrandom
+      );
+      if(arr.length !== 4){
+        console.log(arr);
+      }
+      console.log(arr);
+    }
   }
 
   /* pick target country and categories */
