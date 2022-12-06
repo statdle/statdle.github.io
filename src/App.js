@@ -45,18 +45,19 @@ class App extends React.Component {
 
   componentDidMount() {
     // localStorage.clear();
-    // this.seedTest2();
+    // this.seedTest();
     this.setupStats();
     this.setupGame();
   }
 
   setupStats() {
     if (!localStorage.getItem("stats")) {
+      console.log("no stats found");
       const stats = {
         rounds: 0,
-        losingRounds: 0,
         best: 0,
         average: 0,
+        tally: Array(11).fill(0),
       };
 
       localStorage.setItem("stats", JSON.stringify(stats));
@@ -66,14 +67,14 @@ class App extends React.Component {
 
   seedTest() {
     const seedrandom = require("seedrandom");
-    let count = Array(14).fill(0);
+    let count = Array(15).fill(0);
     for(let i = 0; i < 20; i++){
       let arr = this.easySeedCategories(
         i,
         seedrandom
       );
       if(arr.length !== 4){
-        console.log(arr);
+        console.log("!!");
       }
       for(let i in arr){
         count[arr[i]] += 1;
@@ -166,7 +167,7 @@ class App extends React.Component {
   /* generate 4 randomish categories values */
   // TODO make this more normal
   seedCategories(seed, seedrandom) {
-    let initialCategories = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13];
+    let initialCategories = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14];
     let categoriesReturn = [];
 
     let mandatory = Math.floor(seedrandom(seed)() * 3);
@@ -183,7 +184,7 @@ class App extends React.Component {
   }
 
   easySeedCategories(seed, seedrandom) {
-    let mandatory = [[0,3],[1,2],[4,5,7,8],[6,9,10,11,12,13]];
+    let mandatory = [[0,1],[2,3],[4,5,6,7],[8,9,10,11,12,13,14]];
     let categoriesReturn = [];
 
     for (let i = 0; i < 4; i++) {
@@ -355,27 +356,28 @@ class App extends React.Component {
     let best = stats.best || 0;
     let average = stats.average || 0;
     let rounds = stats.rounds || 0;
-    let losingRounds = stats.losingRounds || 0;
+    let tally = stats.tally || Array(11).fill(0);
 
     // if didnt get a score
-    if (guesses === 0) {
-      losingRounds += 1;
 
-    } else {
 
-      if (guesses < best || best === 0) {
-        best = guesses;
-      }
+    tally[guesses] += 1;
 
-      average = Math.round(((average * rounds + guesses) / (rounds + 1)) * 10) / 10;
-      rounds = rounds + 1;
+    if (guesses < best || best === 0) {
+      best = guesses;
     }
+
+    if (!guesses){
+      average = Math.round(((average * rounds + guesses) / (rounds + 1)) * 10) / 10;
+    }
+
+    rounds = rounds + 1;
 
     stats = {
       rounds: rounds,
       best: best,
       average: average,
-      losingRounds: losingRounds,
+      tally: tally,
     };
 
     localStorage.setItem("stats", JSON.stringify(stats));

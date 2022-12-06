@@ -51,12 +51,14 @@
 
   &__subtitle {
     text-align: center;
+    padding-bottom: 30px;
     margin-bottom: 10px;
     border-bottom: 4px solid $w8;
   }
 
   &__swiper {
     border-bottom: 4px solid $w8;
+    margin-bottom: 30px;
     cursor: grab;
   }
 
