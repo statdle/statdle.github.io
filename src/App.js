@@ -29,13 +29,11 @@ class App extends React.Component {
     this.setStorageGame = this.setStorageGame.bind(this);
     this.updateStorageGame = this.updateStorageGame.bind(this);
     this.updateStorageStats = this.updateStorageStats.bind(this);
-
     this.parseValue = this.parseValue.bind(this);
 
     this.state = {
       categories: {}, // {<categoryname>: {high: <0>, highName: <"">, low: <0> lowName: <""> target: <0>, activeRow: <0>}, ...}
       history: [], //[{name: "", correct: 0, range: N}, ...]
-      // TODO FLIP this back
       modalType: 1, //0: "none", 1: "how" 2: "win from top" 3: "win"
       popupType: 0, //0: "none", 1: "Already Guessed", 2: "Invalid Country", 3: "Copied to Clipboard"
       win: false,
