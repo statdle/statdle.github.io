@@ -26,7 +26,7 @@ A React project following the legacy of webapps wordleifying sporcle quizzes. Fi
 
 ^b: Some countries have multiple capitals, some countries have contested capitals. For countries with multiple capitals, I used the executive capital, if not explicit, by "de-facto". In the case of Israel, its claim to Jerusalem is not widely recognised, and illegimate, and bad for the game if two capitals are the same, so I made it Tel Aviv. I used google maps latt long coordinates for changed locations.
 
-^d: Annoyingly, the UN doesn't give enough detail for surface area in its .CSV forms, so I parsed a 2012 UN source, which is incomplete and a bit weird in its own right, and subbed in data from Wikipedia for Sudan which was abscent.
+^c: Annoyingly, the UN doesn't give enough detail for surface area in its .CSV forms, so I parsed a 2012 UN source, which is incomplete and a bit weird in its own right, and subbed in data from Wikipedia for Sudan which was abscent.
 
 ^d: I got UN data from 2009 and 2019 and calculated the change independently.
 
