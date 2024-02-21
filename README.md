@@ -1,4 +1,7 @@
-A React project following the legacy of webapps wordleifying sporcle quizzes. Find the Country State using Statistics! Built using ReactJS and SCSS.
+Find the Country State using Statistics! 
+
+A React project following the legacy of webapps wordleifying sporcle quizzes. 
+Built using ReactJS and SCSS.
 
 ---
 
