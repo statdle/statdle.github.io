@@ -1,4 +1,4 @@
-Find the Country State using Statistics! 
+Find the Nation State using Statistics! 
 
 
 A React project following the legacy of webapps wordleifying sporcle quizzes. 
